@@ -1,0 +1,17 @@
+.magnetic {
+  display: inline-flex;
+  max-width: 100%;
+}
+
+.active {
+  /* Springy return when the pointer leaves; the follow itself is set inline. */
+  transition: transform 0.55s cubic-bezier(0.22, 1.2, 0.36, 1);
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .active {
+    transition: none;
+    transform: none !important;
+  }
+}

@@ -1,6 +1,7 @@
-import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
-import { baseURL, about, person, work } from "@/resources";
+import { Meta, Schema } from "@once-ui-system/core";
+import { about, baseURL, person, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
+import { ContactSection, Section } from "@/components/sections";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -14,7 +15,7 @@ export async function generateMetadata() {
 
 export default function Work() {
   return (
-    <Column maxWidth="m" paddingTop="24">
+    <>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -28,10 +29,20 @@ export default function Work() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      <Heading marginBottom="l" variant="heading-strong-xl" align="center">
-        {work.title}
-      </Heading>
-      <Projects />
-    </Column>
+      <Section
+        eyebrow="Projects"
+        title={<>Projects</>}
+        description={
+          <>
+            Production applications with real users, payments and deadlines behind them. Each entry
+            covers the problem, what I built and the stack it runs on.
+          </>
+        }
+        top
+      >
+        <Projects />
+      </Section>
+      <ContactSection />
+    </>
   );
 }

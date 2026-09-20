@@ -23,6 +23,8 @@ import { iconLibrary } from "../resources/icons";
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <LayoutProvider>
+      {/* No `theme` prop: passing one forces the theme and disables the
+          switcher. The default is seeded in the head script in layout.tsx. */}
       <ThemeProvider
         brand={style.brand as Schemes}
         accent={style.accent as Schemes}

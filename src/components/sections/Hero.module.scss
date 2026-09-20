@@ -1,0 +1,177 @@
+/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
+   class. Anchor colour rules below are doubled (.x.x) so this component
+   keeps control of its own colour regardless of stylesheet order. */
+
+.hero {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  /* Tall enough to feel composed, short enough that the next section is
+     already hinted at the bottom of the screen. */
+  min-height: min(88svh, 48rem);
+  padding-block: clamp(7rem, 16vh, 10rem) clamp(3rem, 6vw, 4.5rem);
+}
+
+.container {
+  width: 100%;
+  max-width: var(--studio-max);
+  margin-inline: auto;
+  padding-inline: var(--studio-gutter);
+}
+
+/* ---------- eyebrow ---------- */
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: var(--step-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--brand-on-background-weak);
+  flex: none;
+}
+
+/* ---------- headline ---------- */
+
+/* Doubled class: TextReveal's base `.heading` rule resets margin with the
+   same specificity, so a single class here would lose on stylesheet order. */
+.headline.headline {
+  font-size: var(--step-hero);
+  max-width: 18ch;
+  margin-bottom: clamp(1.5rem, 3vw, 2.25rem);
+}
+
+/* ---------- supporting copy ---------- */
+
+.subline {
+  margin: 0 0 clamp(2rem, 4vw, 2.75rem);
+  font-size: var(--step-lead);
+  line-height: 1.6;
+  color: var(--neutral-on-background-weak);
+  max-width: 56ch;
+  text-wrap: pretty;
+}
+
+/* ---------- actions ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+}
+
+.socials {
+  display: flex;
+  gap: 0.5rem;
+  margin-left: 0.25rem;
+}
+
+.socialLink.socialLink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 3rem;
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-s);
+  color: var(--neutral-on-background-weak);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.socialLink.socialLink:hover {
+  color: var(--neutral-on-background-strong);
+  border-color: var(--neutral-alpha-strong);
+}
+
+/* ---------- core stack ---------- */
+
+.stackRow {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  flex-wrap: wrap;
+  padding-top: clamp(1.5rem, 3vw, 2rem);
+  border-top: var(--studio-rule);
+}
+
+.stackLabel {
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: var(--step-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  flex: none;
+}
+
+.stackList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.stackItem {
+  font-size: 0.85rem;
+  color: var(--neutral-on-background-medium);
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-s);
+  padding: 0.4rem 0.75rem;
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 600px) {
+  .hero {
+    min-height: auto;
+    padding-block: clamp(5rem, 16vh, 7rem) 2.5rem;
+  }
+
+  .headline.headline,
+  .subline {
+    max-width: 100%;
+  }
+
+  /* Full-width stacked buttons are far easier to hit with a thumb. */
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .actions > *,
+  .actions a {
+    width: 100%;
+  }
+
+  .socials {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .socials a {
+    flex: 1;
+  }
+
+  .stackRow {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.9rem;
+  }
+}

@@ -1,52 +1,104 @@
-import { Row, IconButton, SmartLink, Text } from "@once-ui-system/core";
+import Link from "next/link";
+import { Icon } from "@once-ui-system/core";
 import { person, social } from "@/resources";
+import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Footer.module.scss";
+
+const FOOTER_LINKS = [
+  { label: "About", href: "/#about" },
+  { label: "Experience", href: "/#experience" },
+  { label: "Projects", href: "/work" },
+  { label: "Contact", href: "/#contact" },
+];
 
 export const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <Row as="footer" fillWidth padding="8" horizontal="center" s={{ direction: "column" }}>
-      <Row
-        className={styles.mobile}
-        maxWidth="m"
-        paddingY="8"
-        paddingX="16"
-        gap="16"
-        horizontal="between"
-        vertical="center"
-        s={{
-          direction: "column",
-          horizontal: "center",
-          align: "center",
-        }}
-      >
-        <Text variant="body-default-s" onBackground="neutral-strong">
-          <Text onBackground="neutral-weak">© {currentYear} /</Text>
-          <Text paddingX="4">{person.name}</Text>
-          <Text onBackground="neutral-weak">
-            {/* Usage of this template requires attribution. Please don't remove the link to Once UI unless you have a Pro license. */}
-            / Build your portfolio with{" "}
-            <SmartLink href="https://once-ui.com/products/magic-portfolio">Once UI</SmartLink>
-          </Text>
-        </Text>
-        <Row gap="16">
-          {social.map(
-            (item) =>
-              item.link && (
-                <IconButton
+    <footer className={styles.footer}>
+      <div className={styles.container}>
+        <div className={styles.top}>
+          <div className={styles.identity}>
+            <Link href="/" className={styles.wordmark}>
+              <span className={styles.mark} aria-hidden="true" />
+              {person.name}
+            </Link>
+            <p className={styles.role}>{person.role}</p>
+          </div>
+
+          <nav className={styles.nav} aria-label="Footer">
+            <p className={styles.columnLabel}>Site</p>
+            <ul className={styles.list}>
+              {FOOTER_LINKS.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className={styles.link}>
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className={styles.contactColumn}>
+            <p className={styles.columnLabel}>Contact</p>
+            <ul className={styles.list}>
+              <li>
+                <a href={`mailto:${person.email}`} className={styles.link}>
+                  {person.email}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={social.find((item) => item.name === "LinkedIn")?.link}
+                  className={styles.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  linkedin.com/in/aghyadghziel
+                </a>
+              </li>
+            </ul>
+            <div className={styles.socials}>
+              {social.map((item) => (
+                <a
                   key={item.name}
                   href={item.link}
-                  icon={item.icon}
-                  tooltip={item.name}
-                  size="s"
-                  variant="ghost"
-                />
-              ),
-          )}
-        </Row>
-      </Row>
-      <Row height="80" hide s={{ hide: false }} />
-    </Row>
+                  aria-label={item.name}
+                  className={styles.socialLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Icon name={item.icon} size="s" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <div className={styles.bottom}>
+          <p className={styles.legal}>
+            © {currentYear} {person.name}
+            <span className={styles.legalDivider} aria-hidden="true">
+              /
+            </span>
+            {/* Attribution required by the Once UI template licence. */}
+            <span className={styles.attribution}>
+              Built on{" "}
+              <a
+                href="https://once-ui.com/products/magic-portfolio"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.attributionLink}
+              >
+                Once UI
+              </a>
+            </span>
+          </p>
+          <div className={styles.themeToggle}>
+            <ThemeToggle />
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };

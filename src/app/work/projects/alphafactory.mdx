@@ -1,50 +1,62 @@
 ---
-title: "Alpha Factory – Fullstack Development"
+title: "Alpha Factory"
+subtitle: "A marketplace where creative work and payment live in one place"
 publishedAt: "2025-11-15"
-summary: "Explore the enduring debate between using spaces and tabs for code indentation, and why this choice matters more than you might think."
+brand: "Alpha Factory"
+kind: "Collaboration platform"
+role: "Fullstack Developer"
+year: "2025"
+featured: true
+summary: "A collaboration platform connecting influencers with designers and video editors — submissions, revisions, deliveries and payments handled in a single workflow."
+direction: "Role-aware and calm. Three very different users share one product, so each one sees a dashboard built around their job rather than a single interface trying to serve everybody."
+services:
+  - "Fullstack development"
+  - "Role-based dashboards"
+  - "Payments integration"
+  - "Admin panel"
+stack:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "Node.js"
+  - "Prisma"
+  - "Tailwind CSS"
+highlights:
+  - "Three role-specific workflows"
+  - "PayPal and crypto payments"
+  - "Large video file pipeline"
+  - "Moderation and dispute tools"
 images:
   - "/images/projects/project-01/image-02.png"
   - "/images/projects/project-01/image-03.png"
 team:
   - name: "Aghyad Ghziel"
-    role: "Fullstack developer"
+    role: "Fullstack Developer"
     avatar: "/images/avatar.jpg"
     linkedIn: "https://www.linkedin.com/in/aghyadghziel/"
 link: "https://www.xalphafactory.com/"
 ---
 
-## Overview
+## The brief
 
-Led the development of a full-stack collaboration platform at Alpha Factory, enabling seamless partnerships between influencers, designers, and video editors. The platform allows influencers to submit video content, request editing and thumbnail design services, and handle payments via PayPal or cryptocurrency. Built with a scalable architecture and a modern, responsive frontend, the system also includes a robust admin panel for platform management.
+Influencers needed editing and thumbnail work. Designers and editors needed a steady stream of briefs they could actually manage. Both sides needed to get paid without leaving the platform or trusting each other first.
 
-## Key Features
+Alpha Factory brings all three into one workflow. I led the development of the full-stack platform.
 
-- \*\*Influencer Workflow
-  Enabled influencers to upload videos and submit requests for editing and thumbnail design. Users can track project progress, communicate with designers/editors, and receive final deliverables directly through the platform.
-- Designer & Editor Collaboration
-  Developed a dashboard for designers and editors to accept requests, submit drafts, and manage revisions, streamlining the creative workflow between all parties
-- Payments & Monetization
-  Integrated PayPal and cryptocurrency payments to handle project fees, including secure checkout, payment tracking, and transaction history for both influencers and service providers.
-- Admin Panel
-  Built a comprehensive admin dashboard to manage users, monitor projects, approve or reject submissions, and handle disputes or issues, ensuring smooth platform operations.
-- UI & Frontend Architecture
-  Designed a responsive and user-friendly frontend with React and Next.js, focusing on accessibility, real-time updates, and seamless interaction between platform roles.
-- File Management & Data Processing
-  Implemented secure file uploads, storage, and validation for video files and thumbnails, using Prisma for database management to ensure data integrity and scalability.
+## What I built
 
-## Technologies Used
+**The influencer workflow.** Upload video content, request editing and thumbnail design, track progress, talk to the assigned designer or editor, and receive the final files — without an email thread anywhere in the process.
 
-- Next.js & React – Frontend architecture and server-rendered applications
-- Node.js & Express – Backend API and request handling
-- PayPal API & Cryptocurrency Payment Gateways – Secure payment processing
-- Prisma – Database management and structured storage
-- TypeScript – Type-safe frontend and backend development
-- Radix UI / Tailwind CSS – Responsive, modular, and accessible UI components
+**Designer and editor dashboards.** A separate view for the people doing the work: accept requests, submit drafts, handle revisions, and deliver. Each role sees the tools for its own job and nothing else.
 
-## Challenges and Learnings
+**Payments.** PayPal and cryptocurrency payments covering project fees, with secure checkout, payment tracking and transaction history visible to both sides of the exchange.
 
-Coordinating workflows between multiple user roles (influencers, designers, editors, admins) while maintaining a secure and scalable payment system was a key challenge. Implementing real-time project status updates, handling large video files efficiently, and integrating multiple payment options taught important lessons in full-stack architecture, database design with Prisma, cloud storage management, and cross-role collaboration.
+**Admin panel.** User management, project monitoring, approvals and dispute handling — the tools that keep a two-sided marketplace running when something goes wrong.
 
-## Outcome
+**File handling.** Secure upload, storage and validation for large video files and thumbnails, with Prisma modelling the data underneath.
 
-The platform successfully facilitated collaboration between influencers and creative teams, allowing seamless video editing, thumbnail design, and payments. The modular architecture, Prisma-managed database, and admin dashboard streamlined operations, reduced friction between platform users, and provided a scalable foundation for future expansion of services.
+**Interface.** A responsive, role-based UI in React and Next.js, with real-time status so nobody has to ask where a project stands.
+
+## What it taught me
+
+Coordinating four user roles against one shared database, while money moves between two of them, is a design problem before it is a coding problem. Deciding what each role can see and do — and making the interface reflect that without feeling restrictive — was the work that mattered most.

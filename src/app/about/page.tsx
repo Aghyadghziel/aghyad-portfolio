@@ -1,21 +1,10 @@
-import {
-  Avatar,
-  Button,
-  Column,
-  Heading,
-  Icon,
-  IconButton,
-  Media,
-  Tag,
-  Text,
-  Meta,
-  Schema,
-  Row,
-} from "@once-ui-system/core";
-import { baseURL, about, person, social } from "@/resources";
-import TableOfContents from "@/components/about/TableOfContents";
-import styles from "@/components/about/about.module.scss";
-import React from "react";
+import Image from "next/image";
+import { Icon, Meta, Schema } from "@once-ui-system/core";
+import { about, baseURL, calendarLink, person, social } from "@/resources";
+import { Reveal } from "@/components/motion/Reveal";
+import { CTA } from "@/components/ui/CTA";
+import { ContactSection } from "@/components/sections";
+import styles from "./page.module.scss";
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -27,31 +16,16 @@ export async function generateMetadata() {
   });
 }
 
+/**
+ * About page.
+ *
+ * Establishes credibility without turning into a CV: a short human
+ * introduction, the two engagements that back it up, and the capabilities —
+ * then straight into contact, because that is what the page is for.
+ */
 export default function About() {
-  const structure = [
-    {
-      title: about.intro.title,
-      display: about.intro.display,
-      items: [],
-    },
-    {
-      title: about.work.title,
-      display: about.work.display,
-      items: about.work.experiences.map((experience) => experience.company),
-    },
-    {
-      title: about.studies.title,
-      display: about.studies.display,
-      items: about.studies.institutions.map((institution) => institution.name),
-    },
-    {
-      title: about.technical.title,
-      display: about.technical.display,
-      items: about.technical.skills.map((skill) => skill.title),
-    },
-  ];
   return (
-    <Column maxWidth="m">
+    <>
       <Schema
         as="webPage"
         baseURL={baseURL}
@@ -65,278 +39,191 @@ export default function About() {
           image: `${baseURL}${person.avatar}`,
         }}
       />
-      {about.tableOfContent.display && (
-        <Column
-          left="0"
-          style={{ top: "50%", transform: "translateY(-50%)" }}
-          position="fixed"
-          paddingLeft="24"
-          gap="32"
-          s={{ hide: true }}
-        >
-          <TableOfContents structure={structure} about={about} />
-        </Column>
-      )}
-      <Row fillWidth s={{ direction: "column"}} horizontal="center">
-        {about.avatar.display && (
-          <Column
-            className={styles.avatar}
-            top="64"
-            fitHeight
-            position="sticky"
-            s={{ position: "relative", style: { top: "auto" } }}
-            xs={{ style: { top: "auto" } }}
-            minWidth="160"
-            paddingX="l"
-            paddingBottom="xl"
-            gap="m"
-            flex={3}
-            horizontal="center"
-          >
-            <Avatar src={person.avatar} size="xl" />
-            <Row gap="8" vertical="center">
-              <Icon onBackground="accent-weak" name="globe" />
-              {person.location}
-            </Row>
-            {person.languages && person.languages.length > 0 && (
-              <Row wrap gap="8">
-                {person.languages.map((language, index) => (
-                  <Tag key={index} size="l">
-                    {language}
-                  </Tag>
-                ))}
-              </Row>
-            )}
-          </Column>
-        )}
-        <Column className={styles.blockAlign} flex={9} maxWidth={40}>
-          <Column
-            id={about.intro.title}
-            fillWidth
-            minHeight="160"
-            vertical="center"
-            marginBottom="32"
-          >
-            {about.calendar.display && (
-              <Row
-                fitWidth
-                border="brand-alpha-medium"
-                background="brand-alpha-weak"
-                radius="full"
-                padding="4"
-                gap="8"
-                marginBottom="m"
-                vertical="center"
-                className={styles.blockAlign}
-                style={{
-                  backdropFilter: "blur(var(--static-space-1))",
-                }}
-              >
-                <Icon paddingLeft="12" name="calendar" onBackground="brand-weak" />
-                <Row paddingX="8">Schedule a call</Row>
-                <IconButton
-                  href={"https://calendly.com/aghyadghziel/meeting"}
-                  data-border="rounded"
-                  variant="secondary"
-                  icon="chevronRight"
-                />
-              </Row>
-            )}
-            <Heading className={styles.textAlign} variant="display-strong-xl">
-              {person.name}
-            </Heading>
-            <Text
-              className={styles.textAlign}
-              variant="display-default-xs"
-              onBackground="neutral-weak"
-            >
-              {person.role}
-            </Text>
-            {social.length > 0 && (
-              <Row
-                className={styles.blockAlign}
-                paddingTop="20"
-                paddingBottom="8"
-                gap="8"
-                wrap
-                horizontal="center"
-                fitWidth
-                data-border="rounded"
-              >
+
+      <section className={styles.intro}>
+        <div className={styles.container}>
+          <Reveal variant="fade" className={styles.eyebrow}>
+            <span className={styles.eyebrowDot} aria-hidden="true" />
+            About
+          </Reveal>
+
+          <div className={styles.introGrid}>
+            <div className={styles.introBody}>
+              <Reveal variant="up">
+                <h1 className={styles.name}>{person.name}</h1>
+              </Reveal>
+              <Reveal variant="up" delay={0.06}>
+                <p className={styles.role}>{person.role}</p>
+              </Reveal>
+              <Reveal variant="up" delay={0.12}>
+                <p className={styles.lead}>{about.intro.description}</p>
+              </Reveal>
+
+              <Reveal variant="up" delay={0.18} className={styles.actions}>
+                <CTA href={`mailto:${person.email}`} variant="primary">
+                  Email me
+                </CTA>
+                <CTA href={calendarLink} variant="secondary" external>
+                  Book a call
+                </CTA>
+              </Reveal>
+
+              <Reveal variant="up" delay={0.24} className={styles.socials}>
                 {social
-                      .filter((item) => item.essential)
-                      .map(
-                  (item) =>
-                    item.link && (
-                      <React.Fragment key={item.name}>
-                        <Row s={{ hide: true }}>
-                          <Button
-                            key={item.name}
-                            href={item.link}
-                            prefixIcon={item.icon}
-                            label={item.name}
-                            size="s"
-                            weight="default"
-                            variant="secondary"
-                          />
-                        </Row>
-                        <Row hide s={{ hide: false }}>
-                          <IconButton
-                            size="l"
-                            key={`${item.name}-icon`}
-                            href={item.link}
-                            icon={item.icon}
-                            variant="secondary"
-                          />
-                        </Row>
-                      </React.Fragment>
-                    ),
-                )}
-              </Row>
-            )}
-          </Column>
+                  .filter((item) => item.essential)
+                  .map((item) => (
+                    <a
+                      key={item.name}
+                      href={item.link}
+                      className={styles.socialLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Icon name={item.icon} size="s" />
+                      {item.name}
+                    </a>
+                  ))}
+              </Reveal>
+            </div>
 
-          {about.intro.display && (
-            <Column textVariant="body-default-l" fillWidth gap="m" marginBottom="xl">
-              {about.intro.description}
-            </Column>
-          )}
+            <Reveal variant="mask" className={styles.portraitWrap}>
+              <div className={styles.portrait}>
+                <Image
+                  src={person.avatar}
+                  alt={`Portrait of ${person.name}`}
+                  fill
+                  className={styles.portraitImage}
+                  sizes="(max-width: 900px) 70vw, 32vw"
+                  priority
+                />
+              </div>
+              {person.languages && person.languages.length > 0 && (
+                <ul className={styles.languages}>
+                  {person.languages.map((language) => (
+                    <li className={styles.language} key={language}>
+                      {language}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </Reveal>
+          </div>
+        </div>
+      </section>
 
-          {about.work.display && (
-            <>
-              <Heading as="h2" id={about.work.title} variant="display-strong-s" marginBottom="m">
-                {about.work.title}
-              </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.work.experiences.map((experience, index) => (
-                  <Column key={`${experience.company}-${experience.role}-${index}`} fillWidth>
-                    <Row fillWidth horizontal="between" vertical="end" marginBottom="4">
-                      <Text id={experience.company} variant="heading-strong-l">
-                        {experience.company}
-                      </Text>
-                      <Text variant="heading-default-xs" onBackground="neutral-weak">
-                        {experience.timeframe}
-                      </Text>
-                    </Row>
-                    <Text variant="body-default-s" onBackground="brand-weak" marginBottom="m">
-                      {experience.role}
-                    </Text>
-                    <Column as="ul" gap="16">
-                      {experience.achievements.map(
-                        (achievement: React.ReactNode, index: number) => (
-                          <Text
-                            as="li"
-                            variant="body-default-m"
-                            key={`${experience.company}-${index}`}
-                          >
-                            {achievement}
-                          </Text>
-                        ),
-                      )}
-                    </Column>
+      {about.work.display && (
+        <section className={styles.block} aria-labelledby="experience">
+          <div className={styles.container}>
+            <h2 id="experience" className={styles.blockTitle}>
+              {about.work.title}
+            </h2>
+            <div className={styles.experiences}>
+              {about.work.experiences.map((experience, index) => (
+                <Reveal
+                  variant="up"
+                  delay={Math.min(index * 0.08, 0.2)}
+                  className={styles.experience}
+                  key={`${experience.company}-${experience.role}`}
+                >
+                  <div className={styles.experienceMeta}>
+                    <p className={styles.timeframe}>{experience.timeframe}</p>
+                  </div>
+                  <div className={styles.experienceBody}>
+                    <h3 className={styles.company}>{experience.company}</h3>
+                    <p className={styles.experienceRole}>{experience.role}</p>
+                    <ul className={styles.achievements}>
+                      {experience.achievements.map((achievement, achievementIndex) => (
+                        <li
+                          className={styles.achievement}
+                          key={`${experience.company}-${achievementIndex}`}
+                        >
+                          {achievement}
+                        </li>
+                      ))}
+                    </ul>
                     {experience.images && experience.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" paddingLeft="40" gap="12" wrap>
-                        {experience.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
-                              alt={image.alt}
+                      <div className={styles.experienceImages}>
+                        {experience.images.map((image) => (
+                          <div className={styles.experienceImage} key={image.src}>
+                            <Image
                               src={image.src}
-                            />
-                          </Row>
-                        ))}
-                      </Row>
-                    )}
-                  </Column>
-                ))}
-              </Column>
-            </>
-          )}
-
-          {about.studies.display && (
-            <>
-              <Heading as="h2" id={about.studies.title} variant="display-strong-s" marginBottom="m">
-                {about.studies.title}
-              </Heading>
-              <Column fillWidth gap="l" marginBottom="40">
-                {about.studies.institutions.map((institution, index) => (
-                  <Column key={`${institution.name}-${index}`} fillWidth gap="4">
-                    <Text id={institution.name} variant="heading-strong-l">
-                      {institution.name}
-                    </Text>
-                    <Text variant="heading-default-xs" onBackground="neutral-weak">
-                      {institution.description}
-                    </Text>
-                  </Column>
-                ))}
-              </Column>
-            </>
-          )}
-
-          {about.technical.display && (
-            <>
-              <Heading
-                as="h2"
-                id={about.technical.title}
-                variant="display-strong-s"
-                marginBottom="40"
-              >
-                {about.technical.title}
-              </Heading>
-              <Column fillWidth gap="l">
-                {about.technical.skills.map((skill, index) => (
-                  <Column key={`${skill}-${index}`} fillWidth gap="4">
-                    <Text id={skill.title} variant="heading-strong-l">
-                      {skill.title}
-                    </Text>
-                    <Text variant="body-default-m" onBackground="neutral-weak">
-                      {skill.description}
-                    </Text>
-                    {skill.tags && skill.tags.length > 0 && (
-                      <Row wrap gap="8" paddingTop="8">
-                        {skill.tags.map((tag, tagIndex) => (
-                          <Tag key={`${skill.title}-${tagIndex}`} size="l" prefixIcon={tag.icon}>
-                            {tag.name}
-                          </Tag>
-                        ))}
-                      </Row>
-                    )}
-                    {skill.images && skill.images.length > 0 && (
-                      <Row fillWidth paddingTop="m" gap="12" wrap>
-                        {skill.images.map((image, index) => (
-                          <Row
-                            key={index}
-                            border="neutral-medium"
-                            radius="m"
-                            minWidth={image.width}
-                            height={image.height}
-                          >
-                            <Media
-                              enlarge
-                              radius="m"
-                              sizes={image.width.toString()}
                               alt={image.alt}
-                              src={image.src}
+                              fill
+                              className={styles.experienceImageMedia}
+                              sizes="(max-width: 900px) 100vw, 45vw"
+                              loading="lazy"
                             />
-                          </Row>
+                          </div>
                         ))}
-                      </Row>
+                      </div>
                     )}
-                  </Column>
-                ))}
-              </Column>
-            </>
-          )}
-        </Column>
-      </Row>
-    </Column>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {about.technical.display && (
+        <section className={styles.block} aria-labelledby="capabilities">
+          <div className={styles.container}>
+            <h2 id="capabilities" className={styles.blockTitle}>
+              {about.technical.title}
+            </h2>
+            <div className={styles.skills}>
+              {about.technical.skills.map((skill, index) => (
+                <Reveal
+                  variant="up"
+                  delay={Math.min(index * 0.08, 0.2)}
+                  className={styles.skill}
+                  key={skill.title}
+                >
+                  <h3 className={styles.skillTitle}>{skill.title}</h3>
+                  <p className={styles.skillDescription}>{skill.description}</p>
+                  {skill.tags && skill.tags.length > 0 && (
+                    <ul className={styles.tags}>
+                      {skill.tags.map((tag) => (
+                        <li className={styles.tag} key={tag.name}>
+                          {tag.icon && (
+                            <Icon name={tag.icon} size="s" className={styles.tagIcon} />
+                          )}
+                          {tag.name}
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {about.studies.display && (
+        <section className={styles.block} aria-labelledby="background">
+          <div className={styles.container}>
+            <h2 id="background" className={styles.blockTitle}>
+              {about.studies.title}
+            </h2>
+            <div className={styles.studies}>
+              {about.studies.institutions.map((institution, index) => (
+                <Reveal
+                  variant="up"
+                  delay={Math.min(index * 0.08, 0.16)}
+                  className={styles.study}
+                  key={institution.name}
+                >
+                  <h3 className={styles.studyName}>{institution.name}</h3>
+                  <p className={styles.studyDescription}>{institution.description}</p>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <ContactSection />
+    </>
   );
 }

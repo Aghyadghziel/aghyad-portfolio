@@ -19,6 +19,24 @@ type Metadata = {
   tag?: string;
   team: Team[];
   link?: string;
+  /** Brand or company the work was for, e.g. "Bagel Labs". */
+  brand?: string;
+  /** What the project is, in a few words, e.g. "AI SaaS platform". */
+  kind?: string;
+  /** Role held on the project, e.g. "Frontend Lead". */
+  role?: string;
+  /** Year or range shown on the case study, e.g. "2024 — 2025". */
+  year?: string;
+  /** Short list of what was delivered. */
+  services?: string[];
+  /** Key technologies, shown only where they are relevant. */
+  stack?: string[];
+  /** Notable capabilities built, for the case study summary block. */
+  highlights?: string[];
+  /** One line describing the visual direction taken. */
+  direction?: string;
+  /** Pins the project to the top of the work list. */
+  featured?: boolean;
 };
 
 import { notFound } from "next/navigation";
@@ -49,6 +67,15 @@ function readMDXFile(filePath: string) {
     tag: data.tag || [],
     team: data.team || [],
     link: data.link || "",
+    brand: data.brand || "",
+    kind: data.kind || "",
+    role: data.role || "",
+    year: data.year || "",
+    services: data.services || [],
+    stack: data.stack || [],
+    highlights: data.highlights || [],
+    direction: data.direction || "",
+    featured: data.featured ?? false,
   };
 
   return { metadata, content };

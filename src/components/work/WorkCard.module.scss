@@ -1,0 +1,225 @@
+/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
+   class. Anchor colour rules below are doubled (.x.x) so this component
+   keeps control of its own colour regardless of stylesheet order. */
+
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.75rem);
+  align-items: center;
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-l);
+  background: var(--page-background);
+  transition:
+    border-color 0.3s ease,
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover {
+  border-color: var(--neutral-alpha-medium);
+  /* A small lift — enough to register as interactive, not enough to distract. */
+  transform: translate3d(0, -3px, 0);
+}
+
+/* ---------- artwork ---------- */
+
+.mediaColumn {
+  min-width: 0;
+}
+
+.media {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: var(--radius-m);
+  background: var(--neutral-background-weak);
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+/* ---------- body ---------- */
+
+.body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: var(--step-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  margin-bottom: 0.85rem;
+}
+
+.counter {
+  color: var(--brand-on-background-weak);
+}
+
+.metaItem::before {
+  content: "/";
+  margin-right: 0.75rem;
+  opacity: 0.4;
+}
+
+.title {
+  margin: 0 0 0.6rem;
+  font-size: clamp(1.4rem, 2.4vw, 2rem);
+  font-weight: 500;
+  letter-spacing: -0.026em;
+  line-height: 1.1;
+  color: var(--neutral-on-background-strong);
+}
+
+.titleLink.titleLink {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Makes the entire card a click target for the project page. */
+.titleLink::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: var(--radius-l);
+}
+
+.summary {
+  margin: 0 0 1.1rem;
+  font-size: var(--step-body);
+  line-height: 1.6;
+  color: var(--neutral-on-background-weak);
+  max-width: 48ch;
+}
+
+.role {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin: 0 0 1.1rem;
+  font-size: 0.875rem;
+  color: var(--neutral-on-background-medium);
+}
+
+.roleLabel {
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: var(--step-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  flex: none;
+}
+
+.stack {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0 0 1.5rem;
+  padding: 0;
+}
+
+.stackItem {
+  font-size: 0.78rem;
+  color: var(--neutral-on-background-medium);
+  background: var(--neutral-alpha-weak);
+  border-radius: var(--radius-xs);
+  padding: 0.3rem 0.6rem;
+}
+
+/* ---------- actions ---------- */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: auto;
+}
+
+.primaryAction {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--neutral-on-background-strong);
+}
+
+.actionArrow {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.card:hover .actionArrow {
+  transform: translate3d(0.3rem, 0, 0);
+}
+
+.liveLink.liveLink {
+  /* Above the stretched link so it stays independently clickable. */
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  font-size: 0.875rem;
+  color: var(--neutral-on-background-weak);
+  text-decoration: none;
+  transition: color 0.25s ease;
+}
+
+.liveLink.liveLink:hover {
+  color: var(--brand-on-background-weak);
+}
+
+/* ---------- responsive ---------- */
+
+@media (max-width: 900px) {
+  .card {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .summary {
+    max-width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .image,
+  .actionArrow {
+    transition: none;
+  }
+
+  .card:hover {
+    transform: none;
+  }
+
+  .card:hover .image {
+    transform: none;
+  }
+}

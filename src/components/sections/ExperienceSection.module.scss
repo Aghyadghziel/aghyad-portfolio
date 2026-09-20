@@ -1,0 +1,110 @@
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+.item {
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border: 1px solid var(--neutral-alpha-weak);
+  border-radius: var(--radius-m);
+  transition: border-color 0.25s ease;
+}
+
+.item:hover {
+  border-color: var(--neutral-alpha-medium);
+}
+
+/* Company and dates on one line — the two facts checked first. */
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.3rem;
+}
+
+.company {
+  margin: 0;
+  font-size: clamp(1.2rem, 1.9vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: -0.022em;
+  color: var(--neutral-on-background-strong);
+}
+
+.timeframe {
+  font-family: var(--font-code), ui-monospace, monospace;
+  font-size: var(--step-label);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--neutral-on-background-weak);
+  white-space: nowrap;
+}
+
+.role {
+  margin: 0 0 1.25rem;
+  font-size: 0.92rem;
+  color: var(--brand-on-background-weak);
+}
+
+.points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+.point {
+  position: relative;
+  padding-left: 1.1rem;
+  font-size: var(--step-body);
+  line-height: 1.6;
+  color: var(--neutral-on-background-weak);
+  max-width: 78ch;
+}
+
+.point::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.28rem;
+  height: 0.28rem;
+  border-radius: 50%;
+  background: var(--neutral-alpha-strong);
+}
+
+.tech {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 1.5rem 0 0;
+  padding: 1.25rem 0 0;
+  border-top: var(--studio-rule);
+}
+
+.techItem {
+  font-size: 0.78rem;
+  color: var(--neutral-on-background-medium);
+  background: var(--neutral-alpha-weak);
+  border-radius: var(--radius-xs);
+  padding: 0.3rem 0.6rem;
+}
+
+@media (max-width: 600px) {
+  .head {
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .timeframe {
+    white-space: normal;
+  }
+}

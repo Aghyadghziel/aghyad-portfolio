@@ -1,0 +1,60 @@
+.reveal {
+  --reveal-duration: 0.9s;
+  --reveal-ease: cubic-bezier(0.16, 1, 0.3, 1);
+
+  transition:
+    opacity var(--reveal-duration) var(--reveal-ease),
+    transform var(--reveal-duration) var(--reveal-ease);
+}
+
+.up {
+  opacity: 0;
+  transform: translate3d(0, 1.75rem, 0);
+  will-change: opacity, transform;
+}
+
+.fade {
+  opacity: 0;
+  will-change: opacity;
+}
+
+/* The observed root must stay unclipped: a clipped element reports an
+   intersection ratio of zero, so an observer on it would never fire. */
+.maskRoot {
+  transition: none;
+}
+
+.maskInner {
+  opacity: 0;
+  clip-path: inset(0 0 100% 0);
+  transform: translate3d(0, 1rem, 0);
+  will-change: opacity, transform, clip-path;
+  transition:
+    opacity var(--reveal-duration, 0.9s) cubic-bezier(0.16, 1, 0.3, 1),
+    transform var(--reveal-duration, 0.9s) cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path var(--reveal-duration, 0.9s) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.visible {
+  opacity: 1;
+  transform: none;
+  /* Release the compositor hint once the animation has played. */
+  will-change: auto;
+}
+
+.visible .maskInner {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 0 0);
+  will-change: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .maskInner {
+    transition: none;
+    opacity: 1;
+    transform: none;
+    clip-path: none;
+  }
+}

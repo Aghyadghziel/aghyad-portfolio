@@ -1,50 +1,62 @@
 ---
-title: "BagelLabs – Fullstack Development"
+title: "Bagel Labs"
+subtitle: "An AI platform people can actually subscribe to"
 publishedAt: "2025-06-15"
-summary: "Frontend development for the Bagel platform, focusing on building responsive, high-performance user interfaces using modern frontend technologies. Implemented reusable UI components, optimized user experience, and closely collaborated with design and backend teams."
+brand: "Bagel Labs"
+kind: "AI SaaS platform"
+role: "Frontend Lead · Fullstack Developer"
+year: "2024 — 2025"
+featured: true
+summary: "A subscription SaaS platform for fine-tuning and deploying AI models. I led the front end and built the authentication, billing, data pipelines and admin tooling behind it."
+direction: "A dense, product-first interface built on a composable component system — clear hierarchy and predictable states, so a technical audience can move quickly without the UI getting in the way."
+services:
+  - "Frontend architecture"
+  - "Fullstack development"
+  - "Payments & subscriptions"
+  - "Admin tooling"
+stack:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "Radix UI"
+  - "Stripe"
+  - "AWS"
+highlights:
+  - "Role-based authentication with OAuth"
+  - "Stripe subscriptions and billing"
+  - "Model deployment with live status"
+  - "Full admin console"
 images:
   - "/images/projects/project-01/cover-04.png"
   - "/images/projects/project-01/video-01.mp4"
-
 team:
   - name: "Aghyad Ghziel"
-    role: "Fullstack developer"
+    role: "Frontend Lead · Fullstack Developer"
     avatar: "/images/avatar.jpg"
     linkedIn: "https://www.linkedin.com/in/aghyadghziel/"
 link: "https://app.bagel.com/"
 ---
 
-## Overview
+## The brief
 
-Led the development of a full-stack SaaS platform at Bagel Labs, contributing as a Frontend Lead and Full Stack Developer. The platform enables users to fine-tune AI models and manage subscription-based access to advanced models such as VEO 3, Flux, and a variety of image and video models. The project focused on secure authentication, scalable data management, subscription payments, and a modern, responsive user experience for AI developers and creative teams.
+Bagel Labs needed a platform where users could fine-tune AI models and pay for access to advanced image and video models such as VEO 3 and Flux. That meant three hard things at once: secure accounts, reliable subscription billing, and a workflow for uploading and processing large datasets — all wrapped in an interface that a technical audience would trust.
 
-## Key Features
+I joined as Frontend Lead and Fullstack Developer, owning the front-end architecture and building across the stack.
 
-- Authentication & Authorization
-  Implemented a secure authentication system using NextAuth.js, supporting OAuth providers (Google, GitHub) and role-based access control to manage user permissions for both general users and admins.
-- Model Access & Deployment
-  Built a model deployment and fine-tuning system with real-time monitoring and status tracking. Users can deploy, test, and fine-tune AI models, including image, video, and text models.
-- Subscription Management
-  Integrated Stripe to manage subscriptions for accessing premium AI models, handling billing, plan upgrades, and transaction workflows securely.
-- Data & File Management
-  Developed a robust data management system supporting file uploads, processing pipelines, and validation logic, ensuring users can safely upload datasets for model fine-tuning.
-- Admin Console
-  Designed an admin dashboard for user management, system monitoring, and operational controls to support platform administration and internal workflows.
-- UI & Frontend Architecture
-  Led the frontend architecture, building responsive and accessible UI components using Radix UI and modern React patterns for a seamless user experience.
+## What I built
 
-## Technologies Used
+**Authentication and access control.** A secure authentication system using NextAuth.js with OAuth providers (Google, GitHub) and role-based access control, separating what general users and admins can reach.
 
-- Next.js & React – Frontend architecture and server-rendered applications
-- Stripe – Subscription and payment processing
-- Radix UI – Accessible, composable UI components
-- AWS (DynamoDB, S3) – Cloud infrastructure and data storage
-- TypeScript – Type-safe frontend and backend development
+**Subscriptions and billing.** Stripe integration handling subscription plans, upgrades, billing workflows and transaction history — the mechanism that turns the platform into a business.
 
-## Challenges and Learnings
+**Model deployment and fine-tuning.** A workflow for deploying, testing and fine-tuning image, video and text models, with real-time monitoring so users can see the status of a job rather than guessing.
 
-Balancing fast iteration with long-term scalability and security was a key challenge. Ensuring smooth fine-tuning workflows for multiple AI models while maintaining subscription access controls required careful system design. Coordinating full-stack features across authentication, payments, AI model deployment, and cloud infrastructure strengthened my end-to-end development skills and remote team collaboration.
+**Data and file management.** Upload, processing and validation pipelines for the datasets users submit for fine-tuning, backed by AWS S3 and DynamoDB.
 
-## Outcome
+**Admin console.** A dashboard for user management, system monitoring and the operational controls the team needed to run the platform day to day.
 
-The platform successfully enabled users to fine-tune and deploy AI models while managing subscriptions for advanced models like VEO 3 and Flux. The modular frontend and admin tooling reduced maintenance overhead, improved observability, and accelerated feature delivery, providing a scalable foundation for future AI-driven products.
+**Front-end architecture.** Responsive, accessible components built on Radix UI and modern React patterns, set up so new features could be added without redesigning what already existed.
+
+## What it taught me
+
+The hard part was not any single feature — it was keeping fast iteration and long-term scalability in the same codebase. Fine-tuning workflows, subscription gating, cloud infrastructure and authentication all touch each other, and a shortcut in one shows up as a bug in another. Getting that right end to end, in a fully remote team, is the part I carried into every project since.

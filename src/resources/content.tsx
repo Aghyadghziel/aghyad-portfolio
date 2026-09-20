@@ -1,45 +1,48 @@
-import { About, Blog, Gallery, Home, Newsletter, Person, Social, Work } from "@/types";
-import { Line, Row, Text } from "@once-ui-system/core";
+import type { About, Blog, Capabilities, Contact, Home, Person, Social, Work } from "@/types";
 
 const person: Person = {
   firstName: "Aghyad",
   lastName: "Ghziel",
   name: `Aghyad Ghziel`,
-  role: "Fullstack Developer",
+  role: "Full-Stack Developer",
   avatar: "/images/avatar.jpg",
   email: "aghyadghziel@gmail.com",
-  location: "Asia/Tbilisi", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
-  languages: ["English", "Russian", "Arabic"], // optional: Leave the array empty if you don't want to display languages
+  location: "Asia/Tbilisi", // IANA time zone identifier
+  languages: ["Arabic", "English", "Russian"],
 };
 
-const newsletter: Newsletter = {
-  display: true,
-  title: <>Subscribe to {person.firstName}'s Newsletter</>,
-  description: <>My weekly newsletter about creativity and engineering</>,
-};
+/** Digits only, international format — used to build the wa.me link. */
+const whatsappNumber = "966592655067";
+/** Human-readable version of the same number. */
+const whatsappDisplay = "+966 59 265 5067";
+const calendarLink = "https://calendly.com/aghyadghziel/meeting";
+const linkedInUrl = "https://www.linkedin.com/in/aghyadghziel/";
+const githubUrl = "https://github.com/Aghyadghziel";
 
 const social: Social = [
-  // Links are automatically displayed.
-  // Import new icons in /once-ui/icons.ts
-  // Set essentials: true for links you want to show on the about page
-  {
-    name: "GitHub",
-    icon: "github",
-    link: "https://github.com/Aghyadghziel",
-    essential: true,
-  },
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    link: "https://www.linkedin.com/in/aghyadghziel/",
-    essential: true,
-  },
-
   {
     name: "Email",
     icon: "email",
     link: `mailto:${person.email}`,
     essential: true,
+  },
+  {
+    name: "LinkedIn",
+    icon: "linkedin",
+    link: linkedInUrl,
+    essential: true,
+  },
+  {
+    name: "GitHub",
+    icon: "github",
+    link: githubUrl,
+    essential: true,
+  },
+  {
+    name: "WhatsApp",
+    icon: "whatsapp",
+    link: `https://wa.me/${whatsappNumber}`,
+    essential: false,
   },
 ];
 
@@ -47,37 +50,113 @@ const home: Home = {
   path: "/",
   image: "/images/og/home.png",
   label: "Home",
-  title: `${person.name}'s Portfolio`,
-  description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Building bridges between ideas and code
-  </>,
-  featured: {
-    display: true,
-    title: (
-      <Row gap="12" vertical="center">
-        <strong className="ml-4">     Aghyad Ghziel</strong>{" "}
-        <Line background="brand-alpha-strong" vert height="20" />
-        <Text marginRight="4" onBackground="brand-medium">
-          Portfolio
-        </Text>
-      </Row>
+  title: `${person.name} — Full-Stack Developer`,
+  description:
+    "Full-stack developer with a frontend focus, building production web applications with React, Next.js, TypeScript and Node.js.",
+  hero: {
+    eyebrow: "Full-Stack Developer",
+    lines: ["Full-stack developer", "with a frontend focus."],
+    subline: (
+      <>
+        I build production web applications end to end — interface, API and database. Two years
+        shipping SaaS platforms with real users, payments and deadlines.
+      </>
     ),
-    href: "/work",
+    primary: { label: "View projects", href: "#projects" },
+    secondary: { label: "Get in touch", href: "#contact" },
+    stack: ["React", "Next.js", "TypeScript", "Node.js", "SQL"],
   },
-  subline: (
+};
+
+const capabilities: Capabilities = {
+  display: true,
+  id: "stack",
+  eyebrow: "Stack",
+  title: <>Technologies I work with</>,
+  description: (
+    <>Day to day I work across the whole stack, with most of my depth on the front end.</>
+  ),
+  groups: [
+    {
+      title: "Frontend",
+      description: "Where most of my work happens.",
+      tags: [
+        { name: "React", icon: "react" },
+        { name: "Next.js", icon: "nextjs" },
+        { name: "TypeScript", icon: "typescript" },
+        { name: "Tailwind CSS", icon: "tailwindcss" },
+      ],
+    },
+    {
+      title: "Backend & data",
+      description: "APIs, authentication, storage and schema design.",
+      tags: [
+        { name: "Node.js", icon: "nodejs" },
+        { name: "Express", icon: "express" },
+        { name: "SQL", icon: "database" },
+        { name: "Prisma", icon: "prisma" },
+        { name: "AWS", icon: "aws" },
+      ],
+    },
+    {
+      title: "Payments & design",
+      description: "Billing flows in production, and design-to-code work.",
+      tags: [
+        { name: "Stripe", icon: "stripe" },
+        { name: "PayPal", icon: "paypal" },
+        { name: "Figma", icon: "figma" },
+      ],
+    },
+  ],
+};
+
+const contact: Contact = {
+  display: true,
+  id: "contact",
+  eyebrow: "Contact",
+  title: <>Get in touch</>,
+  description: (
     <>
-      I'm Aghyad, a fullstack developer with over 5 years of experience crafting scalable web applications and interactive user experiences. In my free time, I build personal projects and explore new technologies.
+      Open to full-stack and frontend roles, and to freelance work. The quickest way to reach me is
+      email — I reply to everything.
     </>
   ),
+  channels: [
+    {
+      name: "Email",
+      value: person.email,
+      hint: "Best for roles and details",
+      href: `mailto:${person.email}`,
+      icon: "email",
+    },
+    {
+      name: "LinkedIn",
+      value: "in/aghyadghziel",
+      hint: "Experience and network",
+      href: linkedInUrl,
+      icon: "linkedin",
+      external: true,
+    },
+    {
+      name: "GitHub",
+      value: "Aghyadghziel",
+      hint: "Code and side projects",
+      href: githubUrl,
+      icon: "github",
+      external: true,
+    },
+  ],
+  primary: { label: "Email me", href: `mailto:${person.email}` },
+  secondary: { label: "Connect on LinkedIn", href: linkedInUrl, external: true },
 };
 
 const about: About = {
   path: "/about",
   label: "About",
   title: `About – ${person.name}`,
-  description: `Meet ${person.name}, ${person.role} from ${person.location}`,
+  description: `${person.name} is a full-stack developer with a frontend focus, working with React, Next.js, TypeScript and Node.js.`,
   tableOfContent: {
-    display: true,
+    display: false,
     subItems: false,
   },
   avatar: {
@@ -85,94 +164,99 @@ const about: About = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com",
+    link: calendarLink,
   },
   intro: {
     display: true,
-    title: "Introduction",
+    title: "About",
     description: (
       <>
-        I am a full-stack software engineer building scalable, high-quality web applications. I specialize in creating reliable backend systems and intuitive frontend interfaces, turning complex requirements into efficient, maintainable solutions.
+        I am a full-stack developer with a Computer Science degree and most of my depth on the
+        front end. For the last two years I have worked on SaaS products for startups — AI model
+        tooling at Bagel Labs, where I led the front end, and a two-sided marketplace at Alpha
+        Factory. Both shipped with real users, subscription billing and role-based access.
       </>
     ),
   },
   work: {
-    display: true, // set to false to hide this section
-    title: "Work Experience",
+    display: true,
+    title: "Experience",
     experiences: [
       {
-        company: "Bagel Labs — Remote",
+        company: "Bagel Labs",
         timeframe: "Jan 2024 — Sep 2025",
-        role: "Senior Fullstack Developer",
+        role: "Senior Fullstack Developer · Frontend Lead",
         achievements: [
           <>
-            Worked as a Full Stack Developer with frontend leadership responsibility on a SaaS platform focused on AI model fine-tuning and subscription-based access to advanced image and video models (including VEO 3, Flux, and others).
+            Led the front-end architecture of a SaaS platform for fine-tuning and deploying AI
+            image and video models, including VEO 3 and Flux.
           </>,
           <>
-            Built secure authentication and authorization using NextAuth.js with OAuth (Google, GitHub) and role-based access control
+            Built authentication and authorization with NextAuth.js, OAuth providers and
+            role-based access control.
+          </>,
+          <>Integrated Stripe for subscriptions, billing workflows and transaction handling.</>,
+          <>
+            Implemented model deployment and fine-tuning workflows with real-time status
+            monitoring.
           </>,
           <>
-            ntegrated Stripe for subscription management, billing workflows, and transaction handling
-
-            Designed and implemented model deployment and fine-tuning workflows with real-time status monitoring
+            Built dataset upload, processing and validation pipelines on AWS S3 and DynamoDB.
           </>,
-          <>
-            Developed scalable data and file management systems for dataset uploads, processing, and validation
-          </>,
-          <>
-            Built a full admin console for user management, system monitoring, and operational control
-          </>,
-          <>
-            Integrated AWS services (S3, DynamoDB) to support cloud infrastructure
-          </>,
-          <>
-            Collaborated closely with backend, product, and design teams in a fully remote environment
-          </>,
+          <>Shipped an admin console for user management, monitoring and operations.</>,
+        ],
+        technologies: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "NextAuth.js",
+          "Stripe",
+          "AWS S3",
+          "DynamoDB",
+          "Radix UI",
         ],
         images: [
-          // optional: leave the array empty if you don't want to display images
           {
             src: "/images/projects/project-01/cover-04.png",
-            alt: "Once UI Project",
+            alt: "Bagel Labs platform interface",
             width: 16,
             height: 9,
           },
         ],
       },
       {
-        company: "Alpha Factory - Remote",
-        timeframe: "aug 2025 — Dec 2025",
+        company: "Alpha Factory",
+        timeframe: "Aug 2025 — Dec 2025",
         role: "Fullstack Developer",
         achievements: [
           <>
-            Built a full-stack collaboration platform connecting influencers, designers, and video editors into a unified workflow.
+            Built a two-sided collaboration platform connecting influencers with designers and
+            video editors.
           </>,
           <>
-            Developed influencer workflows for submitting video content and requesting editing and thumbnail design
+            Developed role-specific dashboards for four user types, each with its own permissions
+            and workflow.
           </>,
+          <>Integrated PayPal and cryptocurrency payments for project-based transactions.</>,
+          <>Built an admin panel for moderation, user management and dispute handling.</>,
           <>
-            Built dashboards for designers and editors to manage requests, revisions, and deliveries
+            Designed secure upload and storage pipelines for large video assets, with Prisma
+            modelling the data.
           </>,
-          <>
-            Integrated PayPal and cryptocurrency payments for secure project-based transactions
-          </>,
-          <>
-            Implemented a comprehensive admin panel for platform moderation, user management, and dispute handling
-          </>,
-          <>
-            Designed secure file upload and storage pipelines for large video assets
-          </>,
-          <>
-            Used Prisma for database modeling and structured data storage
-          </>,
-          <>
-            Delivered a responsive, role-based UI with Next.js and React
-          </>,
+        ],
+        technologies: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "Node.js",
+          "Prisma",
+          "PayPal API",
+          "Tailwind CSS",
         ],
         images: [
           {
             src: "/images/projects/project-01/image-02.png",
-            alt: "Once UI Project",
+            alt: "Alpha Factory platform interface",
             width: 16,
             height: 9,
           },
@@ -181,89 +265,65 @@ const about: About = {
     ],
   },
   studies: {
-    display: true, // set to false to hide this section
-    title: "Studies",
+    display: true,
+    title: "Education",
     institutions: [
       {
         name: "Kazan Federal University",
         description: <>Bachelor of Science in Computer Science.</>,
       },
       {
-        name: "Fullstack Development Focus",
-        description: <>Completed professional online courses in Fullstack Web Development (React, Node.js, Express, SQL/NoSQL, Tailwind CSS).</>,
+        name: "Fullstack Development",
+        description: (
+          <>Professional coursework in React, Node.js, Express, SQL/NoSQL and Tailwind CSS.</>
+        ),
       },
     ],
   },
   technical: {
-    display: true, // set to false to hide this section
+    display: true,
     title: "Technical skills",
     skills: [
       {
-        title: "Frontend & UI",
+        title: "Frontend",
         description: (
-          <>Building modern, accessible, and scalable user interfaces with React, Next.js, and TypeScript. Expertise in component architecture and UI libraries like Radix UI and Tailwind CSS.</>
+          <>
+            Component architecture, accessibility and responsive interfaces in React and Next.js,
+            working from Figma designs.
+          </>
         ),
         tags: [
-          {
-            name: "React",
-            icon: "react",
-          },
-          {
-            name: "Next.js",
-            icon: "nextjs",
-          },
-          {
-            name: "TypeScript",
-            icon: "typescript",
-          },
-          {
-            name: "Tailwind CSS",
-            icon: "tailwindcss",
-          },
+          { name: "React", icon: "react" },
+          { name: "Next.js", icon: "nextjs" },
+          { name: "TypeScript", icon: "typescript" },
+          { name: "Tailwind CSS", icon: "tailwindcss" },
+          { name: "Figma", icon: "figma" },
         ],
       },
       {
-        title: "Backend & Infrastructure",
+        title: "Backend & infrastructure",
         description: (
-          <>Developing robust backend systems with Node.js and Express. Experience with Prisma ORM, AWS services (S3, DynamoDB), and implementing secure authentication and payment solutions including NextAuth.js, Stripe, PayPal, and cryptocurrency payments.</>
+          <>
+            APIs, authentication, database modelling and cloud storage with Node.js, Express,
+            Prisma and AWS.
+          </>
         ),
         tags: [
-          {
-            name: "Node.js",
-            icon: "nodejs",
-          },
-          {
-            name: "Express",
-            icon: "express",
-          },
-          {
-            name: "Prisma",
-            icon: "prisma",
-          },
-          {
-            name: "AWS",
-            icon: "aws",
-          },
-          {
-            name: "Stripe",
-            icon: "stripe",
-          },
-          {
-            name: "PayPal",
-            icon: "paypal",
-          },
+          { name: "Node.js", icon: "nodejs" },
+          { name: "Express", icon: "express" },
+          { name: "SQL", icon: "database" },
+          { name: "Prisma", icon: "prisma" },
+          { name: "AWS", icon: "aws" },
         ],
       },
       {
-        title: "Design & Prototyping",
+        title: "Payments",
         description: (
-          <>Rapid prototyping and design-to-code workflows in Figma. Strong focus on developer–designer collaboration to bridge the gap between design and implementation.</>
+          <>Subscription billing and marketplace payouts shipped to production.</>
         ),
         tags: [
-          {
-            name: "Figma",
-            icon: "figma",
-          },
+          { name: "Stripe", icon: "stripe" },
+          { name: "PayPal", icon: "paypal" },
         ],
       },
     ],
@@ -272,71 +332,30 @@ const about: About = {
 
 const blog: Blog = {
   path: "/blog",
-  label: "Blog",
-  title: "Writing about design and tech...",
-  description: `Read what ${person.name} has been up to recently`,
-  // Create new blog posts by adding a new .mdx file to app/blog/posts
-  // All posts will be listed on the /blog route
+  label: "Writing",
+  title: "Notes on building for the web",
+  description: `Occasional writing by ${person.name}`,
 };
 
 const work: Work = {
   path: "/work",
-  label: "Work",
-  title: `Projects – ${person.name}`,
-  description: `Design and dev projects by ${person.name}`,
-  // Create new project pages by adding a new .mdx file to app/blog/posts
-  // All projects will be listed on the /home and /work routes
+  label: "Projects",
+  title: `Projects`,
+  description: `Web applications designed and built by ${person.name}.`,
 };
 
-const gallery: Gallery = {
-  path: "/gallery",
-  label: "Gallery",
-  title: `Photo gallery – ${person.name}`,
-  description: `A photo collection by ${person.name}`,
-  // Images by https://lorant.one
-  // These are placeholder images, replace with your own
-  images: [
-    {
-      src: "/images/gallery/horizontal-1.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-4.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-3.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-1.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/vertical-2.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-    {
-      src: "/images/gallery/horizontal-2.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/horizontal-4.jpg",
-      alt: "image",
-      orientation: "horizontal",
-    },
-    {
-      src: "/images/gallery/vertical-3.jpg",
-      alt: "image",
-      orientation: "vertical",
-    },
-  ],
+export {
+  person,
+  social,
+  home,
+  capabilities,
+  contact,
+  about,
+  blog,
+  work,
+  whatsappNumber,
+  whatsappDisplay,
+  calendarLink,
+  linkedInUrl,
+  githubUrl,
 };
-
-export { person, social, newsletter, home, about, blog, work, gallery };

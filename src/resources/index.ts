@@ -1,18 +1,23 @@
-// import a pre-defined template for config and content options
+// Site content — edit these to change what the site says.
 export {
   person,
   social,
-  newsletter,
   home,
+  capabilities,
+  contact,
   about,
   blog,
   work,
-  gallery,
+  whatsappNumber,
+  whatsappDisplay,
+  calendarLink,
+  linkedInUrl,
+  githubUrl,
 } from "./content";
 
+// Site configuration — theme, routes, fonts and SEO.
 export {
   display,
-  mailchimp,
   routes,
   protectedRoutes,
   baseURL,

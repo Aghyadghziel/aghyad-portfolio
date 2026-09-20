@@ -1,103 +1,96 @@
-# Magic Portfolio
+# Aghyad Ghziel — Developer Portfolio
 
-Magic Portfolio is a simple, clean, beginner-friendly portfolio template. It supports an MDX-based content system for projects and blog posts, an about / CV page and a gallery.
+Personal portfolio for a full-stack developer with a frontend focus. Built for recruiters
+and hiring managers: role, stack, experience, projects and contact, readable in about
+thirty seconds.
 
-View the demo [here](https://demo.magic-portfolio.com).
-
-![Magic Portfolio](public/images/og/home.png)
+Next.js 16 (App Router), React 19, TypeScript, SCSS modules and the
+[Once UI](https://once-ui.com/products/magic-portfolio) design tokens. Project write-ups
+are MDX.
 
 ## Getting started
 
-**1. Clone the repository**
-
-```
-git clone https://github.com/once-ui-system/magic-portfolio.git
-```
-
-**2. Install dependencies**
-
-```
+```bash
 npm install
+npm run dev      # http://localhost:3000
+npm run build    # production build
+npm start        # serve the production build
 ```
 
-**3. Run dev server**
+## Where things live
+
+| What | Where |
+|---|---|
+| All site copy — hero, about, experience, stack, contact | `src/resources/content.tsx` |
+| Theme, fonts, routes, SEO | `src/resources/once-ui.config.ts` |
+| Project write-ups (one `.mdx` per project) | `src/app/work/projects/` |
+| Home page sections | `src/components/sections/` |
+| Motion primitives | `src/components/motion/` |
+| Icons | `src/resources/icons.ts` |
+
+Almost every content change is an edit to `content.tsx` — including the experience
+entries, which drive both the home page section and the about page. Nothing in that file
+is generated; if a claim is in there, it should be true.
+
+## Page structure
+
+The home page is one scroll: hero → about → experience → projects → stack → contact.
+Navigation links to those anchors and marks the current one as you scroll. `/about` holds
+the longer version, `/work` lists every project, `/work/<slug>` is a single write-up.
+
+## Environment
+
+Set the production origin so canonical URLs, Open Graph tags, the sitemap and schema point
+at the real domain. Without it the build falls back to the Vercel deployment URL, then to
+`http://localhost:3000`.
 
 ```
-npm run dev
+NEXT_PUBLIC_SITE_URL=https://your-domain.com
 ```
 
-**4. Edit config**
+`PAGE_ACCESS_PASSWORD` is only needed if you add entries to `protectedRoutes` in
+`once-ui.config.ts`. See `.env.example`.
 
+## Adding a project
+
+Create `src/app/work/projects/<slug>.mdx`. The frontmatter drives the card and the
+write-up page:
+
+```yaml
+---
+title: "Project name"
+subtitle: "One line on what it is"
+publishedAt: "2026-01-30"     # sorts the list, newest first
+brand: "Project name"          # headline on the card and the page
+kind: "AI SaaS platform"       # what kind of product it is
+role: "Fullstack Developer"
+year: "2026"
+featured: true                 # pins it to the top of the list
+summary: "Two sentences for the card and meta description."
+services: ["Frontend architecture", "Payments"]   # scope, shown in the sidebar
+stack: ["Next.js", "TypeScript"]                  # tags on the card
+highlights: ["Key feature", "Another one"]
+images:
+  - "/images/projects/<slug>/cover.png"   # first image is the cover
+link: "https://live-site.com"             # omit or leave "" to hide the button
+---
 ```
-src/resources/once-ui.config.js
-```
 
-**5. Edit content**
+The markdown body becomes the article.
 
-```
-src/resources/content.js
-```
+## Motion
 
-**6. Create blog posts / projects**
+Animation is opt-in per component and always honours `prefers-reduced-motion`:
 
-```
-Add a new .mdx file to src/app/blog/posts or src/app/work/projects
-```
+- `Reveal` — scroll-in reveal via a single `IntersectionObserver` that disconnects after firing.
+- `TextReveal` — line-by-line masked headline reveal, with the full string kept in `aria-label`.
+- `Magnetic` — pointer-following wrapper, active only on devices with a fine pointer.
 
-Magic Portfolio was built with [Once UI](https://once-ui.com) for [Next.js](https://nextjs.org). It requires Node.js v18.17+.
+Everything else is CSS hover state. The project cards and experience cards ship no
+client JavaScript.
 
-## Documentation
+## Licence
 
-Docs available at: [docs.once-ui.com](https://docs.once-ui.com/docs/magic-portfolio/quick-start)
-
-## Features
-
-### Once UI
-
-- All tokens, components & features of [Once UI](https://once-ui.com)
-
-### SEO
-
-- Automatic open-graph and X image generation with next/og
-- Automatic schema and metadata generation based on the content file
-
-### Design
-
-- Responsive layout optimized for all screen sizes
-- Timeless design without heavy animations and motion
-- Endless customization options through [data attributes](https://once-ui.com/docs/theming)
-
-### Content
-
-- Render sections conditionally based on the content file
-- Enable or disable pages for blog, work, gallery and about / CV
-- Generate and display social links automatically
-- Set up password protection for URLs
-
-### Localization
-
-- A localized, earlier version of Magic Portfolio is available with the next-intl library
-- To use localization, switch to the 'i18n' branch
-
-## Creators
-
-Lorant One: [Threads](https://www.threads.net/@lorant.one) / [LinkedIn](https://www.linkedin.com/in/lorant-one/)
-
-## Get involved
-
-- Join the Design Engineers Club on [Discord](https://discord.com/invite/5EyAQ4eNdS) and share your project with us!
-- Deployed your docs? Share it on the [Once UI Hub](https://once-ui.com/hub) too! We feature our favorite apps on our landing page.
-
-## License
-
-Distributed under the CC BY-NC 4.0 License.
-
-- Attribution is required.
-- Commercial usage is not allowed.
-- You can extend the license to [Dopler CC](https://dopler.app/license) by purchasing a [Once UI Pro](https://once-ui.com/pricing) license.
-
-See `LICENSE.txt` for more information.
-
-## Deploy with Vercel
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&project-name=portfolio&repository-name=portfolio&redirect-url=https%3A%2F%2Fgithub.com%2Fonce-ui-system%2Fmagic-portfolio&demo-title=Magic%20Portfolio&demo-description=Showcase%20your%20designers%20or%20developer%20portfolio&demo-url=https%3A%2F%2Fdemo.magic-portfolio.com&demo-image=%2F%2Fraw.githubusercontent.com%2Fonce-ui-system%2Fmagic-portfolio%2Fmain%2Fpublic%2Fimages%2Fog%2Fhome.png)
+Built on the Once UI Magic Portfolio template, which is CC BY-NC 4.0 and requires
+attribution — that is the "Built on Once UI" link in the footer. Removing it requires a
+Once UI Pro licence.

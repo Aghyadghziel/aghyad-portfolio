@@ -91,16 +91,8 @@ export interface Home extends BasePageConfig {
    * The image needs to be put inside `/public/images/` directory
    */
   image: `/images/${string}` | string;
-  /** The headline of the home page */
-  headline: React.ReactNode;
-  /** Featured badge, which appears above the headline */
-  featured: {
-    display: boolean;
-    title: React.ReactNode;
-    href: string;
-  };
-  /** The sub text which appears below the headline */
-  subline: React.ReactNode;
+  /** Hero section content */
+  hero: Hero;
 }
 
 /**
@@ -152,6 +144,8 @@ export interface About extends BasePageConfig {
       role: string;
       /** Achievements at the company */
       achievements: React.ReactNode[];
+      /** Technologies used on this engagement */
+      technologies?: string[];
       /** Images related to the experience */
       images?: Array<{
         /** Image source path */
@@ -238,3 +232,74 @@ export interface Gallery extends BasePageConfig {
     orientation: string;
   }>;
 }
+
+/**
+ * A capability group shown in the stack section.
+ */
+export type Capability = {
+  title: string;
+  description: string;
+  tags: Array<{ name: string; icon?: IconName }>;
+};
+
+/**
+ * Capabilities/stack section configuration.
+ */
+export type Capabilities = {
+  display: boolean;
+  id: string;
+  eyebrow: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  groups: Capability[];
+};
+
+/**
+ * A single direct contact channel.
+ */
+export type ContactChannel = {
+  /** Channel name, e.g. "WhatsApp" */
+  name: string;
+  /** Value shown to the visitor, e.g. the address or number */
+  value: string;
+  /** Short line explaining when to use this channel */
+  hint: string;
+  /** Fully-qualified href (mailto:, https://wa.me/..., etc.) */
+  href: string;
+  icon: IconName;
+  /** Whether the link should open in a new tab */
+  external?: boolean;
+};
+
+/**
+ * Contact section configuration.
+ */
+export type Contact = {
+  display: boolean;
+  id: string;
+  eyebrow: string;
+  title: React.ReactNode;
+  description: React.ReactNode;
+  /** Direct contact channels, rendered in order */
+  channels: ContactChannel[];
+  /** Primary call to action */
+  primary: { label: string; href: string; external?: boolean };
+  /** Secondary call to action */
+  secondary: { label: string; href: string; external?: boolean };
+};
+
+/**
+ * Home hero configuration.
+ */
+export type Hero = {
+  /** Small availability/positioning line above the headline */
+  eyebrow: string;
+  /** Display headline, rendered line by line for the reveal animation */
+  lines: string[];
+  /** Value proposition below the headline */
+  subline: React.ReactNode;
+  primary: { label: string; href: string; external?: boolean };
+  secondary: { label: string; href: string };
+  /** Core technologies, listed directly under the hero */
+  stack: string[];
+};

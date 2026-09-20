@@ -1,22 +1,37 @@
 import { getPosts } from "@/utils/utils";
-import { Column } from "@once-ui-system/core";
-import { ProjectCard } from "@/components";
+import { Reveal } from "@/components/motion/Reveal";
+import { WorkCard } from "./WorkCard";
+import styles from "./Projects.module.scss";
 
 interface ProjectsProps {
+  /** 1-based inclusive slice of the sorted list, e.g. [1, 2]. */
   range?: [number, number?];
+  /** Slugs to leave out, used on a case study page to hide itself. */
   exclude?: string[];
 }
 
+/**
+ * The case study list.
+ *
+ * Featured projects come first, then the most recent — a portfolio should
+ * open with the strongest work, not the oldest. Reading the MDX happens on the
+ * server, so no project content ships to the browser as JavaScript.
+ */
 export function Projects({ range, exclude }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
 
-  // Exclude by slug (exact match)
   if (exclude && exclude.length > 0) {
     allProjects = allProjects.filter((post) => !exclude.includes(post.slug));
   }
 
   const sortedProjects = allProjects.sort((a, b) => {
-    return new Date(a.metadata.publishedAt).getTime() - new Date(b.metadata.publishedAt).getTime();
+    // Featured work is pinned to the top.
+    if (a.metadata.featured !== b.metadata.featured) {
+      return a.metadata.featured ? -1 : 1;
+    }
+    return (
+      new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
+    );
   });
 
   const displayedProjects = range
@@ -24,20 +39,24 @@ export function Projects({ range, exclude }: ProjectsProps) {
     : sortedProjects;
 
   return (
-    <Column fillWidth gap="xl" marginBottom="40" paddingX="l">
+    <div className={styles.list}>
       {displayedProjects.map((post, index) => (
-        <ProjectCard
-          priority={index < 2}
-          key={post.slug}
-          href={`/work/${post.slug}`}
-          images={post.metadata.images}
-          title={post.metadata.title}
-          description={post.metadata.summary}
-          content={post.content}
-          avatars={post.metadata.team?.map((member) => ({ src: member.avatar })) || []}
-          link={post.metadata.link || ""}
-        />
+        <Reveal variant="up" threshold={0.08} key={post.slug}>
+          <WorkCard
+            index={index}
+            href={`/work/${post.slug}`}
+            title={post.metadata.title}
+            summary={post.metadata.summary}
+            brand={post.metadata.brand}
+            kind={post.metadata.kind}
+            role={post.metadata.role}
+            year={post.metadata.year}
+            stack={post.metadata.stack}
+            image={post.metadata.images?.[0]}
+            link={post.metadata.link}
+          />
+        </Reveal>
       ))}
-    </Column>
+    </div>
   );
 }

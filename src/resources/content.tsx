@@ -244,7 +244,7 @@ const about: About = {
             notifications, behind an admin dashboard.
           </>,
           <>
-            Produced concept projects (LIWAN, NOBLE Immersive, Rashfa) exploring real-time 3D,
+            Produced concept projects (NOBLE Immersive, Rashfa) exploring real-time 3D,
             scroll-driven storytelling and mobile performance budgets.
           </>,
         ],

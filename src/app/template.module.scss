@@ -18,3 +18,14 @@
     animation: none;
   }
 }
+
+/* Printing snapshots the page while this animation is still running, so the
+   PDF came out faded and slightly soft — the content was caught mid-fade and
+   mid-translate, at a fractional pixel offset. On paper there is no entrance. */
+@media print {
+  .enter {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

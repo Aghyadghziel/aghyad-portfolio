@@ -231,6 +231,15 @@ body::before {
    printed starts from white. The attribute selector outranks the background
    class Once UI puts on <body>. */
 @media print {
+  /* Nothing animates on paper. Without this, a print can catch an element
+     mid-animation and bake its half-faded, half-shifted state into the PDF. */
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+
   body[class] {
     background: #fff !important;
   }

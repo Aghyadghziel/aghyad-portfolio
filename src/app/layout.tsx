@@ -4,7 +4,7 @@ import "@/resources/custom.css";
 
 import classNames from "classnames";
 
-import { Column, Flex, Meta } from "@once-ui-system/core";
+import { Column, Flex } from "@once-ui-system/core";
 import {
   Cursor,
   Footer,
@@ -15,9 +15,10 @@ import {
   SmoothScroll,
 } from "@/components";
 import { baseURL, dataStyle, fonts, home, style } from "@/resources";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  return pageMetadata({
     title: home.title,
     description: home.description,
     baseURL: baseURL,

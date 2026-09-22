@@ -2,7 +2,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { Icon, Meta, Schema } from "@once-ui-system/core";
+import { Icon, Schema } from "@once-ui-system/core";
 import { getPosts } from "@/utils/utils";
 import { about, baseURL, person, work } from "@/resources";
 import { CustomMDX, ScrollProgress, ScrollToHash } from "@/components";
@@ -12,6 +12,7 @@ import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { CTA } from "@/components/ui/CTA";
 import styles from "./page.module.scss";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "work", "projects"]);
@@ -35,7 +36,7 @@ export async function generateMetadata({
 
   if (!post) return {};
 
-  return Meta.generate({
+  return pageMetadata({
     title: `${post.metadata.title} — Case study`,
     description: post.metadata.summary,
     baseURL: baseURL,
@@ -118,11 +119,18 @@ export default async function Project({
               <p className={styles.summary}>{metadata.summary}</p>
             </Reveal>
 
-            {metadata.link && (
+            {(metadata.link || metadata.repo) && (
               <Reveal variant="up" delay={0.18} className={styles.headerAction}>
-                <CTA href={metadata.link} variant="primary" external arrow>
-                  Visit live site
-                </CTA>
+                {metadata.link && (
+                  <CTA href={metadata.link} variant="primary" external arrow>
+                    Visit live site
+                  </CTA>
+                )}
+                {metadata.repo && (
+                  <CTA href={metadata.repo} variant="secondary" external arrow>
+                    Read the code
+                  </CTA>
+                )}
               </Reveal>
             )}
           </div>

@@ -1,13 +1,14 @@
 {
-  "name": "@once-ui-system/magic-portfolio",
-  "version": "2.3.0",
+  "name": "aghyad-portfolio",
+  "version": "1.0.0",
   "scripts": {
     "dev": "next dev",
     "export": "next export",
     "build": "next build",
     "biome-write": "npx @biomejs/biome format --write .",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cv": "./tools/print-cv.sh"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",

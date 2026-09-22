@@ -1,0 +1,316 @@
+/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
+   class. Anchor colour rules below are doubled (.x.x) so this page keeps
+   control of its own colour regardless of stylesheet order. */
+
+.page {
+  padding-block: calc(var(--nav) + 3rem) 5rem;
+  width: min(100% - 2 * var(--studio-gutter), 58rem);
+  margin-inline: auto;
+}
+
+.sheet {
+  font-family: var(--font-text);
+  color: var(--ink);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+/* ---------- header ---------- */
+
+.header {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--line-strong);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-size: clamp(2.25rem, 1.4rem + 2.4vw, 3rem);
+  line-height: 1;
+  letter-spacing: -0.01em;
+  margin: 0;
+}
+
+.role {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent-ink);
+  margin: 0.75rem 0 0;
+}
+
+.specialty {
+  margin: 0.75rem 0 0;
+  max-width: 34ch;
+  color: var(--ink-2);
+}
+
+.contact {
+  list-style: none;
+  margin: 0.35rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.35rem;
+}
+
+.contact li {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 1fr);
+  gap: 0.75rem;
+  font-size: 0.875rem;
+}
+
+.contactLabel {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+
+.contactValue.contactValue {
+  color: var(--ink);
+  text-decoration: none;
+  word-break: break-word;
+}
+
+.contactValue.contactValue:hover {
+  color: var(--accent-ink);
+}
+
+/* ---------- blocks ---------- */
+
+.block {
+  margin-top: 2.25rem;
+}
+
+.blockTitle {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-2);
+  margin: 0 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.blockTitleSpaced {
+  margin-top: 1.5rem;
+}
+
+.lead {
+  margin: 0;
+  max-width: 78ch;
+}
+
+/* ---------- experience ---------- */
+
+.role_ {
+  margin-bottom: 1.5rem;
+  break-inside: avoid;
+}
+
+.role_:last-child {
+  margin-bottom: 0;
+}
+
+.roleHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+}
+
+.company {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.timeframe,
+.tech {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.roleTitle {
+  margin: 0.15rem 0 0.6rem;
+  color: var(--accent-ink);
+  font-size: 0.9rem;
+}
+
+.bullets {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.3rem;
+}
+
+.bullets li {
+  padding-left: 0.15rem;
+}
+
+.tech {
+  margin: 0.6rem 0 0;
+}
+
+/* ---------- projects ---------- */
+
+.projects {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.projectHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.9rem;
+  margin: 0;
+}
+
+.projectName {
+  font-weight: 600;
+}
+
+.projectKind,
+.projectLink.projectLink {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.projectLink.projectLink {
+  color: var(--accent-ink);
+  text-decoration: none;
+}
+
+.projectSummary {
+  margin: 0.15rem 0 0;
+  color: var(--ink-2);
+  max-width: 78ch;
+}
+
+/* ---------- skills, education ---------- */
+
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem;
+  align-items: start;
+}
+
+.skills {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.skillTitle {
+  display: block;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.skillTags {
+  display: block;
+  color: var(--ink-2);
+  font-size: 0.875rem;
+}
+
+.download {
+  margin-top: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.download a {
+  color: var(--accent-ink);
+}
+
+@media (max-width: 40rem) {
+  .header,
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+/* ---------- print: this page is the source of the PDF ---------- */
+
+@media print {
+  :global(header),
+  :global(footer),
+  :global([data-site-chrome]) {
+    display: none !important;
+  }
+
+  /* A CV prints on white, whatever the site's paper ground is. */
+  :global(html),
+  :global(body) {
+    background: #fff !important;
+  }
+
+  /* The paper-noise overlay is decoration; it has no place on a CV. */
+  :global(body::before),
+  :global(body::after) {
+    display: none !important;
+    content: none !important;
+  }
+
+  .page {
+    padding: 0;
+    width: 100%;
+  }
+
+  .sheet {
+    color: #111;
+  }
+
+  .sheet {
+    font-size: 9.5pt;
+    line-height: 1.4;
+  }
+
+  .name {
+    font-size: 24pt;
+  }
+
+  .company {
+    font-size: 12pt;
+  }
+
+  .block {
+    margin-top: 14pt;
+  }
+
+  .blockTitle {
+    break-after: avoid;
+  }
+
+  .download {
+    display: none;
+  }
+
+  .sheet a {
+    color: inherit !important;
+    text-decoration: none;
+  }
+}

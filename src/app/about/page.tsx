@@ -1,13 +1,14 @@
 import Image from "next/image";
-import { Icon, Meta, Schema } from "@once-ui-system/core";
-import { about, baseURL, calendarLink, home, person, social } from "@/resources";
+import { Icon, Schema } from "@once-ui-system/core";
+import { about, baseURL, calendarLink, cvPath, home, person, social } from "@/resources";
 import { Reveal } from "@/components/motion/Reveal";
 import { CTA } from "@/components/ui/CTA";
 import { ContactSection } from "@/components/sections";
 import styles from "./page.module.scss";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  return pageMetadata({
     title: about.title,
     description: about.description,
     baseURL: baseURL,
@@ -65,6 +66,9 @@ export default function About() {
                 </CTA>
                 <CTA href={calendarLink} variant="secondary" external>
                   Book a call
+                </CTA>
+                <CTA href={cvPath} variant="ghost" magnetic={false}>
+                  Download CV
                 </CTA>
               </Reveal>
 

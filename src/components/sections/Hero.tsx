@@ -1,4 +1,4 @@
-import { home, person } from "@/resources";
+import { cvPath, home, person } from "@/resources";
 import { Ticker } from "@/components/Ticker";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
@@ -59,6 +59,10 @@ export function Hero() {
               </CTA>
               <CTA href={secondary.href} variant="secondary" arrow>
                 {secondary.label}
+              </CTA>
+              {/* Recruiters ask for a CV before they ask for anything else. */}
+              <CTA href={cvPath} variant="ghost" magnetic={false}>
+                Download CV
               </CTA>
             </Reveal>
 

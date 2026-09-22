@@ -19,6 +19,8 @@ type Metadata = {
   tag?: string;
   team: Team[];
   link?: string;
+  /** Public repository for the project, when the code is open. */
+  repo?: string;
   /** Brand or company the work was for, e.g. "Bagel Labs". */
   brand?: string;
   /** What the project is, in a few words, e.g. "AI SaaS platform". */
@@ -76,6 +78,7 @@ function readMDXFile(filePath: string) {
     tag: data.tag || [],
     team: data.team || [],
     link: data.link || "",
+    repo: data.repo || "",
     brand: data.brand || "",
     kind: data.kind || "",
     role: data.role || "",

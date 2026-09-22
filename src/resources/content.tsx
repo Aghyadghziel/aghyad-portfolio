@@ -29,6 +29,8 @@ const whatsappDisplay = "+966 59 265 5067";
 const calendarLink = "https://calendly.com/aghyadghziel/meeting";
 const linkedInUrl = "https://www.linkedin.com/in/aghyadghziel/";
 const githubUrl = "https://github.com/Aghyadghziel";
+/** The CV. The page at /cv is the source; the PDF is printed from it. */
+const cvPath = "/Aghyad-Ghziel-CV.pdf";
 
 const social: Social = [
   {
@@ -259,7 +261,7 @@ const about: About = {
       },
       {
         company: "Bagel Labs",
-        timeframe: "Jan 2024 — Sep 2025",
+        timeframe: "Jan 2024 — Aug 2025",
         role: "Full-Stack Developer · Frontend Lead",
         achievements: [
           <>
@@ -443,4 +445,5 @@ export {
   calendarLink,
   linkedInUrl,
   githubUrl,
+  cvPath,
 };

@@ -225,3 +225,17 @@ body::before {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* Printing. The paper ground and its noise layer are screen decoration; on
+   paper (and in the CV's PDF) they turn into a dirty grey panel, so anything
+   printed starts from white. The attribute selector outranks the background
+   class Once UI puts on <body>. */
+@media print {
+  body[class] {
+    background: #fff !important;
+  }
+
+  body::before {
+    display: none !important;
+  }
+}

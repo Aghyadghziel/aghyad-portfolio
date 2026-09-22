@@ -1,8 +1,9 @@
 # Aghyad Ghziel — Developer Portfolio
 
-Personal portfolio for a full-stack developer with a frontend focus. Built for recruiters
-and hiring managers: role, stack, experience, projects and contact, readable in about
-thirty seconds.
+**Live: [aghyad.site](https://www.aghyad.site) · [CV](https://www.aghyad.site/cv)**
+
+Personal portfolio for a full-stack developer. Built for recruiters and hiring managers:
+role, stack, experience, projects and contact, readable in about thirty seconds.
 
 Next.js 16 (App Router), React 19, TypeScript, SCSS modules and the
 [Once UI](https://once-ui.com/products/magic-portfolio) design tokens. Project write-ups
@@ -63,7 +64,7 @@ subtitle: "One line on what it is"
 publishedAt: "2026-01-30"     # sorts the list, newest first
 brand: "Project name"          # headline on the card and the page
 kind: "AI SaaS platform"       # what kind of product it is
-role: "Fullstack Developer"
+role: "Full-Stack Developer"
 year: "2026"
 featured: true                 # pins it to the top of the list
 summary: "Two sentences for the card and meta description."
@@ -73,10 +74,23 @@ highlights: ["Key feature", "Another one"]
 images:
   - "/images/projects/<slug>/cover.png"   # first image is the cover
 link: "https://live-site.com"             # omit or leave "" to hide the button
+repo: "https://github.com/user/repo"      # optional — adds a "Read the code" button
 ---
 ```
 
 The markdown body becomes the article.
+
+## The CV
+
+`/cv` renders the CV from the same `content.tsx` the rest of the site uses, so the two can
+never disagree. `public/Aghyad-Ghziel-CV.pdf` is printed from that page:
+
+```bash
+npm run build
+npm run cv        # prints /cv to public/Aghyad-Ghziel-CV.pdf
+```
+
+Re-run it after any change to experience, skills or contact details.
 
 ## Motion
 

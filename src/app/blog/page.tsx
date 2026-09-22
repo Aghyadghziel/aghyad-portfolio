@@ -1,9 +1,10 @@
-import { Column, Heading, Meta, Schema } from "@once-ui-system/core";
+import { Column, Heading, Schema } from "@once-ui-system/core";
 import { Posts } from "@/components/blog/Posts";
 import { baseURL, blog, person } from "@/resources";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  return pageMetadata({
     title: blog.title,
     description: blog.description,
     baseURL: baseURL,

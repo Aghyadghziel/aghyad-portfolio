@@ -1,4 +1,4 @@
-import { Meta, Schema } from "@once-ui-system/core";
+import { Schema } from "@once-ui-system/core";
 import { about, baseURL, home, person } from "@/resources";
 import { ScrollToHash } from "@/components";
 import {
@@ -9,9 +9,10 @@ import {
   ProjectsSection,
   StackSection,
 } from "@/components/sections";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateMetadata() {
-  return Meta.generate({
+  return pageMetadata({
     title: home.title,
     description: home.description,
     baseURL: baseURL,

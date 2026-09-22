@@ -1,7 +1,6 @@
 import { notFound } from "next/navigation";
 import { CustomMDX, ScrollToHash } from "@/components";
 import {
-  Meta,
   Schema,
   Column,
   Heading,
@@ -21,6 +20,7 @@ import { Metadata } from "next";
 import React from "react";
 import { Posts } from "@/components/blog/Posts";
 import { ShareSection } from "@/components/blog/ShareSection";
+import { pageMetadata } from "@/utils/metadata";
 
 export async function generateStaticParams(): Promise<{ slug: string }[]> {
   const posts = getPosts(["src", "app", "blog", "posts"]);
@@ -44,7 +44,7 @@ export async function generateMetadata({
 
   if (!post) return {};
 
-  return Meta.generate({
+  return pageMetadata({
     title: post.metadata.title,
     description: post.metadata.summary,
     baseURL: baseURL,

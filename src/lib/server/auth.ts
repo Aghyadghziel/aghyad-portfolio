@@ -9,8 +9,8 @@ import { markThisBrowserAsOwn } from './own';
 import { hmac, randomCode, randomToken, rateLimit, requestMeta, safeEqualHex, sha256 } from './security';
 import { parseUserAgent } from './ua';
 
-/** The only accounts that can ever sign in. Changing this list requires a code change and deploy. */
-export const ADMIN_EMAILS = ['aghyadghziel@gmail.com', 'simastudio7@gmail.com'] as const;
+/** The only account that can ever sign in. Changing this requires a code change and deploy. */
+export const ADMIN_EMAILS = ['aghyadghziel@gmail.com'] as const;
 
 export const SESSION_COOKIE = '__Host-ag_admin';
 const SESSION_HOURS = 12;

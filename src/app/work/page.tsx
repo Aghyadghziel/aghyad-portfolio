@@ -34,8 +34,9 @@ export default function Work() {
         title={<>Projects</>}
         description={
           <>
-            Production applications with real users, payments and deadlines behind them. Each entry
-            covers the problem, what I built and the stack it runs on.
+            SaaS platforms with real users, payments and deadlines, and studio work for brands
+            where the interface itself is a real-time 3D scene. Each entry covers the problem,
+            what I built and the stack it runs on.
           </>
         }
         top

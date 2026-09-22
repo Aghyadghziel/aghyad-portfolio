@@ -49,6 +49,10 @@ import {
   SiAmazon,
   SiStripe,
   SiPaypal,
+  SiThreedotjs,
+  SiGreensock,
+  SiAstro,
+  SiPostgresql,
 } from "react-icons/si";
 
 import {
@@ -115,6 +119,10 @@ export const iconLibrary: Record<string, IconType> = {
   aws: SiAmazon,
   stripe: SiStripe,
   paypal: SiPaypal,
+  threejs: SiThreedotjs,
+  gsap: SiGreensock,
+  astro: SiAstro,
+  postgresql: SiPostgresql,
   facebook: FaFacebook,
   pinterest: FaPinterest,
   whatsapp: FaWhatsapp,

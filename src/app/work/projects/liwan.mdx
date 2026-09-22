@@ -1,0 +1,65 @@
+---
+title: "LIWAN"
+subtitle: "An architecture site where the house is the interface"
+publishedAt: "2026-09-21"
+brand: "LIWAN"
+kind: "3D architecture experience"
+role: "Design & Development · SIMA Studio"
+year: "2026"
+featured: false
+summary: "A self-initiated concept for a Riyadh architecture studio: a villa drawn entirely in code that you walk through as you scroll, then specify finish by finish. Arabic first, and no downloaded models, textures or HDRIs anywhere in it."
+direction: "Ink, paper and a single bronze accent, with a restrained filmic grade on the 3D — no bloom, no blur. The architecture is the image, so nothing else competes with it."
+services:
+  - "Art direction"
+  - "3D experience"
+  - "Web development"
+  - "Performance work"
+stack:
+  - "Next.js"
+  - "React Three Fiber"
+  - "Three.js"
+  - "GSAP"
+  - "Web Workers"
+  - "TypeScript"
+highlights:
+  - "Villa generated in code from a metric plan"
+  - "Scroll-driven camera through the house"
+  - "Live finish configurator, 13 surfaces"
+  - "Textures drawn in Web Workers"
+images:
+  - "/images/projects/liwan/hero.jpg"
+  - "/images/projects/liwan/detail.jpg"
+  - "/images/projects/liwan/extra.jpg"
+team:
+  - name: "Aghyad Ghziel"
+    role: "Design & Development"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/aghyadghziel/"
+link: "https://liwan-studio.vercel.app/ar"
+---
+
+## The brief
+
+A self-initiated concept, built at SIMA Studio for a fictional Riyadh architecture studio and residential developer. The studio is invented; the engineering is not.
+
+A villa buyer picks finishes months before anything exists, from a sample box and a flat drawing. The premise was to put them inside the house instead — on a phone, in Arabic — and let them see each finish in the room's real light.
+
+## What I built
+
+**A house, not a model.** The villa is generated from a plan measured in metres. Walls are extruded outlines with their openings cut through, so a window is a real hole with a reveal and a sill, not a texture. Nothing in the scene is downloaded: no GLB, no texture pack, no HDRI.
+
+**Textures drawn at real scale.** Stone, oak, marble and plaster are generated procedurally in Web Workers and sized in metres, so a tile is the size a tile actually is. Keeping the generation off the main thread removed a multi-second freeze on load.
+
+**A camera that reads as a film.** Scrolling runs one continuous timeline: wide on the garden, the threshold, the living room, the kitchen, out to the pool.
+
+**The configurator.** Thirteen surfaces — exterior walls, window frames, entrance door, pool water, terrace paving, floors, walls, sofa, lighting temperature, cabinets, countertop, metal accents — each dissolving into the next on the house itself rather than on a swatch.
+
+**Its own interface on a phone.** Phones get a compact panel that tells the camera how tall it is, so the house stays framed above the controls instead of hiding behind them.
+
+**Arabic first.** The root redirects to `/ar`; English mirrors it. Copy is written in both languages, with Alexandria for headings, IBM Plex Sans Arabic for reading and Noto Naskh for the editorial line.
+
+**Performance.** The first build ran at about 21 ms per frame. Merging static meshes per material, moving texture generation to workers and trimming the post-processing stack brought it to roughly 5.6 ms, and removed a 4.8-second freeze on first load.
+
+## What it taught me
+
+Real-time 3D on the web is a budget problem before it is a visual one. Almost every decision here — merged geometry, procedural textures, which post-processing pass survives — was a trade between how the house looks and whether a mid-range phone can hold sixty frames. The version that runs everywhere is worth more than the version that looks best on my machine.

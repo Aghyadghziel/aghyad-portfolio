@@ -1,0 +1,65 @@
+---
+title: "NASAQ"
+subtitle: "A uniform company whose website is the shirt"
+publishedAt: "2026-09-10"
+brand: "NASAQ"
+kind: "Brand site + 3D configurator"
+role: "Design & Development · SIMA Studio"
+year: "2026"
+featured: true
+summary: "A Saudi B2B workwear company: a new identity, a 3D T-shirt sewn from a real sewing pattern in a cloth simulation, and a live configurator that turns a browsing procurement manager into a specific quote request."
+direction: "Paper and ink with a single thread-gold accent. The shirt carries the page, the typography stays out of its way, and Arabic is designed right to left first rather than flipped."
+services:
+  - "Brand identity"
+  - "3D experience"
+  - "Web development"
+  - "Bilingual RTL build"
+stack:
+  - "Next.js"
+  - "React Three Fiber"
+  - "Three.js"
+  - "GSAP"
+  - "TypeScript"
+  - "Tailwind CSS"
+highlights:
+  - "3D shirt sewn from a real sewing pattern"
+  - "Configurator that fills the quote form"
+  - "New logo and visual identity"
+  - "Arabic + English, full RTL"
+images:
+  - "/images/projects/nasaq/hero.jpg"
+  - "/images/projects/nasaq/detail.jpg"
+  - "/images/projects/nasaq/extra.jpg"
+team:
+  - name: "Aghyad Ghziel"
+    role: "Design & Development"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/aghyadghziel/"
+link: "https://www.nasaqksa.com/"
+---
+
+## The brief
+
+Nasaq (نسق) designs and manufactures uniforms for companies across Saudi Arabia — corporate, healthcare, hospitality, industrial, aviation, education. This is a client project, built at SIMA Studio, replacing their existing website.
+
+Uniforms are bought by companies, not shoppers. There is no cart and no checkout: the site has to work for a procurement manager on a laptop and an owner on a phone, in Arabic, and turn "we are interested" into a quote request specific enough to price.
+
+## What I built
+
+**A 3D shirt, sewn rather than modelled.** The hero garment is not a downloaded model. Flat pattern pieces are generated from real sewing measurements, then sewn together in a cloth simulation that runs in Node and exports a GLB. The seams, hems and rib neck in the final mesh are where the pattern put them, and the shader draws jersey knit, twin-needle hems and satin embroidery from the sewing data baked into the model.
+
+**A hero you can touch.** Drag turns the shirt. Scrolling flies the camera into the fabric, the embroidery and the hem. Devices without WebGL get still posters rather than a blank box.
+
+**The configurator.** The same shirt becomes the product: colour, embroidery or print, thread colour and placement, updating live in 3D. The choice is serialised into the contact page, so the quote request arrives with the specification already attached.
+
+**The quote pipeline.** A server-validated form posting to an API route that sends through nodemailer, with a mailto fallback if mail is not configured — so the form never silently drops a lead.
+
+**A new identity.** A monoline «نسق» wordmark drawn on a one-stroke grid with nib cuts and the ق tail running under the word, plus a geometric NASAQ lockup. Generated from a geometry file, so the logo ships as SVG, as an embroidery file, and as a React component drawing the same curves.
+
+**Bilingual, Arabic first.** Locale on a cookie, full RTL, and type chosen per script. Arabic headlines are never split into letters for animation — that breaks letter joining — so the motion works on words and lines instead.
+
+**Twelve industries.** Each with its own colour-graded photography, pinned as a horizontal scroll on desktop and a swipe on mobile.
+
+## What it taught me
+
+The interesting constraint was that nothing here could be faked. A shirt that is modelled by eye looks like a 3D asset; a shirt that is sewn from a pattern looks like a shirt, and the configurator is then trustworthy enough to quote against. Getting the simulation, the shader and the browser's frame budget to agree took longer than the rest of the site combined.

@@ -1,6 +1,7 @@
 .groups {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  /* Auto-fit so the row stays balanced whether there are three groups or four. */
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: clamp(1rem, 2vw, 1.5rem);
 }
 
@@ -61,6 +62,12 @@
 .tagIcon {
   color: var(--brand-on-background-weak);
   flex: none;
+}
+
+@media (max-width: 1100px) {
+  .groups {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 900px) {

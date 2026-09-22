@@ -74,7 +74,10 @@ const capabilities: Capabilities = {
   eyebrow: "Stack",
   title: <>Technologies I work with</>,
   description: (
-    <>Day to day I work across the whole stack, with most of my depth on the front end.</>
+    <>
+      Day to day I work across the whole stack, with most of my depth on the front end — and, on
+      studio work, on real-time 3D and motion in the browser.
+    </>
   ),
   groups: [
     {
@@ -105,6 +108,15 @@ const capabilities: Capabilities = {
         { name: "Stripe", icon: "stripe" },
         { name: "PayPal", icon: "paypal" },
         { name: "Figma", icon: "figma" },
+      ],
+    },
+    {
+      title: "3D & motion",
+      description: "Real-time scenes and scroll-driven interfaces, kept inside a frame budget.",
+      tags: [
+        { name: "Three.js", icon: "threejs" },
+        { name: "React Three Fiber", icon: "react" },
+        { name: "GSAP", icon: "gsap" },
       ],
     },
   ],
@@ -172,9 +184,11 @@ const about: About = {
     description: (
       <>
         I am a full-stack developer with a Computer Science degree and most of my depth on the
-        front end. For the last two years I have worked on SaaS products for startups — AI model
-        tooling at Bagel Labs, where I led the front end, and a two-sided marketplace at Alpha
-        Factory. Both shipped with real users, subscription billing and role-based access.
+        front end. I spent two years on SaaS products for startups — AI model tooling at Bagel
+        Labs, where I led the front end, and a two-sided marketplace at Alpha Factory, both with
+        real users, subscription billing and role-based access. I now run SIMA Studio, my own
+        design and development studio building Arabic-first websites for Saudi companies, where
+        the work adds real-time 3D, motion and bilingual RTL on top of the same stack.
       </>
     ),
   },
@@ -182,6 +196,52 @@ const about: About = {
     display: true,
     title: "Experience",
     experiences: [
+      {
+        company: "SIMA Studio",
+        timeframe: "Jan 2026 — Present",
+        role: "Founder · Design & Development",
+        achievements: [
+          <>
+            Founded SIMA Studio, a design and development studio building Arabic-first websites
+            for Saudi companies and brands.
+          </>,
+          <>
+            Delivered NASAQ, a B2B uniform manufacturer's website: a new visual identity, a 3D
+            garment built from a real sewing pattern, and a configurator that feeds the quote
+            request.
+          </>,
+          <>
+            Designed and built the studio's own site — bilingual Arabic and English with full
+            RTL, case studies and published pricing.
+          </>,
+          <>
+            Built a first-party, cookieless analytics and lead pipeline on Postgres with Resend
+            notifications, behind an admin dashboard.
+          </>,
+          <>
+            Produced concept projects (LIWAN, NOBLE Immersive, Rashfa) exploring real-time 3D,
+            scroll-driven storytelling and mobile performance budgets.
+          </>,
+        ],
+        technologies: [
+          "Next.js",
+          "React",
+          "TypeScript",
+          "React Three Fiber",
+          "Three.js",
+          "GSAP",
+          "Postgres",
+          "Tailwind CSS",
+        ],
+        images: [
+          {
+            src: "/images/projects/sima/hero.jpg",
+            alt: "SIMA Studio website",
+            width: 16,
+            height: 10,
+          },
+        ],
+      },
       {
         company: "Bagel Labs",
         timeframe: "Jan 2024 — Sep 2025",
@@ -324,6 +384,20 @@ const about: About = {
         tags: [
           { name: "Stripe", icon: "stripe" },
           { name: "PayPal", icon: "paypal" },
+        ],
+      },
+      {
+        title: "3D & motion",
+        description: (
+          <>
+            Real-time scenes and scroll-driven interfaces in React Three Fiber and GSAP, built to
+            hold their frame budget on a mid-range phone.
+          </>
+        ),
+        tags: [
+          { name: "Three.js", icon: "threejs" },
+          { name: "React Three Fiber", icon: "react" },
+          { name: "GSAP", icon: "gsap" },
         ],
       },
     ],

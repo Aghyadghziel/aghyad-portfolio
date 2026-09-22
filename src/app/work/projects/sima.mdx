@@ -1,0 +1,66 @@
+---
+title: "SIMA Studio"
+subtitle: "My own design and development studio, and the site that sells it"
+publishedAt: "2026-09-18"
+brand: "SIMA Studio"
+kind: "Studio website"
+role: "Founder · Design & Development"
+year: "2026"
+featured: true
+summary: "The website for SIMA Studio — the design and development studio I founded, building Arabic-first sites for Saudi companies and brands. Bilingual, with a first-party analytics and lead system behind it."
+direction: "Editorial and quiet, in the studio's own identity: ink, bone and a single saffron accent, condensed display type in English and Alexandria in Arabic. Arabic is the default language, not a translation layer."
+services:
+  - "Brand identity"
+  - "Design & art direction"
+  - "Fullstack development"
+  - "Analytics & lead capture"
+stack:
+  - "Next.js"
+  - "React"
+  - "TypeScript"
+  - "React Three Fiber"
+  - "GSAP"
+  - "Postgres"
+  - "Tailwind CSS"
+highlights:
+  - "Arabic-first with full RTL, English mirror"
+  - "Case studies with a live work index"
+  - "Contact form writing leads to Postgres"
+  - "First-party, cookieless analytics dashboard"
+images:
+  - "/images/projects/sima/hero.jpg"
+  - "/images/projects/sima/detail.jpg"
+  - "/images/projects/sima/extra.jpg"
+team:
+  - name: "Aghyad Ghziel"
+    role: "Founder · Design & Development"
+    avatar: "/images/avatar.jpg"
+    linkedIn: "https://www.linkedin.com/in/aghyadghziel/"
+link: "https://www.simastudio.it.com"
+---
+
+## The brief
+
+SIMA Studio is my own studio. It designs and builds websites for Saudi companies and brands — Arabic first, with 3D and motion where they earn their place.
+
+The site had to do three jobs at once: show the work, explain what a project costs and how long it takes before anyone has to ask, and turn a visitor into a conversation. It also had to be the studio's own proof: if the work is meant to be premium, the studio's website cannot be the weakest thing in the portfolio.
+
+## What I built
+
+**The identity.** Ink, bone and ash with one saffron accent, a two-part S symbol, Barlow Condensed for display and Alexandria for Arabic. The same system runs from the brand deck through to the favicon.
+
+**Arabic as the default.** The apex domain lands on `/ar`; English mirrors it. Every line of copy is written in both languages rather than machine-translated, with type chosen separately for each script and the whole layout designed right to left first.
+
+**Case studies, not thumbnails.** Each project gets its own page: the brief, the constraint, the idea, the interactions, the stack. Content lives in typed TypeScript files, so a project is data rather than markup, and the index, the case study and the metadata all read from the same source.
+
+**Pricing in the open.** Packages, what is and is not included, timelines and the payment split are on the page. That removes the first email exchange from every lead.
+
+**Contact and leads.** The contact form validates on the server, writes the lead to a Postgres table on Neon and sends the notification through Resend, so nothing depends on an inbox being watched.
+
+**Analytics I own.** First-party and cookieless: page views, journeys and active sessions stored in my own database and read back in an admin dashboard behind an email-code login, with my own devices excluded so my testing does not pollute the numbers.
+
+**The hero.** A spectral light arc rendered in React Three Fiber, kept deliberately light — the 3D is atmosphere, not the pitch.
+
+## Notes
+
+The studio's positioning is deliberately narrow: Saudi companies and brands that need Arabic to be the first-class language on their site, not an afterthought. The projects below are what that looks like in practice — one client project, and concepts built to prove the studio can do the work before a client has to take the risk.

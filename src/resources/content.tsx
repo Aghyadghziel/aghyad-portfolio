@@ -193,6 +193,8 @@ const about: About = {
         the work adds real-time 3D, motion and bilingual RTL on top of the same stack.
       </>
     ),
+    text:
+      "I am a full-stack developer with a Computer Science degree and most of my depth on the front end. I spent two years on SaaS products for startups — AI model tooling at Bagel Labs, where I led the front end, and a two-sided marketplace at Alpha Factory, both with real users, subscription billing and role-based access. I now run SIMA Studio, my own design and development studio building Arabic-first websites for Saudi companies, where the work adds real-time 3D, motion and bilingual RTL on top of the same stack.",
   },
   work: {
     display: true,

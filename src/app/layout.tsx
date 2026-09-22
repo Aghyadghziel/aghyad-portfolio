@@ -5,7 +5,7 @@ import "@/resources/custom.css";
 import classNames from "classnames";
 
 import { Column, Flex, Meta } from "@once-ui-system/core";
-import { Cursor, Footer, Providers, RouteGuard, SiteNav } from "@/components";
+import { Cursor, Footer, Providers, RouteGuard, SiteNav, SmoothScroll } from "@/components";
 import { baseURL, dataStyle, fonts, home, style } from "@/resources";
 
 export async function generateMetadata() {
@@ -103,6 +103,7 @@ export default async function RootLayout({
           </a>
           <SiteNav />
           <Cursor />
+          <SmoothScroll />
           {/* A plain <main>, not a centred flex column: `align-items: center`
               shrinks each section to its content width, so sections stop
               sharing a left edge and headings drift out of alignment. */}

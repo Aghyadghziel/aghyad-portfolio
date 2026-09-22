@@ -5,7 +5,7 @@ import type { Metadata } from "next";
 import { Icon, Meta, Schema } from "@once-ui-system/core";
 import { getPosts } from "@/utils/utils";
 import { about, baseURL, person, work } from "@/resources";
-import { CustomMDX, ScrollToHash } from "@/components";
+import { CustomMDX, ScrollProgress, ScrollToHash } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { ContactSection } from "@/components/sections";
 import { Reveal } from "@/components/motion/Reveal";
@@ -75,6 +75,7 @@ export default async function Project({
 
   return (
     <>
+      <ScrollProgress />
       <Schema
         as="blogPosting"
         baseURL={baseURL}

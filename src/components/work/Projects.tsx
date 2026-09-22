@@ -1,4 +1,5 @@
 import { getPosts } from "@/utils/utils";
+import { FeaturedProject } from "./FeaturedProject";
 import { ProjectIndex } from "./ProjectIndex";
 
 interface ProjectsProps {
@@ -6,6 +7,8 @@ interface ProjectsProps {
   range?: [number, number?];
   /** Slugs to leave out, used on a case study page to hide itself. */
   exclude?: string[];
+  /** Shows the first project as a wide plate above the index. */
+  featured?: boolean;
 }
 
 /**
@@ -16,7 +19,7 @@ interface ProjectsProps {
  * oldest. Reading the MDX happens on the server; only the row data reaches
  * the client index.
  */
-export function Projects({ range, exclude }: ProjectsProps) {
+export function Projects({ range, exclude, featured = false }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
 
   if (exclude && exclude.length > 0) {
@@ -55,5 +58,26 @@ export function Projects({ range, exclude }: ProjectsProps) {
     link: post.metadata.link,
   }));
 
-  return <ProjectIndex rows={rows} startAt={range ? range[0] : 1} />;
+  const start = range ? range[0] : 1;
+  const [first, ...rest] = rows;
+
+  if (featured && first?.image) {
+    return (
+      <>
+        <FeaturedProject
+          href={first.href}
+          name={first.name}
+          kind={first.kind}
+          label={first.label}
+          year={first.year}
+          summary={first.summary}
+          image={first.image}
+          number={String(start).padStart(2, "0")}
+        />
+        <ProjectIndex rows={rest} startAt={start + 1} />
+      </>
+    );
+  }
+
+  return <ProjectIndex rows={rows} startAt={start} />;
 }

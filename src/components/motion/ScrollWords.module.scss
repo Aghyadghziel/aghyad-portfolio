@@ -1,0 +1,11 @@
+.block {
+  --progress: 0;
+}
+
+/* Each word fades from faint to ink as `--progress` passes its own index. */
+.word {
+  --gap: 0.12;
+  color: var(--ink);
+  opacity: calc(0.18 + 0.82 * clamp(0, (var(--progress) - var(--i)) / var(--gap), 1));
+  transition: opacity 0.2s linear;
+}

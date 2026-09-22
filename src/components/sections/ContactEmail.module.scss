@@ -1,0 +1,46 @@
+/* Doubled so Once UI's `a:not(.button)` colour rule never wins. */
+.link.link {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  max-width: 100%;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.text {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 0.6rem + 5.4vw, 6.5rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  overflow-wrap: anywhere;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0% 2px;
+  transition: background-size 0.7s var(--ease-out);
+}
+
+.link:hover .text,
+.link:focus-visible .text {
+  background-size: 100% 2px;
+}
+
+.at {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hint {
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--faint);
+  transition: color 0.3s ease;
+}
+
+.hintOn {
+  color: var(--accent);
+}

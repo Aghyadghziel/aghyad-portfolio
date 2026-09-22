@@ -17,14 +17,15 @@ export const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.container}>
+        <p className={styles.giant} aria-hidden="true">
+          Aghyad Ghziel
+        </p>
         <div className={styles.top}>
           <div className={styles.identity}>
             <Link href="/" className={styles.wordmark}>
               {person.name}
             </Link>
-            <p className={styles.role}>
-              {person.role} · Founder, SIMA Studio
-            </p>
+            <p className={styles.role}>{person.role} · Founder, SIMA Studio</p>
           </div>
 
           <nav className={styles.nav} aria-label="Footer">
@@ -97,6 +98,12 @@ export const Footer = () => {
           </p>
           <p className={styles.legal}>
             <LocalTime />
+            <span className={styles.legalDivider} aria-hidden="true">
+              /
+            </span>
+            <a href="#top" className={styles.attributionLink}>
+              Back to top ↑
+            </a>
           </p>
         </div>
       </div>

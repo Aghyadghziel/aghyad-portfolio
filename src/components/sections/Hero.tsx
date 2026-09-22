@@ -1,22 +1,31 @@
-import Image from "next/image";
 import { home, person } from "@/resources";
+import { Ticker } from "@/components/Ticker";
 import { Reveal } from "@/components/motion/Reveal";
 import { TextReveal } from "@/components/motion/TextReveal";
 import { CTA } from "@/components/ui/CTA";
+import { Portrait } from "./Portrait";
 import styles from "./Hero.module.scss";
 
 /**
  * Opening screen.
  *
  * A split page: the statement on the left in the serif, the person on the
- * right. Below the fold line, a ruled strip points at the work. No proof
- * card, no light show — the type and the portrait carry it.
+ * right, drifting and tilting a little. Below, a ruled strip with a ticker
+ * points at the work. No proof card, no light show — type and portrait
+ * carry it.
  */
 export function Hero() {
   const { eyebrow, lines, subline, primary, secondary, stack, now } = home.hero;
+  const ticker = [
+    "Full-stack developer",
+    ...stack,
+    "Founder, SIMA Studio",
+    "Open to roles & freelance",
+    "Riyadh · GMT+3",
+  ];
 
   return (
-    <section className={styles.hero} aria-labelledby="hero-heading">
+    <section id="top" className={styles.hero} aria-labelledby="hero-heading">
       <div className={styles.wash} aria-hidden="true" />
 
       <div className={styles.container}>
@@ -57,26 +66,17 @@ export function Hero() {
           </div>
 
           <Reveal variant="mask" delay={0.2} className={styles.portraitWrap}>
-            <figure className={styles.portrait}>
-              <Image
-                src="/images/portrait.jpg"
-                alt={`Portrait of ${person.name}`}
-                fill
-                priority
-                sizes="(min-width: 1024px) 38vw, (min-width: 640px) 60vw, 100vw"
-                className={styles.portraitImage}
-              />
-              <figcaption className={styles.caption}>
-                <span>{person.name}</span>
-                <span>Riyadh, {new Date().getFullYear()}</span>
-              </figcaption>
-            </figure>
+            <Portrait
+              src="/images/portrait.jpg"
+              alt={`Portrait of ${person.name}`}
+              caption={[person.name, `Riyadh, ${new Date().getFullYear()}`]}
+            />
           </Reveal>
         </div>
 
         <Reveal variant="fade" delay={0.6} className={styles.strip}>
-          <span className={styles.stripItem}>Selected work ↓</span>
-          <span className={styles.stripItem}>{stack.join(" · ")}</span>
+          <span className={styles.stripLead}>Selected work ↓</span>
+          <Ticker items={ticker} className={styles.ticker} />
         </Reveal>
       </div>
     </section>

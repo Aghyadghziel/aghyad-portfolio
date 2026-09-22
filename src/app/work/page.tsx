@@ -41,7 +41,7 @@ export default function Work() {
         }
         top
       >
-        <Projects />
+        <Projects featured />
       </Section>
       <ContactSection />
     </>

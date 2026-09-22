@@ -14,8 +14,26 @@
 }
 
 .item {
+  position: relative;
   border-bottom: var(--studio-rule);
   transition: opacity 0.5s var(--ease-out);
+}
+
+/* A wash of darker paper sweeps in from the left behind the hovered row. */
+.item::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(-1 * var(--studio-gutter));
+  background: var(--paper-2);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.6s var(--ease-out);
+  pointer-events: none;
+  z-index: -1;
+}
+
+.item.active::before {
+  transform: scaleX(1);
 }
 
 /* Other rows step back while one is hovered. */
@@ -95,6 +113,26 @@
 
 .summary {
   display: none;
+  margin: 0;
+  padding: 0 0 0 4rem;
+  max-width: 56ch;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  /* Slides open under the hovered row. */
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  transition:
+    max-height 0.6s var(--ease-out),
+    opacity 0.4s ease,
+    padding-bottom 0.6s var(--ease-out);
+}
+
+.item.active .summary {
+  max-height: 8rem;
+  opacity: 1;
+  padding-bottom: 1.5rem;
 }
 
 /* ---------- inline media (touch) ---------- */
@@ -162,6 +200,10 @@
 /* ---------- wide ---------- */
 
 @media (min-width: 900px) {
+  .summary {
+    display: block;
+  }
+
   .row.row {
     grid-template-columns: 4rem minmax(0, 1.4fr) minmax(0, 1fr) 6rem 2rem;
     grid-template-areas: "number name meta year arrow";
@@ -181,6 +223,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .item,
+  .item::before,
+  .summary,
   .name,
   .arrow,
   .preview,

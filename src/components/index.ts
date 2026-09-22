@@ -9,3 +9,6 @@ export { ThemeToggle } from "@/components/ThemeToggle";
 export { CustomMDX } from "@/components/mdx";
 export { Projects } from "@/components/work/Projects";
 export { SiteNav } from "@/components/SiteNav";
+export { SmoothScroll } from "@/components/SmoothScroll";
+export { ScrollProgress } from "@/components/ScrollProgress";
+export { Ticker } from "@/components/Ticker";

@@ -127,6 +127,8 @@ export interface About extends BasePageConfig {
     title: string;
     /** Description of the introduction section */
     description: React.ReactNode;
+    /** The same introduction as plain text, for the word-by-word scroll reveal. */
+    text: string;
   };
   /** Work experience section */
   work: {

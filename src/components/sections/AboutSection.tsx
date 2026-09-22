@@ -1,5 +1,6 @@
 import { about, person } from "@/resources";
 import { Reveal } from "@/components/motion/Reveal";
+import { ScrollWords } from "@/components/motion/ScrollWords";
 import { Section } from "./Section";
 import styles from "./AboutSection.module.scss";
 
@@ -24,9 +25,7 @@ export function AboutSection() {
         </Reveal>
 
         <div className={styles.body}>
-          <Reveal variant="up">
-            <p className={styles.lead}>{about.intro.description}</p>
-          </Reveal>
+          <ScrollWords text={about.intro.text} className={styles.lead} />
 
           <Reveal variant="up" delay={0.08}>
             <dl className={styles.facts}>

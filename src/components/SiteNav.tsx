@@ -36,6 +36,7 @@ export function SiteNav() {
   const pathname = usePathname() ?? "/";
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [activeId, setActiveId] = useState<string>("top");
   const [menuOpen, setMenuOpen] = useState(false);
   const ticking = useRef(false);
@@ -48,12 +49,17 @@ export function SiteNav() {
   // detection band while the page is still a few hundred pixels down, so its
   // last callback fires too early to conclude the hero is back in view.
   useEffect(() => {
+    let last = window.scrollY;
     const onScroll = () => {
       if (ticking.current) return;
       ticking.current = true;
       requestAnimationFrame(() => {
         const y = window.scrollY;
         setScrolled(y > 16);
+        // Slip away while reading downward, return on the first upward move.
+        if (y > 160 && y > last + 4) setHidden(true);
+        else if (y < last - 4 || y <= 160) setHidden(false);
+        last = y;
         if (y < 120) setActiveId("top");
         ticking.current = false;
       });
@@ -140,7 +146,13 @@ export function SiteNav() {
 
   return (
     <>
-      <header className={classNames(styles.header, scrolled && styles.scrolled)}>
+      <header
+        className={classNames(
+          styles.header,
+          scrolled && styles.scrolled,
+          hidden && !menuOpen && styles.hidden,
+        )}
+      >
         <div className={styles.inner}>
           <Link href="/" className={styles.wordmark} aria-label={`${person.name} — home`}>
             <span className={styles.mark} aria-hidden="true" />
@@ -167,6 +179,10 @@ export function SiteNav() {
           </nav>
 
           <div className={styles.actions}>
+            <span className={styles.status}>
+              <span className={styles.statusDot} aria-hidden="true" />
+              Available
+            </span>
             <div className={styles.desktopCta}>
               <CTA href="/#contact" variant="primary" size="s" magnetic={false}>
                 Get in touch
@@ -178,7 +194,7 @@ export function SiteNav() {
               className={styles.menuButton}
               aria-expanded={menuOpen}
               aria-controls="mobile-menu"
-            onClick={() => setMenuOpen((open) => !open)}
+              onClick={() => setMenuOpen((open) => !open)}
             >
               <span className={styles.menuButtonLabel}>{menuOpen ? "Close" : "Menu"}</span>
               <span className={classNames(styles.burger, menuOpen && styles.burgerOpen)}>
@@ -214,7 +230,13 @@ export function SiteNav() {
         </nav>
 
         <div className={styles.menuFooter}>
-          <CTA href="/#contact" variant="primary" magnetic={false} onClick={closeMenu} className={styles.menuCta}>
+          <CTA
+            href="/#contact"
+            variant="primary"
+            magnetic={false}
+            onClick={closeMenu}
+            className={styles.menuCta}
+          >
             Get in touch
           </CTA>
           <div className={styles.menuSocial}>

@@ -1,0 +1,119 @@
+/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
+   class. Anchor colour rules below are doubled (.x.x) so this component
+   keeps control of its own colour regardless of stylesheet order. */
+
+.wrap {
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+
+.plate.plate {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--paper-3);
+  box-shadow:
+    0 40px 80px -40px rgb(23 22 19 / 0.4),
+    0 0 0 1px rgb(23 22 19 / 0.08);
+}
+
+.media {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+}
+
+.image {
+  object-fit: cover;
+  object-position: top;
+  transition: transform 1.6s var(--ease-out);
+}
+
+.plate:hover .image {
+  transform: scale(1.03);
+}
+
+.badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius);
+  background: rgb(243 239 231 / 0.9);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+
+.badgeNumber {
+  color: var(--accent);
+}
+
+.caption {
+  display: grid;
+  gap: 1rem;
+  padding-top: 1.25rem;
+}
+
+.captionMain {
+  min-width: 0;
+}
+
+.name.name {
+  font-family: var(--font-display);
+  font-size: var(--step-title);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.summary {
+  margin: 0.75rem 0 0;
+  max-width: 52ch;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--ink-2);
+  text-wrap: pretty;
+}
+
+.captionMeta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1.5rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.open.open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+@media (min-width: 900px) {
+  .media {
+    aspect-ratio: 21 / 9;
+  }
+
+  .caption {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+  }
+
+  .captionMeta {
+    justify-content: flex-end;
+  }
+}

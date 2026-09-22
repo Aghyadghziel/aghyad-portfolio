@@ -23,7 +23,7 @@ export function ProjectsSection() {
       }
       divider
     >
-      <Projects range={[1, 5]} />
+      <Projects range={[1, 5]} featured />
 
       <Reveal variant="up" className={styles.footer}>
         <CTA href="/work" variant="secondary" arrow>

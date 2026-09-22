@@ -10,7 +10,12 @@
   transition:
     background-color 0.5s ease,
     border-color 0.5s ease,
-    backdrop-filter 0.5s ease;
+    backdrop-filter 0.5s ease,
+    transform 0.6s var(--ease-out);
+}
+
+.hidden {
+  transform: translateY(-100%);
 }
 
 .scrolled {
@@ -122,6 +127,40 @@
 
 .desktopCta {
   display: flex;
+}
+
+/* Availability, the one thing a recruiter checks first. */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-right: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
+}
+
+.statusDot {
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background: #2f8f4e;
+  box-shadow: 0 0 0 0 rgb(47 143 78 / 0.5);
+  animation: pulse 2.4s ease-out infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgb(47 143 78 / 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 0.5rem rgb(47 143 78 / 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgb(47 143 78 / 0);
+  }
 }
 
 /* ---------- mobile menu button ---------- */
@@ -287,7 +326,8 @@
 /* ---------- breakpoints ---------- */
 
 @media (max-width: 1100px) {
-  .desktopCta {
+  .desktopCta,
+  .status {
     display: none;
   }
 }

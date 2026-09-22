@@ -4,12 +4,23 @@ const person: Person = {
   firstName: "Aghyad",
   lastName: "Ghziel",
   name: `Aghyad Ghziel`,
+  /** The one title. Used verbatim in the hero, page title, footer, About and
+      structured data — and it must match the GitHub bio and LinkedIn headline. */
   role: "Full-Stack Developer",
   avatar: "/images/avatar.jpg",
   email: "aghyadghziel@gmail.com",
-  location: "Asia/Tbilisi", // IANA time zone identifier
+  location: "Asia/Riyadh", // IANA time zone identifier
   languages: ["Arabic", "English", "Russian"],
 };
+
+/** Digits only, international format — used to build the wa.me link. */
+/**
+ * The positioning line. Everything that describes what kind of developer he is
+ * derives from this one sentence, so the site, the OG card, the GitHub bio and
+ * the LinkedIn headline can never disagree.
+ */
+const specialty =
+  "React and Next.js, end to end — with a specialty in real-time 3D and Arabic-first interfaces.";
 
 /** Digits only, international format — used to build the wa.me link. */
 const whatsappNumber = "966592655067";
@@ -48,25 +59,25 @@ const social: Social = [
 
 const home: Home = {
   path: "/",
-  image: "/images/og/home.png",
+  image: "/images/og/card.jpg",
   label: "Home",
   title: `${person.name} — Full-Stack Developer`,
   description:
-    "Full-stack developer with a frontend focus, building production web applications with React, Next.js, TypeScript and Node.js.",
+    "Aghyad Ghziel is a full-stack developer in Riyadh building production web applications with React, Next.js, TypeScript and Node.js — specialising in real-time 3D and Arabic-first interfaces.",
   hero: {
-    eyebrow: "Full-stack developer · Riyadh",
+    eyebrow: "Full-Stack Developer · Riyadh · Open to work",
     lines: ["Web products that", "feel *considered*."],
     subline: (
       <>
-        I build production web applications end to end — interface, API and database. Two years
-        shipping SaaS platforms with real users and payments, and now my own studio building
-        Arabic-first sites with real-time 3D.
+        I build production web applications end to end — React and Next.js on the front, Node and
+        Postgres behind them. Two years shipping SaaS with real users and payments, and now my own
+        studio, where the work adds real-time 3D and Arabic-first interfaces on the same stack.
       </>
     ),
     primary: { label: "See the work", href: "#projects" },
     secondary: { label: "Say hi", href: "#contact" },
-    stack: ["React", "Next.js", "TypeScript", "Node.js", "Three.js"],
-    now: "Founder & developer at SIMA Studio. Open to full-stack and frontend roles, and to freelance work.",
+    stack: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL", "Three.js"],
+    now: "Full-stack developer at SIMA Studio, my own studio in Riyadh. Open to full-time full-stack and frontend roles — on site in Riyadh or remote — and to freelance builds.",
   },
 };
 
@@ -131,8 +142,8 @@ const contact: Contact = {
   title: "Let’s *talk*.",
   description: (
     <>
-      Open to full-stack and frontend roles, and to freelance work. The quickest way to reach me is
-      email — I reply to everything.
+      Open to full-time full-stack and frontend roles — in Riyadh or remote — and to freelance
+      builds. The quickest way to reach me is email; I reply to everything.
     </>
   ),
   channels: [
@@ -167,8 +178,8 @@ const contact: Contact = {
 const about: About = {
   path: "/about",
   label: "About",
-  title: `About – ${person.name}`,
-  description: `${person.name} is a full-stack developer with a frontend focus, working with React, Next.js, TypeScript and Node.js.`,
+  title: `About — ${person.name}, ${person.role}`,
+  description: `${person.name} is a full-stack developer in Riyadh working with React, Next.js, TypeScript and Node.js, with a specialty in real-time 3D and Arabic-first interfaces.`,
   tableOfContent: {
     display: false,
     subItems: false,
@@ -185,16 +196,16 @@ const about: About = {
     title: "About",
     description: (
       <>
-        I am a full-stack developer with a Computer Science degree and most of my depth on the
-        front end. I spent two years on SaaS products for startups — AI model tooling at Bagel
-        Labs, where I led the front end, and a two-sided marketplace at Alpha Factory, both with
-        real users, subscription billing and role-based access. I now run SIMA Studio, my own
-        design and development studio building Arabic-first websites for Saudi companies, where
-        the work adds real-time 3D, motion and bilingual RTL on top of the same stack.
+        I am a full-stack developer with a Computer Science degree, working in React, Next.js and
+        TypeScript on the front and Node and Postgres behind them. I spent two years on SaaS
+        products for startups — AI model tooling at Bagel Labs, where I led the front end, and a
+        two-sided marketplace at Alpha Factory, both with real users, subscription billing and
+        role-based access. I now run SIMA Studio, my own studio in Riyadh, where the same stack
+        carries two things most developers do not do: real-time 3D in the browser, and Arabic-first
+        interfaces built right to left from the first line.
       </>
     ),
-    text:
-      "I am a full-stack developer with a Computer Science degree and most of my depth on the front end. I spent two years on SaaS products for startups — AI model tooling at Bagel Labs, where I led the front end, and a two-sided marketplace at Alpha Factory, both with real users, subscription billing and role-based access. I now run SIMA Studio, my own design and development studio building Arabic-first websites for Saudi companies, where the work adds real-time 3D, motion and bilingual RTL on top of the same stack.",
+    text: "I am a full-stack developer with a Computer Science degree, working in React, Next.js and TypeScript on the front and Node and Postgres behind them. I spent two years on SaaS products for startups — AI model tooling at Bagel Labs, where I led the front end, and a two-sided marketplace at Alpha Factory, both with real users, subscription billing and role-based access. I now run SIMA Studio, my own studio in Riyadh, where the same stack carries two things most developers do not do: real-time 3D in the browser, and Arabic-first interfaces built right to left from the first line.",
   },
   work: {
     display: true,
@@ -203,11 +214,11 @@ const about: About = {
       {
         company: "SIMA Studio",
         timeframe: "Jan 2026 — Present",
-        role: "Founder · Design & Development",
+        role: "Founder · Full-Stack Developer",
         achievements: [
           <>
-            Founded SIMA Studio, a design and development studio building Arabic-first websites
-            for Saudi companies and brands.
+            Founded SIMA Studio, a design and development studio building Arabic-first websites for
+            Saudi companies and brands.
           </>,
           <>
             Delivered NASAQ, a B2B uniform manufacturer's website: a new visual identity, a 3D
@@ -215,8 +226,8 @@ const about: About = {
             request.
           </>,
           <>
-            Designed and built the studio's own site — bilingual Arabic and English with full
-            RTL, case studies and published pricing.
+            Designed and built the studio's own site — bilingual Arabic and English with full RTL,
+            case studies and published pricing.
           </>,
           <>
             Built a first-party, cookieless analytics and lead pipeline on Postgres with Resend
@@ -249,24 +260,21 @@ const about: About = {
       {
         company: "Bagel Labs",
         timeframe: "Jan 2024 — Sep 2025",
-        role: "Senior Fullstack Developer · Frontend Lead",
+        role: "Full-Stack Developer · Frontend Lead",
         achievements: [
           <>
-            Led the front-end architecture of a SaaS platform for fine-tuning and deploying AI
-            image and video models, including VEO 3 and Flux.
+            Led the front-end architecture of a SaaS platform for fine-tuning and deploying AI image
+            and video models, including VEO 3 and Flux.
           </>,
           <>
-            Built authentication and authorization with NextAuth.js, OAuth providers and
-            role-based access control.
+            Built authentication and authorization with NextAuth.js, OAuth providers and role-based
+            access control.
           </>,
           <>Integrated Stripe for subscriptions, billing workflows and transaction handling.</>,
           <>
-            Implemented model deployment and fine-tuning workflows with real-time status
-            monitoring.
+            Implemented model deployment and fine-tuning workflows with real-time status monitoring.
           </>,
-          <>
-            Built dataset upload, processing and validation pipelines on AWS S3 and DynamoDB.
-          </>,
+          <>Built dataset upload, processing and validation pipelines on AWS S3 and DynamoDB.</>,
           <>Shipped an admin console for user management, monitoring and operations.</>,
         ],
         technologies: [
@@ -291,11 +299,11 @@ const about: About = {
       {
         company: "Alpha Factory",
         timeframe: "Aug 2025 — Dec 2025",
-        role: "Fullstack Developer",
+        role: "Full-Stack Developer",
         achievements: [
           <>
-            Built a two-sided collaboration platform connecting influencers with designers and
-            video editors.
+            Built a two-sided collaboration platform connecting influencers with designers and video
+            editors.
           </>,
           <>
             Developed role-specific dashboards for four user types, each with its own permissions
@@ -337,7 +345,7 @@ const about: About = {
         description: <>Bachelor of Science in Computer Science.</>,
       },
       {
-        name: "Fullstack Development",
+        name: "Full-Stack Development",
         description: (
           <>Professional coursework in React, Node.js, Express, SQL/NoSQL and Tailwind CSS.</>
         ),
@@ -368,8 +376,8 @@ const about: About = {
         title: "Backend & infrastructure",
         description: (
           <>
-            APIs, authentication, database modelling and cloud storage with Node.js, Express,
-            Prisma and AWS.
+            APIs, authentication, database modelling and cloud storage with Node.js, Express, Prisma
+            and AWS.
           </>
         ),
         tags: [
@@ -382,9 +390,7 @@ const about: About = {
       },
       {
         title: "Payments",
-        description: (
-          <>Subscription billing and marketplace payouts shipped to production.</>
-        ),
+        description: <>Subscription billing and marketplace payouts shipped to production.</>,
         tags: [
           { name: "Stripe", icon: "stripe" },
           { name: "PayPal", icon: "paypal" },
@@ -418,12 +424,13 @@ const blog: Blog = {
 const work: Work = {
   path: "/work",
   label: "Projects",
-  title: `Projects`,
-  description: `Web applications designed and built by ${person.name}.`,
+  title: `Projects — ${person.name}`,
+  description: `Web applications designed and built by ${person.name}, full-stack developer in Riyadh — React, Next.js, TypeScript and real-time 3D.`,
 };
 
 export {
   person,
+  specialty,
   social,
   home,
   capabilities,

@@ -1,6 +1,7 @@
 // Site content — edit these to change what the site says.
 export {
   person,
+  specialty,
   social,
   home,
   capabilities,

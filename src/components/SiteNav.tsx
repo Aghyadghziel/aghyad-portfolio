@@ -181,7 +181,7 @@ export function SiteNav() {
           <div className={styles.actions}>
             <span className={styles.status}>
               <span className={styles.statusDot} aria-hidden="true" />
-              Available
+              Open to work
             </span>
             <div className={styles.desktopCta}>
               <CTA href="/#contact" variant="primary" size="s" magnetic={false}>

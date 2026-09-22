@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Icon, Meta, Schema } from "@once-ui-system/core";
-import { about, baseURL, calendarLink, person, social } from "@/resources";
+import { about, baseURL, calendarLink, home, person, social } from "@/resources";
 import { Reveal } from "@/components/motion/Reveal";
 import { CTA } from "@/components/ui/CTA";
 import { ContactSection } from "@/components/sections";
@@ -11,7 +11,7 @@ export async function generateMetadata() {
     title: about.title,
     description: about.description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(about.title)}`,
+    image: home.image,
     path: about.path,
   });
 }
@@ -32,7 +32,7 @@ export default function About() {
         title={about.title}
         description={about.description}
         path={about.path}
-        image={`/api/og/generate?title=${encodeURIComponent(about.title)}`}
+        image={home.image}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -185,9 +185,7 @@ export default function About() {
                     <ul className={styles.tags}>
                       {skill.tags.map((tag) => (
                         <li className={styles.tag} key={tag.name}>
-                          {tag.icon && (
-                            <Icon name={tag.icon} size="s" className={styles.tagIcon} />
-                          )}
+                          {tag.icon && <Icon name={tag.icon} size="s" className={styles.tagIcon} />}
                           {tag.name}
                         </li>
                       ))}

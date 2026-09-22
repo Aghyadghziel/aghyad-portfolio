@@ -1,5 +1,5 @@
 import { Meta, Schema } from "@once-ui-system/core";
-import { about, baseURL, person, work } from "@/resources";
+import { about, baseURL, home, person, work } from "@/resources";
 import { Projects } from "@/components/work/Projects";
 import { ContactSection, Section } from "@/components/sections";
 
@@ -8,7 +8,7 @@ export async function generateMetadata() {
     title: work.title,
     description: work.description,
     baseURL: baseURL,
-    image: `/api/og/generate?title=${encodeURIComponent(work.title)}`,
+    image: home.image,
     path: work.path,
   });
 }
@@ -22,7 +22,7 @@ export default function Work() {
         path={work.path}
         title={work.title}
         description={work.description}
-        image={`/api/og/generate?title=${encodeURIComponent(work.title)}`}
+        image={home.image}
         author={{
           name: person.name,
           url: `${baseURL}${about.path}`,
@@ -35,8 +35,8 @@ export default function Work() {
         description={
           <>
             SaaS platforms with real users and payments, and studio work for brands where the
-            interface is a real-time 3D scene. Each entry covers the problem, what I built and
-            the stack it runs on.
+            interface is a real-time 3D scene. Each entry covers the problem, what I built and the
+            stack it runs on.
           </>
         }
         top

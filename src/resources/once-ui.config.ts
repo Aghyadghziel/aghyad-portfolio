@@ -10,7 +10,7 @@ import type {
   SocialSharingConfig,
   StyleConfig,
 } from "@/types";
-import { home, person } from "./content";
+import { home, person, specialty } from "./content";
 
 /**
  * Public site origin, used for canonical URLs, OG tags, sitemap and schema.
@@ -157,7 +157,7 @@ const schema: SchemaConfig = {
   logo: `${baseURL}${person.avatar}`,
   type: "Person",
   name: person.name,
-  description: home.description,
+  description: specialty,
   email: person.email,
 };
 

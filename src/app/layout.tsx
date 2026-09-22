@@ -5,7 +5,15 @@ import "@/resources/custom.css";
 import classNames from "classnames";
 
 import { Column, Flex, Meta } from "@once-ui-system/core";
-import { Cursor, Footer, Providers, RouteGuard, SiteNav, SmoothScroll } from "@/components";
+import {
+  Cursor,
+  Footer,
+  PersonSchema,
+  Providers,
+  RouteGuard,
+  SiteNav,
+  SmoothScroll,
+} from "@/components";
 import { baseURL, dataStyle, fonts, home, style } from "@/resources";
 
 export async function generateMetadata() {
@@ -37,6 +45,7 @@ export default async function RootLayout({
       )}
     >
       <head>
+        <PersonSchema />
         <script
           id="theme-init"
           dangerouslySetInnerHTML={{

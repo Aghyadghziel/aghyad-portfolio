@@ -10,18 +10,23 @@ import styles from "./Hero.module.scss";
  * Opening screen.
  *
  * A split page: the statement on the left in the serif, the person on the
- * right, drifting and tilting a little. Below, a ruled strip with a ticker
- * points at the work. No proof card, no light show — type and portrait
- * carry it.
+ * right, drifting and tilting a little. Two mono rows under the buttons answer
+ * the two questions a recruiter has in the first fifteen seconds — what he
+ * builds with, and whether he is available. Below, a ruled strip with a ticker
+ * points at the work.
  */
 export function Hero() {
   const { eyebrow, lines, subline, primary, secondary, stack, now } = home.hero;
+  // The ticker carries the positioning; the stack sits still below the buttons,
+  // so a recruiter can read the technologies without waiting for them to scroll past.
   const ticker = [
-    "Full-stack developer",
-    ...stack,
-    "Founder, SIMA Studio",
-    "Open to roles & freelance",
+    person.role,
+    "React & Next.js",
+    "TypeScript",
+    "Real-time 3D",
+    "Arabic-first interfaces",
     "Riyadh · GMT+3",
+    "Open to work",
   ];
 
   return (
@@ -57,12 +62,18 @@ export function Hero() {
               </CTA>
             </Reveal>
 
-            {now && (
-              <Reveal variant="fade" delay={0.55} className={styles.now}>
-                <span className={styles.nowLabel}>Now</span>
-                <span className={styles.nowValue}>{now}</span>
-              </Reveal>
-            )}
+            <Reveal variant="fade" delay={0.55} className={styles.facts}>
+              <p className={styles.fact}>
+                <span className={styles.factLabel}>Stack</span>
+                <span className={styles.factValue}>{stack.join(" · ")}</span>
+              </p>
+              {now && (
+                <p className={styles.fact}>
+                  <span className={styles.factLabel}>Now</span>
+                  <span className={styles.factValue}>{now}</span>
+                </p>
+              )}
+            </Reveal>
           </div>
 
           <Reveal variant="mask" delay={0.2} className={styles.portraitWrap}>

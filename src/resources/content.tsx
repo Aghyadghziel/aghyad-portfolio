@@ -54,7 +54,7 @@ const home: Home = {
   description:
     "Full-stack developer with a frontend focus, building production web applications with React, Next.js, TypeScript and Node.js.",
   hero: {
-    eyebrow: "Full-Stack Developer",
+    eyebrow: "Available for roles and freelance",
     lines: ["Full-stack developer", "with a frontend focus."],
     subline: (
       <>
@@ -65,6 +65,14 @@ const home: Home = {
     primary: { label: "View projects", href: "#projects" },
     secondary: { label: "Get in touch", href: "#contact" },
     stack: ["React", "Next.js", "TypeScript", "Node.js", "SQL"],
+    proof: {
+      label: "Latest client project",
+      name: "NASAQ Uniforms",
+      domain: "nasaqksa.com",
+      href: "/work/nasaq",
+      poster: "/images/projects/nasaq/loop-poster.jpg",
+      video: "/images/projects/nasaq/loop.mp4",
+    },
   },
 };
 
@@ -72,7 +80,7 @@ const capabilities: Capabilities = {
   display: true,
   id: "stack",
   eyebrow: "Stack",
-  title: <>Technologies I work with</>,
+  title: "Technologies I work with",
   description: (
     <>
       Day to day I work across the whole stack, with most of my depth on the front end — and, on
@@ -126,7 +134,7 @@ const contact: Contact = {
   display: true,
   id: "contact",
   eyebrow: "Contact",
-  title: <>Get in touch</>,
+  title: "Get in touch",
   description: (
     <>
       Open to full-stack and frontend roles, and to freelance work. The quickest way to reach me is

@@ -16,6 +16,8 @@ interface CTAProps {
   external?: boolean;
   /** Leading icon, e.g. "whatsapp". */
   icon?: IconName;
+  /** Trailing up-right arrow. */
+  arrow?: boolean;
   /** Wraps the button in a magnetic field on pointer devices. */
   magnetic?: boolean;
   className?: string;
@@ -23,11 +25,9 @@ interface CTAProps {
 }
 
 /**
- * The site's call-to-action link.
- *
- * Carries two deliberate micro-interactions: the label and arrow shift right
- * together on hover, and a solid panel wipes up behind the label. Both are
- * pure `transform` changes so they stay on the compositor.
+ * The site's call-to-action link: a pill whose label rolls up on hover,
+ * with an optional arrow that nudges up and right. Only `transform` and
+ * colour change, so the interaction stays on the compositor.
  */
 export function CTA({
   href,
@@ -36,25 +36,32 @@ export function CTA({
   size = "m",
   external = false,
   icon,
+  arrow = false,
   magnetic = true,
   className,
   onClick,
 }: CTAProps) {
-  const isHashLink = href.startsWith("#");
-  const externalProps = external
-    ? { target: "_blank", rel: "noopener noreferrer" as const }
-    : undefined;
+  const isHashLink = href.startsWith("#") || href.startsWith("/#");
+  const isExternal = external || /^(https?:|mailto:|tel:)/.test(href);
+  const externalProps =
+    isExternal && !href.startsWith("mailto:")
+      ? { target: "_blank", rel: "noopener noreferrer" as const }
+      : undefined;
 
   const content = (
     <>
-      <span className={styles.fill} aria-hidden="true" />
+      {icon && <Icon name={icon} size="s" className={styles.icon} />}
       <span className={styles.label}>
-        {icon && <Icon name={icon} size="s" className={styles.icon} />}
         <span className={styles.text}>{children}</span>
-        <span className={styles.arrow} aria-hidden="true">
-          <Icon name="arrowLongRight" size="s" />
+        <span className={styles.textGhost} aria-hidden="true">
+          {children}
         </span>
       </span>
+      {arrow && (
+        <span className={styles.arrow} aria-hidden="true">
+          <Icon name="arrowUpRight" size="s" />
+        </span>
+      )}
     </>
   );
 
@@ -62,15 +69,21 @@ export function CTA({
 
   // Plain <a> for hash and external targets; next/link for real routes.
   const button =
-    isHashLink || external ? (
-      <a href={href} className={classes} onClick={onClick} {...externalProps}>
+    isHashLink || isExternal ? (
+      <a href={href} className={classes} onClick={onClick} data-cursor="open" {...externalProps}>
         {content}
       </a>
     ) : (
-      <Link href={href} className={classes} onClick={onClick}>
+      <Link href={href} className={classes} onClick={onClick} data-cursor="open">
         {content}
       </Link>
     );
 
-  return magnetic ? <Magnetic strength={0.22} max={10}>{button}</Magnetic> : button;
+  return magnetic ? (
+    <Magnetic strength={0.22} max={10}>
+      {button}
+    </Magnetic>
+  ) : (
+    button
+  );
 }

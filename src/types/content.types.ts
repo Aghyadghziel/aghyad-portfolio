@@ -302,4 +302,13 @@ export type Hero = {
   secondary: { label: string; href: string };
   /** Core technologies, listed directly under the hero */
   stack: string[];
+  /** A live project shown moving in the first screen, linked to its case study. */
+  proof?: {
+    label: string;
+    name: string;
+    domain: string;
+    href: string;
+    poster: string;
+    video?: string;
+  };
 };

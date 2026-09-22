@@ -9,6 +9,7 @@ import { CustomMDX, ScrollToHash } from "@/components";
 import { Projects } from "@/components/work/Projects";
 import { ContactSection } from "@/components/sections";
 import { Reveal } from "@/components/motion/Reveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { CTA } from "@/components/ui/CTA";
 import styles from "./page.module.scss";
 
@@ -101,11 +102,10 @@ export default async function Project({
             <div className={styles.meta}>
               {metadata.kind && <span>{metadata.kind}</span>}
               {metadata.year && <span className={styles.metaDivider}>{metadata.year}</span>}
+              {metadata.label && <span className={styles.metaDivider}>{metadata.label}</span>}
             </div>
 
-            <Reveal variant="up">
-              <h1 className={styles.title}>{metadata.brand || metadata.title}</h1>
-            </Reveal>
+            <TextReveal as="h1" lines={[metadata.brand || metadata.title]} className={styles.title} />
 
             {metadata.subtitle && (
               <Reveal variant="up" delay={0.06}>
@@ -119,7 +119,7 @@ export default async function Project({
 
             {metadata.link && (
               <Reveal variant="up" delay={0.18} className={styles.headerAction}>
-                <CTA href={metadata.link} variant="secondary" external>
+                <CTA href={metadata.link} variant="primary" external arrow>
                   Visit live site
                 </CTA>
               </Reveal>
@@ -242,8 +242,8 @@ export default async function Project({
       <section className={styles.related}>
         <div className={styles.container}>
           <div className={styles.relatedHeader}>
-            <h2 className={styles.relatedTitle}>Next project</h2>
-            <CTA href="/work" variant="ghost">
+            <TextReveal as="h2" lines={["Next project"]} className={styles.relatedTitle} />
+            <CTA href="/work" variant="ghost" arrow>
               All projects
             </CTA>
           </div>

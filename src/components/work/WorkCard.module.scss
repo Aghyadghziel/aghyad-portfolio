@@ -3,39 +3,26 @@
    keeps control of its own colour regardless of stylesheet order. */
 
 .card {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
-  gap: clamp(1.25rem, 3vw, 2.75rem);
-  align-items: center;
-  padding: clamp(1rem, 2vw, 1.5rem);
-  border: 1px solid var(--neutral-alpha-weak);
-  border-radius: var(--radius-l);
-  background: var(--page-background);
-  transition:
-    border-color 0.3s ease,
-    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card:hover {
-  border-color: var(--neutral-alpha-medium);
-  /* A small lift — enough to register as interactive, not enough to distract. */
-  transform: translate3d(0, -3px, 0);
+  gap: 1.5rem;
 }
 
 /* ---------- artwork ---------- */
 
-.mediaColumn {
-  min-width: 0;
+.media.media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--ink-2);
+  color: inherit;
+  text-decoration: none;
 }
 
-.media {
+.screen {
   position: relative;
-  width: 100%;
+  display: block;
   aspect-ratio: 16 / 10;
-  overflow: hidden;
-  border-radius: var(--radius-m);
-  background: var(--neutral-background-weak);
 }
 
 .image {
@@ -45,109 +32,166 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: transform 1.4s var(--ease-out);
 }
 
-.card:hover .image {
-  transform: scale(1.03);
+.card:hover .screen .image {
+  transform: scale(1.035);
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-card);
+  box-shadow: inset 0 0 0 1px var(--line);
+  pointer-events: none;
+}
+
+/* Phone view tucked into the corner of the screen. */
+.phone {
+  display: none;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  width: 17%;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  border: 1px solid var(--line);
+  box-shadow: 0 24px 48px -20px rgb(0 0 0 / 0.9);
+  transition: transform 1.2s var(--ease-out);
+}
+
+.card:hover .phone {
+  transform: translateY(-0.5rem);
+}
+
+.phoneScreen {
+  position: relative;
+  display: block;
+  aspect-ratio: 390 / 844;
 }
 
 /* ---------- body ---------- */
 
 .body {
-  min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  min-width: 0;
 }
 
 .meta {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  flex-wrap: wrap;
-  font-family: var(--font-code), ui-monospace, monospace;
-  font-size: var(--step-label);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--neutral-on-background-weak);
-  margin-bottom: 0.85rem;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.875rem;
+  color: var(--mute);
 }
 
-.counter {
-  color: var(--brand-on-background-weak);
+/* The number rolls up and its accent twin rolls in on hover. */
+.number {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  color: var(--paper);
 }
 
-.metaItem::before {
-  content: "/";
-  margin-right: 0.75rem;
-  opacity: 0.4;
+.numberText {
+  display: block;
+  transition: transform 0.7s var(--ease-out);
 }
 
-.title {
-  margin: 0 0 0.6rem;
-  font-size: clamp(1.4rem, 2.4vw, 2rem);
-  font-weight: 500;
-  letter-spacing: -0.026em;
-  line-height: 1.1;
-  color: var(--neutral-on-background-strong);
+.numberGhost {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  color: var(--accent);
+  transition: transform 0.7s var(--ease-out);
+}
+
+.card:hover .numberText {
+  transform: translateY(-100%);
+}
+
+.card:hover .numberGhost {
+  transform: translateY(0);
+}
+
+.kind {
+  text-align: right;
+}
+
+.title.title {
+  margin-top: 1.5rem;
+  transition: transform 0.7s var(--ease-out);
+}
+
+.card:hover .title.title {
+  transform: translateX(0.25rem);
 }
 
 .titleLink.titleLink {
   color: inherit;
   text-decoration: none;
+  outline: none;
 }
 
-/* Makes the entire card a click target for the project page. */
-.titleLink::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  border-radius: var(--radius-l);
+.label {
+  margin: 0.5rem 0 0;
+  font-size: 0.875rem;
+  color: var(--faint);
 }
 
 .summary {
-  margin: 0 0 1.1rem;
-  font-size: var(--step-body);
+  margin: 1.25rem 0 0;
+  max-width: 40ch;
+  font-size: 1rem;
   line-height: 1.6;
-  color: var(--neutral-on-background-weak);
-  max-width: 48ch;
+  color: var(--mute);
+  text-wrap: pretty;
 }
 
-.role {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  margin: 0 0 1.1rem;
-  font-size: 0.875rem;
-  color: var(--neutral-on-background-medium);
-}
-
-.roleLabel {
-  font-family: var(--font-code), ui-monospace, monospace;
-  font-size: var(--step-label);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--neutral-on-background-weak);
-  flex: none;
-}
-
-.stack {
+.tags {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.4rem;
-  margin: 0 0 1.5rem;
+  gap: 0.5rem;
+  margin: 1.5rem 0 0;
   padding: 0;
 }
 
-.stackItem {
-  font-size: 0.78rem;
-  color: var(--neutral-on-background-medium);
-  background: var(--neutral-alpha-weak);
-  border-radius: var(--radius-xs);
-  padding: 0.3rem 0.6rem;
+.tag {
+  padding: 0.25rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  color: #b8b8ba;
+}
+
+.facts {
+  display: none;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0 0;
+  padding-top: 1.5rem;
+  border-top: var(--studio-rule);
+  font-size: 0.875rem;
+}
+
+.factLabel {
+  color: var(--faint);
+}
+
+.factValue {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin: 0.5rem 0 0;
+  color: var(--paper-2);
+}
+
+.factLine {
+  display: block;
 }
 
 /* ---------- actions ---------- */
@@ -156,70 +200,86 @@
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  flex-wrap: wrap;
   margin-top: auto;
+  padding-top: 1.5rem;
 }
 
-.primaryAction {
+.view.view,
+.live.live {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
-  font-weight: 500;
-  color: var(--neutral-on-background-strong);
-}
-
-.actionArrow {
-  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.card:hover .actionArrow {
-  transform: translate3d(0.3rem, 0, 0);
-}
-
-.liveLink.liveLink {
-  /* Above the stretched link so it stays independently clickable. */
-  position: relative;
-  z-index: 2;
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
   min-height: 2.75rem;
   font-size: 0.875rem;
-  color: var(--neutral-on-background-weak);
+  color: var(--paper);
   text-decoration: none;
-  transition: color 0.25s ease;
+  transition: color 0.3s ease;
 }
 
-.liveLink.liveLink:hover {
-  color: var(--brand-on-background-weak);
+.view.view:hover,
+.live.live:hover {
+  color: var(--accent);
+}
+
+.live.live {
+  color: var(--mute);
+}
+
+.arrow {
+  transition: transform 0.5s var(--ease-out);
+}
+
+.card:hover .arrow {
+  transform: translate(0.125rem, -0.125rem);
 }
 
 /* ---------- responsive ---------- */
 
-@media (max-width: 900px) {
+@media (min-width: 640px) {
+  .phone {
+    display: block;
+  }
+}
+
+@media (min-width: 1024px) {
   .card {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 2.5rem;
   }
 
-  .summary {
-    max-width: 100%;
+  .media.media {
+    grid-column: span 8;
+  }
+
+  .body {
+    grid-column: span 4;
+    padding-block: 0.5rem;
+  }
+
+  .flip .media.media {
+    order: 2;
+  }
+
+  .flip .body {
+    order: 1;
+  }
+
+  .facts {
+    display: grid;
+  }
+
+  .actions {
+    padding-top: 2rem;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .card,
   .image,
-  .actionArrow {
+  .phone,
+  .numberText,
+  .numberGhost,
+  .title.title,
+  .arrow {
     transition: none;
-  }
-
-  .card:hover {
-    transform: none;
-  }
-
-  .card:hover .image {
-    transform: none;
   }
 }

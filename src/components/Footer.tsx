@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { Icon } from "@once-ui-system/core";
 import { person, social } from "@/resources";
-import { ThemeToggle } from "./ThemeToggle";
 import styles from "./Footer.module.scss";
 
 const FOOTER_LINKS = [
@@ -20,10 +19,11 @@ export const Footer = () => {
         <div className={styles.top}>
           <div className={styles.identity}>
             <Link href="/" className={styles.wordmark}>
-              <span className={styles.mark} aria-hidden="true" />
               {person.name}
             </Link>
-            <p className={styles.role}>{person.role}</p>
+            <p className={styles.role}>
+              {person.role} · Founder, SIMA Studio
+            </p>
           </div>
 
           <nav className={styles.nav} aria-label="Footer">
@@ -94,9 +94,7 @@ export const Footer = () => {
               </a>
             </span>
           </p>
-          <div className={styles.themeToggle}>
-            <ThemeToggle />
-          </div>
+          <p className={styles.legal}>Riyadh · Remote</p>
         </div>
       </div>
     </footer>

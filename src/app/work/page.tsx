@@ -31,7 +31,7 @@ export default function Work() {
       />
       <Section
         eyebrow="Projects"
-        title={<>Projects</>}
+        title="Projects"
         description={
           <>
             SaaS platforms with real users, payments and deadlines, and studio work for brands

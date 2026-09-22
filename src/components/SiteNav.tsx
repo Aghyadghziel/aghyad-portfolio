@@ -7,7 +7,6 @@ import classNames from "classnames";
 import { Icon } from "@once-ui-system/core";
 import { person, social } from "@/resources";
 import { CTA } from "@/components/ui/CTA";
-import { ThemeToggle } from "./ThemeToggle";
 import styles from "./SiteNav.module.scss";
 
 type NavItem = {
@@ -168,9 +167,6 @@ export function SiteNav() {
           </nav>
 
           <div className={styles.actions}>
-            <div className={styles.themeToggle}>
-              <ThemeToggle />
-            </div>
             <div className={styles.desktopCta}>
               <CTA href="/#contact" variant="primary" size="s" magnetic={false}>
                 Get in touch
@@ -206,10 +202,11 @@ export function SiteNav() {
               <li
                 className={styles.menuItem}
                 key={item.href}
-                style={{ transitionDelay: menuOpen ? `${0.06 + index * 0.04}s` : "0s" }}
+                style={{ transitionDelay: menuOpen ? `${0.2 + index * 0.06}s` : "0s" }}
               >
                 <Link href={item.href} className={styles.menuLink} onClick={closeMenu}>
-                  {item.label}
+                  <span className={styles.menuLabel}>{item.label}</span>
+                  <span className={styles.menuIndex}>0{index + 1}</span>
                 </Link>
               </li>
             ))}
@@ -217,7 +214,9 @@ export function SiteNav() {
         </nav>
 
         <div className={styles.menuFooter}>
-          <p className={styles.menuFooterLabel}>Get in touch</p>
+          <CTA href="/#contact" variant="primary" magnetic={false} onClick={closeMenu} className={styles.menuCta}>
+            Get in touch
+          </CTA>
           <div className={styles.menuSocial}>
             {social.map((item) => (
               <a

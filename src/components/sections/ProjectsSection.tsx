@@ -15,7 +15,7 @@ export function ProjectsSection() {
     <Section
       id="projects"
       eyebrow="Projects"
-      title={<>Selected projects</>}
+      title="Selected projects"
       description={
         <>
           SaaS platforms with real users, payments and deadlines, and studio work where the
@@ -28,7 +28,7 @@ export function ProjectsSection() {
       <Projects range={[1, 4]} />
 
       <Reveal variant="up" className={styles.footer}>
-        <CTA href="/work" variant="secondary">
+        <CTA href="/work" variant="secondary" arrow>
           All projects
         </CTA>
       </Reveal>

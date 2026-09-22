@@ -1,6 +1,7 @@
 import { Icon } from "@once-ui-system/core";
 import { contact } from "@/resources";
 import { Reveal } from "@/components/motion/Reveal";
+import { TextReveal } from "@/components/motion/TextReveal";
 import { CTA } from "@/components/ui/CTA";
 import styles from "./ContactSection.module.scss";
 
@@ -22,18 +23,22 @@ export function ContactSection() {
           {contact.eyebrow}
         </Reveal>
 
-        <Reveal variant="up">
-          <h2 id="contact-heading" className={styles.headline}>
-            {contact.title}
-          </h2>
-        </Reveal>
+        {typeof contact.title === "string" ? (
+          <TextReveal as="h2" id="contact-heading" lines={[contact.title]} className={styles.headline} />
+        ) : (
+          <Reveal variant="up">
+            <h2 id="contact-heading" className={styles.headline}>
+              {contact.title}
+            </h2>
+          </Reveal>
+        )}
 
         <Reveal variant="up" delay={0.06}>
           <p className={styles.description}>{contact.description}</p>
         </Reveal>
 
         <Reveal variant="up" delay={0.12} className={styles.actions}>
-          <CTA href={contact.primary.href} variant="primary" external={contact.primary.external}>
+          <CTA href={contact.primary.href} variant="primary" arrow external={contact.primary.external}>
             {contact.primary.label}
           </CTA>
           <CTA

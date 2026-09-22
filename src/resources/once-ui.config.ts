@@ -33,37 +33,44 @@ const routes: RoutesConfig = {
 const display: DisplayConfig = {
   location: false,
   time: false,
-  themeSwitcher: true,
+  themeSwitcher: false,
 };
 
 /** Password-protected routes. Set the password in .env — see .env.example. */
 const protectedRoutes: ProtectedRoutesConfig = {};
 
-import { Geist } from "next/font/google";
-import { Geist_Mono } from "next/font/google";
+import { Barlow, Barlow_Condensed, Geist_Mono } from "next/font/google";
 
-const heading = Geist({
+/** Display — condensed and heavy, set uppercase by the display utilities. */
+const heading = Barlow_Condensed({
   variable: "--font-heading",
   subsets: ["latin"],
+  weight: ["600", "700", "800"],
   display: "swap",
 });
 
-const body = Geist({
+/** Body and UI labels. */
+const body = Barlow({
   variable: "--font-body",
   subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const label = Geist({
+const label = Barlow({
   variable: "--font-label",
   subsets: ["latin"],
+  weight: ["500"],
   display: "swap",
 });
 
+/** Small mono metadata labels. Never in the first paint's critical text. */
 const code = Geist_Mono({
   variable: "--font-code",
   subsets: ["latin"],
+  weight: ["500"],
   display: "swap",
+  preload: false,
 });
 
 const fonts: FontsConfig = {
@@ -75,10 +82,10 @@ const fonts: FontsConfig = {
 
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
-  theme: "dark", // dark | light | system
-  neutral: "sand", // sand | gray | slate | custom
-  brand: "orange", // warm, restrained accent used sparingly
-  accent: "orange",
+  theme: "dark", // dark only — the palette in custom.css is built for ink
+  neutral: "gray", // remapped in custom.css; kept so the template tokens resolve
+  brand: "blue", // remapped in custom.css to the cool accent
+  accent: "blue",
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
   border: "conservative", // tighter radii read as more editorial than "playful"

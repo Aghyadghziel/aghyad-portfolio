@@ -5,7 +5,7 @@ import "@/resources/custom.css";
 import classNames from "classnames";
 
 import { Column, Flex, Meta } from "@once-ui-system/core";
-import { Footer, Providers, RouteGuard, SiteNav } from "@/components";
+import { Cursor, Footer, Providers, RouteGuard, SiteNav } from "@/components";
 import { baseURL, dataStyle, fonts, home, style } from "@/resources";
 
 export async function generateMetadata() {
@@ -65,23 +65,10 @@ export default async function RootLayout({
                   });
 
                   // Resolve theme
-                  const resolveTheme = (themeValue) => {
-                    if (!themeValue || themeValue === 'system') {
-                      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-                    }
-                    return themeValue;
-                  };
-
-                  // Seed the configured default on a first visit. Writing it to
-                  // storage (rather than only to the DOM) is what makes the theme
-                  // stick: the provider reads storage on mount and would otherwise
-                  // fall back to the operating system preference.
-                  let savedTheme = localStorage.getItem('data-theme');
-                  if (!savedTheme) {
-                    savedTheme = resolveTheme('${style.theme}');
-                    localStorage.setItem('data-theme', savedTheme);
-                  }
-                  root.setAttribute('data-theme', resolveTheme(savedTheme));
+                                    // The site is dark only: the palette is built for an ink
+                  // ground, so a stored light preference is never honoured.
+                  localStorage.setItem('data-theme', 'dark');
+                  root.setAttribute('data-theme', 'dark');
 
                   // Apply any saved style overrides
                   const styleKeys = Object.keys(config);
@@ -115,6 +102,7 @@ export default async function RootLayout({
             Skip to content
           </a>
           <SiteNav />
+          <Cursor />
           {/* A plain <main>, not a centred flex column: `align-items: center`
               shrinks each section to its content width, so sections stop
               sharing a left edge and headings drift out of alignment. */}

@@ -17,7 +17,7 @@ export function ExperienceSection() {
     <Section
       id="experience"
       eyebrow="Experience"
-      title={<>Where I&rsquo;ve worked</>}
+      title="Where I’ve worked"
       divider
     >
       <ol className={styles.list}>

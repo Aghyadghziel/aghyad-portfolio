@@ -35,6 +35,10 @@ type Metadata = {
   highlights?: string[];
   /** One line describing the visual direction taken. */
   direction?: string;
+  /** Phone screenshot (780×1688), tucked into the corner of the list card. */
+  mobile?: string;
+  /** What kind of engagement this was, e.g. "Client project". */
+  label?: string;
   /** Pins the project to the top of the work list. */
   featured?: boolean;
   /**
@@ -80,6 +84,8 @@ function readMDXFile(filePath: string) {
     stack: data.stack || [],
     highlights: data.highlights || [],
     direction: data.direction || "",
+    mobile: data.mobile || "",
+    label: data.label || "",
     featured: data.featured ?? false,
     order: typeof data.order === "number" ? data.order : undefined,
   };

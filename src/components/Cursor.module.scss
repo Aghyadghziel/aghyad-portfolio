@@ -1,0 +1,88 @@
+.root {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+}
+
+.dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 6px;
+  margin: -3px 0 0 -3px;
+  border-radius: 50%;
+  background: var(--paper);
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  will-change: transform;
+}
+
+.dot.on {
+  opacity: 1;
+}
+
+.ringWrap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  will-change: transform;
+}
+
+.ring {
+  --size: 22px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--size);
+  height: var(--size);
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid rgb(244 244 241 / 0.35);
+  background: transparent;
+  opacity: 0;
+  transition:
+    width 0.35s var(--ease-out),
+    height 0.35s var(--ease-out),
+    opacity 0.2s ease,
+    background-color 0.35s var(--ease-out),
+    border-color 0.35s var(--ease-out);
+}
+
+.ring.on {
+  opacity: 1;
+}
+
+.ring.hover {
+  --size: 44px;
+}
+
+.ring.label {
+  --size: 76px;
+  background: var(--accent);
+  border-color: transparent;
+}
+
+.labelText {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  animation: pop 0.3s var(--ease-out);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}

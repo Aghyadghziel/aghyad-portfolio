@@ -1,5 +1,4 @@
 import { getPosts } from "@/utils/utils";
-import { Reveal } from "@/components/motion/Reveal";
 import { WorkCard } from "./WorkCard";
 import styles from "./Projects.module.scss";
 
@@ -15,8 +14,8 @@ interface ProjectsProps {
  *
  * Projects with an explicit `order` lead the list, then featured work, then
  * the most recent — a portfolio should open with the strongest work, not the
- * oldest. Reading the MDX happens on the server, so no project content ships
- * to the browser as JavaScript.
+ * oldest. Cards alternate sides. Reading the MDX happens on the server, so no
+ * project content ships to the browser as JavaScript.
  */
 export function Projects({ range, exclude }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
@@ -38,9 +37,7 @@ export function Projects({ range, exclude }: ProjectsProps) {
     if (a.metadata.featured !== b.metadata.featured) {
       return a.metadata.featured ? -1 : 1;
     }
-    return (
-      new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime()
-    );
+    return new Date(b.metadata.publishedAt).getTime() - new Date(a.metadata.publishedAt).getTime();
   });
 
   const displayedProjects = range
@@ -50,21 +47,25 @@ export function Projects({ range, exclude }: ProjectsProps) {
   return (
     <div className={styles.list}>
       {displayedProjects.map((post, index) => (
-        <Reveal variant="up" threshold={0.08} key={post.slug}>
-          <WorkCard
-            index={index}
-            href={`/work/${post.slug}`}
-            title={post.metadata.title}
-            summary={post.metadata.summary}
-            brand={post.metadata.brand}
-            kind={post.metadata.kind}
-            role={post.metadata.role}
-            year={post.metadata.year}
-            stack={post.metadata.stack}
-            image={post.metadata.images?.[0]}
-            link={post.metadata.link}
-          />
-        </Reveal>
+        <WorkCard
+          key={post.slug}
+          index={index}
+          flip={index % 2 === 1}
+          href={`/work/${post.slug}`}
+          title={post.metadata.title}
+          summary={post.metadata.summary}
+          brand={post.metadata.brand}
+          kind={post.metadata.kind}
+          label={post.metadata.label}
+          role={post.metadata.role}
+          year={post.metadata.year}
+          services={post.metadata.services}
+          stack={post.metadata.stack}
+          image={post.metadata.images?.[0]}
+          mobile={post.metadata.mobile}
+          link={post.metadata.link}
+          priority={index === 0}
+        />
       ))}
     </div>
   );

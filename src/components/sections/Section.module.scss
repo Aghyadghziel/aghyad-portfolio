@@ -9,75 +9,84 @@
 
 /* First section on a page sits under the fixed header. */
 .top {
-  padding-top: clamp(7rem, 15vh, 11rem);
+  padding-top: calc(var(--nav) + clamp(3rem, 8vh, 6rem));
 }
 
 .container {
-  width: 100%;
-  max-width: var(--studio-max);
+  width: min(100% - 2 * var(--studio-gutter), var(--studio-max));
   margin-inline: auto;
-  padding-inline: var(--studio-gutter);
 }
 
+/* Display heading left, supporting copy right, aligned on the baseline. */
 .header {
-  margin-bottom: clamp(2.5rem, 5vw, 4.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+}
+
+.headerMain {
+  min-width: 0;
 }
 
 .eyebrow {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-family: var(--font-code), ui-monospace, monospace;
+  font-family: var(--font-mono);
   font-size: var(--step-label);
-  letter-spacing: 0.16em;
+  font-weight: 500;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--neutral-on-background-weak);
-  margin-bottom: 1.75rem;
+  color: var(--mute);
+  margin-bottom: 1.5rem;
 }
 
 .eyebrowDot {
   width: 0.375rem;
   height: 0.375rem;
   border-radius: 50%;
-  background: var(--brand-on-background-weak);
+  background: var(--accent);
   flex: none;
 }
 
-/* Heading left, supporting copy right — an editorial split that stops
-   every section header looking like a centred hero. */
-.headerBody {
-  display: grid;
-  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-  gap: clamp(1.5rem, 4vw, 4rem);
-  align-items: end;
+/* Doubled: TextReveal's own `.heading` resets margin at the same specificity. */
+.title.title {
+  font-size: var(--step-display);
+  max-width: 16ch;
 }
 
-.title {
-  margin: 0;
-  font-size: var(--step-display);
-  font-weight: 500;
-  line-height: 1.02;
-  letter-spacing: -0.032em;
-  color: var(--neutral-on-background-strong);
-  text-wrap: balance;
+.headerSide {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
 }
 
 .description {
   margin: 0;
-  font-size: var(--step-lead);
+  font-size: 1.125rem;
   line-height: 1.55;
-  color: var(--neutral-on-background-weak);
-  max-width: 44ch;
+  color: var(--mute);
+  max-width: 42ch;
+  text-wrap: pretty;
 }
 
-@media (max-width: 900px) {
-  .headerBody {
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: start;
+.aside {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--faint);
+}
+
+@media (min-width: 900px) {
+  .header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 3rem;
   }
 
-  .eyebrow {
-    margin-bottom: 1.25rem;
+  .headerSide {
+    align-items: flex-end;
+    text-align: left;
   }
 }

@@ -12,7 +12,7 @@ import styles from "./AboutSection.module.scss";
  */
 export function AboutSection() {
   return (
-    <Section id="about" eyebrow="About" title={<>Who I am</>} divider>
+    <Section id="about" eyebrow="About" title="Who I am" divider>
       <div className={styles.layout}>
         <Reveal variant="mask" className={styles.portraitWrap}>
           <div className={styles.portrait}>

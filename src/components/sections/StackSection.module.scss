@@ -1,35 +1,39 @@
 .groups {
   display: grid;
-  /* Auto-fit so the row stays balanced whether there are three groups or four. */
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  border-top: var(--studio-rule);
 }
 
+/* Columns divided by hairlines rather than boxed cards. */
 .group {
   min-width: 0;
-  padding: clamp(1.25rem, 2.5vw, 1.75rem);
-  border: 1px solid var(--neutral-alpha-weak);
-  border-radius: var(--radius-m);
-  transition: border-color 0.25s ease;
+  padding: clamp(1.75rem, 3vw, 2.5rem) clamp(1.25rem, 2.5vw, 2rem) clamp(1.75rem, 3vw, 2.5rem) 0;
+  border-right: var(--studio-rule);
 }
 
-.group:hover {
-  border-color: var(--neutral-alpha-medium);
+.group:last-child {
+  border-right: 0;
+}
+
+.group + .group {
+  padding-left: clamp(1.25rem, 2.5vw, 2rem);
 }
 
 .groupTitle {
-  margin: 0 0 0.4rem;
-  font-size: 1.05rem;
-  font-weight: 500;
-  letter-spacing: -0.018em;
-  color: var(--neutral-on-background-strong);
+  margin: 0 0 0.5rem;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 1.8vw, 1.9rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  line-height: 1;
+  color: var(--paper);
 }
 
 .groupDescription {
-  margin: 0 0 1.25rem;
-  font-size: 0.88rem;
-  line-height: 1.5;
-  color: var(--neutral-on-background-weak);
+  margin: 0 0 1.5rem;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--mute);
   text-wrap: pretty;
 }
 
@@ -38,29 +42,26 @@
   margin: 0;
   padding: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.45rem;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
 .tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.4rem 0.7rem;
-  border: 1px solid var(--neutral-alpha-weak);
-  border-radius: var(--radius-s);
-  font-size: 0.82rem;
-  color: var(--neutral-on-background-medium);
-  transition: border-color 0.25s ease;
+  gap: 0.6rem;
+  padding: 0.4rem 0;
+  font-size: 0.95rem;
+  color: var(--paper-2);
+  transition: color 0.3s ease;
 }
 
 .tag:hover {
-  border-color: var(--neutral-alpha-strong);
-  color: var(--neutral-on-background-strong);
+  color: var(--paper);
 }
 
 .tagIcon {
-  color: var(--brand-on-background-weak);
+  color: var(--accent);
   flex: none;
 }
 
@@ -68,10 +69,29 @@
   .groups {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+
+  .group:nth-child(2n) {
+    border-right: 0;
+  }
+
+  .group:nth-child(n + 3) {
+    border-top: var(--studio-rule);
+  }
 }
 
-@media (max-width: 900px) {
+@media (max-width: 640px) {
   .groups {
     grid-template-columns: 1fr;
+  }
+
+  .group,
+  .group + .group {
+    padding-left: 0;
+    padding-right: 0;
+    border-right: 0;
+  }
+
+  .group + .group {
+    border-top: var(--studio-rule);
   }
 }

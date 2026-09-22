@@ -13,9 +13,10 @@ interface ProjectsProps {
 /**
  * The case study list.
  *
- * Featured projects come first, then the most recent — a portfolio should
- * open with the strongest work, not the oldest. Reading the MDX happens on the
- * server, so no project content ships to the browser as JavaScript.
+ * Projects with an explicit `order` lead the list, then featured work, then
+ * the most recent — a portfolio should open with the strongest work, not the
+ * oldest. Reading the MDX happens on the server, so no project content ships
+ * to the browser as JavaScript.
  */
 export function Projects({ range, exclude }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
@@ -25,7 +26,15 @@ export function Projects({ range, exclude }: ProjectsProps) {
   }
 
   const sortedProjects = allProjects.sort((a, b) => {
-    // Featured work is pinned to the top.
+    // An explicit `order` wins: those projects lead the list, lowest first.
+    const orderA = a.metadata.order;
+    const orderB = b.metadata.order;
+    if (orderA !== undefined || orderB !== undefined) {
+      if (orderA === undefined) return 1;
+      if (orderB === undefined) return -1;
+      if (orderA !== orderB) return orderA - orderB;
+    }
+    // Then featured work, then the most recent.
     if (a.metadata.featured !== b.metadata.featured) {
       return a.metadata.featured ? -1 : 1;
     }

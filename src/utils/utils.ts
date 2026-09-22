@@ -37,6 +37,11 @@ type Metadata = {
   direction?: string;
   /** Pins the project to the top of the work list. */
   featured?: boolean;
+  /**
+   * Explicit position in the work list, lowest first. Projects with an order
+   * come before everything else; the rest fall back to featured, then date.
+   */
+  order?: number;
 };
 
 import { notFound } from "next/navigation";
@@ -76,6 +81,7 @@ function readMDXFile(filePath: string) {
     highlights: data.highlights || [],
     direction: data.direction || "",
     featured: data.featured ?? false,
+    order: typeof data.order === "number" ? data.order : undefined,
   };
 
   return { metadata, content };

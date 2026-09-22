@@ -239,7 +239,7 @@ const about: About = {
         ],
         images: [
           {
-            src: "/images/projects/sima/hero.jpg",
+            src: "/images/projects/sima/hero-en.jpg",
             alt: "SIMA Studio website",
             width: 16,
             height: 10,

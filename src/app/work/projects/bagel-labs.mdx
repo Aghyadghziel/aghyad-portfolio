@@ -59,6 +59,20 @@ I joined as a full-stack developer and led the front end, owning the front-end a
 
 **Front-end architecture.** Responsive, accessible components built on Radix UI and modern React patterns, set up so new features could be added without redesigning what already existed.
 
+## How it was built
+
+The code belongs to Bagel Labs, so what follows is the architecture and the decisions behind it rather than the source.
+
+**One Next.js application, three trust boundaries.** The public marketing surface, the signed-in product, and the admin console live in the same App Router codebase but are separated by where authorisation is enforced: on the server, on every request, from the session — never by hiding a link in the client. NextAuth issues the session; the role on it decides what a request is allowed to touch.
+
+**Billing state comes from Stripe, not from the app.** A user's plan is whatever Stripe's webhooks say it is. Checkout starts a session, the webhook updates the subscription record, and every gated feature asks that record — not the client, and not the result of the checkout redirect, which a user can never be trusted to complete. That is what makes upgrades, downgrades, failed payments and cancellations behave correctly without a nightly reconciliation job.
+
+**Datasets never travel through the API.** Fine-tuning datasets are large. The browser uploads straight to S3, and the application only handles the small things: issuing the upload credential, recording the object, and validating the result. The dataset and job records live in DynamoDB, keyed by owner, because the access pattern is "everything belonging to this user, newest first" — a key-value read, not a query that needs joins.
+
+**Jobs are long, so the interface is built around status, not completion.** A fine-tune or a deployment can run for a long time; the UI treats every job as a row with a state and a timestamp that updates as the run progresses, so a user can leave and come back rather than sit on a spinner.
+
+**The admin console is the same application with a different role.** User management, monitoring and the operational controls are routes that require the admin role server-side — not a separate deployment, which for a small team would have meant two codebases drifting apart.
+
 ## What it taught me
 
 The hard part was not any single feature — it was keeping fast iteration and long-term scalability in the same codebase. Fine-tuning workflows, subscription gating, cloud infrastructure and authentication all touch each other, and a shortcut in one shows up as a bug in another. Getting that right end to end, in a fully remote team, is the part I carried into every project since.

@@ -58,6 +58,24 @@ Alpha Factory brings all three into one workflow. I built the full-stack platfor
 
 **Interface.** A responsive, role-based UI in React and Next.js, with real-time status so nobody has to ask where a project stands.
 
+## How it was built
+
+The code belongs to Alpha Factory. This is the design underneath it.
+
+**Four roles against one database.** Influencer, designer, editor and admin all read and write the same tables; what separates them is a role on the session that is checked on the server for every request. Each dashboard is a different view of the same project rows, not a different application.
+
+*Influencer* — writes the brief, reviews the delivery, approves it and releases payment, and can open a dispute.
+
+*Designer or editor* — accepts a brief, submits drafts and revisions, delivers, and can open a dispute. Cannot approve their own work.
+
+*Admin* — resolves disputes, refunds and suspends. Cannot do the work or approve on a user's behalf; moderation is not a way around the workflow.
+
+**A project is a state machine, and the money follows it.** `requested → accepted → draft submitted → revision → delivered → approved → paid`, with `disputed` reachable from any state after acceptance. Keeping that progression in one place is what makes the two-sided part work: every permission question — can this user upload here, can this one be paid — is answered by the state the project is in and the role asking, rather than by a condition written separately into each screen.
+
+**Payments are recorded as transactions, not as a flag on the project.** PayPal and crypto settle differently and at different speeds, so each payment is its own row with its own status and provider reference. The project asks the transaction whether it is paid; it never stores the answer itself.
+
+**Large video never passes through the application server.** Uploads go to object storage directly, and the platform stores the reference, the validation result and who may read it. Prisma models the rest — users, roles, projects, revisions, deliveries, transactions and disputes — so the relationships that decide access are declared in one schema rather than implied across queries.
+
 ## What it taught me
 
 Coordinating four user roles against one shared database, while money moves between two of them, is a design problem before it is a coding problem. Deciding what each role can see and do — and making the interface reflect that without feeling restrictive — was the work that mattered most.

@@ -65,6 +65,111 @@ The site had to do three jobs at once: show the work, explain what a project cos
 
 **The hero.** A spectral light arc rendered in React Three Fiber, kept deliberately light — the 3D is atmosphere, not the pitch.
 
+## How it works
+
+The site is a Next.js App Router application on Vercel. There is no separate API service: server components read Postgres directly, and the only route handlers are the ones a browser has to post to — the analytics beacon, the contact form, the review form. The database is Neon Postgres, reached over HTTP with `@neondatabase/serverless`, which means no connection pool to babysit across serverless instances. Email goes out through Resend.
+
+### The data model
+
+Seven tables, all created by an idempotent schema that runs on first use and can also be applied explicitly with `npm run db:setup`. Trimmed to the shape that matters:
+
+```sql
+create table analytics_sessions (
+  id text primary key,
+  visitor_id text not null,
+  started_at timestamptz not null default now(),
+  last_seen timestamptz not null default now(),
+  entry_path text not null,
+  exit_path text not null,
+  source text not null default 'Direct',
+  country text, city text, device text, browser text, os text,
+  is_own boolean not null default false,   -- my own visits, flagged and excluded
+  pageviews integer not null default 0
+);
+
+create table analytics_events (
+  id bigserial primary key,
+  session_id text not null,
+  visitor_id text not null,
+  ts timestamptz not null default now(),
+  type text not null,      -- pageview | event | ping
+  name text, path text, props jsonb
+);
+
+create table leads (
+  id bigserial primary key,
+  created_at timestamptz not null default now(),
+  name text not null, brand text not null,
+  reach text not null, reach_type text not null,
+  need text, budget text, package text, message text,
+  session_id text,                          -- ties a lead to the visit that produced it
+  status text not null default 'new',       -- new | contacted | won | lost
+  emailed boolean not null default false,
+  ip_hash text, country text, city text
+);
+
+```
+
+`leads.session_id` is the join that makes the dashboard useful: a project request can be read next to the pages that visitor saw before they sent it.
+
+### Signing in
+
+There are no passwords. The admin allowlist is a constant in the code, so adding an account takes a deploy — the right trade for a two-person studio, and the wrong one for a product, where it would be a `users` table with roles.
+
+```sql
+create table admin_codes (
+  email text primary key,
+  code_hash text not null,          -- HMAC-SHA256, never the code itself
+  expires_at timestamptz not null,
+  attempts integer not null default 0
+);
+
+create table admin_sessions (
+  id text primary key,              -- SHA-256 of the cookie token
+  email text not null,
+  expires_at timestamptz not null,
+  last_seen timestamptz not null default now(),
+  revoked_at timestamptz,
+  ip text, user_agent text
+);
+
+create table admin_logins (
+  id bigserial primary key,
+  email text not null,
+  ts timestamptz not null default now(),
+  success boolean not null,
+  reason text, ip text, user_agent text
+);
+
+create table rate_limits (
+  key text not null,
+  window_start bigint not null,
+  count integer not null default 0,
+  primary key (key, window_start)
+);
+```
+
+1. **Email in.** The response is identical whether or not the address is on the allowlist, so the form cannot be used to find out who can sign in.
+2. **Rate limits before anything else** — ten code requests per IP per hour, three per email per fifteen minutes.
+3. **A six-digit code** is generated with `crypto.randomInt`, stored as an HMAC-SHA256 digest keyed with the server secret, and expires in thirty minutes. The plaintext code exists only in the email.
+4. **Verification** compares digests with `timingSafeEqual`. Five wrong attempts destroy the code. Every attempt — right or wrong — is written to `admin_logins` with its IP, location and user agent.
+5. **The session** is a 32-byte random token; only its SHA-256 is stored. The cookie is `__Host-` prefixed, `httpOnly`, `secure`, `SameSite=strict`, and lives twelve hours.
+6. **Every request re-validates** the session against the database and bumps `last_seen`, so a session can be revoked — one device, or every device but this one — and the next request is locked out. The login alert email is sent with `after()`, so it never delays the response.
+
+### Two decisions worth naming
+
+**Leads are written before they are emailed.** The row lands in Postgres first, then Resend is called, then `emailed` is set. If the mail provider is down, the lead is still on record instead of lost in a failed request.
+
+**Rate limiting lives in Postgres, not in memory.** Fixed windows keyed by `(key, window_start)`, incremented with `insert … on conflict do update … returning count`, with a 2% chance per call of sweeping old windows. In-memory counters are free but useless here: every serverless instance would keep its own.
+
+### Analytics without cookies
+
+Visitor ids are random per-browser values, hashed with a server secret before storage. The collector rejects bots, validates every field against a pattern and clips it to a maximum length, and keeps only *which* ad platform a click id came from, never the id itself. My own visits are recorded and flagged rather than dropped — and the flag is sticky per browser, so once a browser is known to be mine, every visit it ever made is excluded from the numbers.
+
+### What I would change at scale
+
+`analytics_events` grows without bound and would want monthly partitioning and a retention policy. The fixed-window limiter is coarse and would become a sliding window. And the allowlist-as-constant only works while the team is two people.
+
 ## Notes
 
 The studio's positioning is deliberately narrow: Saudi companies and brands that need Arabic to be the first-class language on their site, not an afterthought. The projects below are what that looks like in practice — one client project, and concepts built to prove the studio can do the work before a client has to take the risk.

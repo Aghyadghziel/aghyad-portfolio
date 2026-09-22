@@ -106,6 +106,9 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
 function createParagraph({ children }: TextProps) {
   return (
     <Text
+      /* Once UI's Text is a span by default, so every paragraph in a case study
+         ran into the next one and the margins below did nothing. */
+      as="p"
       style={{ lineHeight: "175%" }}
       variant="body-default-m"
       onBackground="neutral-medium"

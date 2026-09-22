@@ -28,10 +28,11 @@ function duration(seconds: number) {
   return m < 60 ? `${m}m ${s % 60}s` : `${Math.floor(m / 60)}h ${m % 60}m`;
 }
 
+/** Change against the previous period of the same length, or null when there is nothing to compare to. */
 function delta(now: number, before: number) {
-  if (!before) return now ? "new" : "—";
+  if (!before) return null;
   const change = ((now - before) / before) * 100;
-  return `${change >= 0 ? "+" : ""}${change.toFixed(0)}%`;
+  return `${change >= 0 ? "+" : ""}${change.toFixed(0)}% vs previous`;
 }
 
 /** Area chart drawn as inline SVG: no chart library, so the admin bundle stays small. */
@@ -230,7 +231,7 @@ export function DashboardView({ data, ranges, me, messages }: Props) {
       { label: "Visits", value: nf.format(Number(now.sessions)), change: delta(Number(now.sessions), Number(before.sessions)) },
       { label: "Page views", value: nf.format(Number(now.pageviews)), change: delta(Number(now.pageviews), Number(before.pageviews)) },
       { label: "Avg. time", value: duration(Number(now.avg_duration)), change: delta(Number(now.avg_duration), Number(before.avg_duration)) },
-      { label: "Bounce", value: `${Math.round(Number(now.bounce_rate) * 100)}%`, change: "" },
+      { label: "Bounce", value: `${Math.round(Number(now.bounce_rate) * 100)}%`, change: delta(Number(now.bounce_rate), Number(before.bounce_rate)) },
       { label: "New people", value: nf.format(Number(now.new_visitors)), change: delta(Number(now.new_visitors), Number(before.new_visitors)) },
     ],
     [now, before],
@@ -280,7 +281,12 @@ export function DashboardView({ data, ranges, me, messages }: Props) {
         </div>
         <div className={styles.spark} aria-hidden="true">
           {(data.activeMinutes as Row[]).map((m, i) => (
-            <span key={i} style={{ height: `${(Number(m.users) / peakMinute) * 100}%` }} title={`${m.t} · ${m.users}`} />
+            <span
+              key={i}
+              data-empty={Number(m.users) === 0}
+              style={{ height: `${(Number(m.users) / peakMinute) * 100}%` }}
+              title={`${m.t} · ${m.users}`}
+            />
           ))}
         </div>
       </section>
@@ -301,7 +307,7 @@ export function DashboardView({ data, ranges, me, messages }: Props) {
               <article key={k.label} className={styles.kpi}>
                 <p className={styles.faint}>{k.label}</p>
                 <p className={styles.kpiValue}>{k.value}</p>
-                {k.change && <p className={styles.kpiChange}>{k.change} vs previous</p>}
+                <p className={styles.kpiChange}>{k.change ?? "no earlier data"}</p>
               </article>
             ))}
           </section>

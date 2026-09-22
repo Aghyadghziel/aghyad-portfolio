@@ -2,7 +2,7 @@ import { after } from 'next/server';
 import { SESSION_COOKIE } from '@/lib/server/auth';
 import { db, ensureSchema } from '@/lib/server/db';
 import { OWN_COOKIE } from '@/lib/server/own';
-import { hmac, requestMeta } from '@/lib/server/security';
+import { hmac, rateLimit, requestMeta, sha256 } from '@/lib/server/security';
 import { classifySource, isBot, parseUserAgent } from '@/lib/server/ua';
 
 /**
@@ -38,6 +38,12 @@ export async function POST(request: Request) {
 
   const meta = requestMeta(request.headers);
   if (isBot(meta.userAgent)) return new Response(null, { status: 204 });
+
+  // The collector is public by necessity, so one address cannot be allowed to fill the
+  // database: a real reader sends a handful of beacons a minute, never hundreds.
+  if (!(await rateLimit(`t:${sha256(meta.ip ?? 'unknown')}`, 240, 600))) {
+    return new Response(null, { status: 429 });
+  }
 
   // Our own visits are recorded but flagged, and left out of every number. Either a live admin
   // session or the year-long marker (set at sign-in, or by /api/own) counts.

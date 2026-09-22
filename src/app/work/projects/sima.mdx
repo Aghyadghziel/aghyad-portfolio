@@ -166,6 +166,12 @@ create table rate_limits (
 
 Visitor ids are random per-browser values, hashed with a server secret before storage. The collector rejects bots, validates every field against a pattern and clips it to a maximum length, and keeps only *which* ad platform a click id came from, never the id itself. My own visits are recorded and flagged rather than dropped — and the flag is sticky per browser, so once a browser is known to be mine, every visit it ever made is excluded from the numbers.
 
+### What the dashboard reads back
+
+![The SIMA admin dashboard: visitors, visits, page views, average visit time, bounce rate and leads over the last seven days, with a traffic curve and a breakdown of where visitors came from.](/images/projects/sima/admin-dashboard.jpg)
+
+Seven days on my own site, so the numbers are small — that is the honest part. The point is where they come from: every figure on this screen was collected by the beacon, stored in the two analytics tables above, and computed in SQL at request time. No third-party script, no dashboard I rent, no cookie banner, and my own visits excluded before anything is counted. The live count in the corner is sessions whose `last_seen` is inside the last few minutes.
+
 ### What I would change at scale
 
 `analytics_events` grows without bound and would want monthly partitioning and a retention policy. The fixed-window limiter is coarse and would become a sliding window. And the allowlist-as-constant only works while the team is two people.

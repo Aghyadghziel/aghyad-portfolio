@@ -8,10 +8,12 @@
     "biome-write": "npx @biomejs/biome format --write .",
     "start": "next start",
     "lint": "next lint",
-    "cv": "./tools/print-cv.sh"
+    "cv": "./tools/print-cv.sh",
+    "db:setup": "node scripts/db-setup.mjs"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",
+    "@neondatabase/serverless": "^1.1.0",
     "@next/mdx": "^16.0.10",
     "@once-ui-system/core": "^1.5.6",
     "classnames": "^2.5.1",
@@ -25,6 +27,7 @@
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",
     "sass": "^1.86.3",
+    "server-only": "^0.0.1",
     "transliteration": "^2.3.5"
   },
   "devDependencies": {

@@ -6,9 +6,14 @@ import { baseURL, routes } from "@/resources";
  * them here keeps them out of the index without needing a redirect.
  */
 function disabledPaths(): string[] {
-  return Object.entries(routes)
-    .filter(([, enabled]) => !enabled)
-    .map(([path]) => path);
+  return [
+    ...Object.entries(routes)
+      .filter(([, enabled]) => !enabled)
+      .map(([path]) => path),
+    // The admin area and the analytics collector are private.
+    "/admin",
+    "/api/",
+  ];
 }
 
 export default function robots() {

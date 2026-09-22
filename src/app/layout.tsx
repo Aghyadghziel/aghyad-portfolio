@@ -5,15 +5,9 @@ import "@/resources/custom.css";
 import classNames from "classnames";
 
 import { Column, Flex } from "@once-ui-system/core";
-import {
-  Cursor,
-  Footer,
-  PersonSchema,
-  Providers,
-  RouteGuard,
-  SiteNav,
-  SmoothScroll,
-} from "@/components";
+import { Footer, PersonSchema, Providers } from "@/components";
+import { SiteFrame } from "@/components/SiteFrame";
+import { Tracker } from "@/components/analytics/Tracker";
 import { baseURL, dataStyle, fonts, home, style } from "@/resources";
 import { pageMetadata } from "@/utils/metadata";
 
@@ -107,20 +101,9 @@ export default async function RootLayout({
           padding="0"
           horizontal="center"
         >
+          <Tracker />
           {/* Lets keyboard users jump straight past the navigation. */}
-          <a href="#main" className="skip-link">
-            Skip to content
-          </a>
-          <SiteNav />
-          <Cursor />
-          <SmoothScroll />
-          {/* A plain <main>, not a centred flex column: `align-items: center`
-              shrinks each section to its content width, so sections stop
-              sharing a left edge and headings drift out of alignment. */}
-          <main id="main" className="site-main">
-            <RouteGuard>{children}</RouteGuard>
-          </main>
-          <Footer />
+          <SiteFrame footer={<Footer />}>{children}</SiteFrame>
         </Column>
       </Providers>
     </Flex>

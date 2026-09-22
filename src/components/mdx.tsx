@@ -104,6 +104,14 @@ function createHeading(as: "h1" | "h2" | "h3" | "h4" | "h5" | "h6") {
 }
 
 function createParagraph({ children }: TextProps) {
+  // Markdown wraps a standalone image in a paragraph, and our image renders a
+  // <div>, which is invalid inside <p> and breaks hydration. A paragraph whose
+  // only child is media is therefore passed straight through.
+  const single = React.Children.count(children) === 1 ? React.Children.toArray(children)[0] : null;
+  if (React.isValidElement(single) && single.type === createImage) {
+    return <>{children}</>;
+  }
+
   return (
     <Text
       /* Once UI's Text is a span by default, so every paragraph in a case study

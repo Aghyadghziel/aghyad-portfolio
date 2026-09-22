@@ -86,20 +86,18 @@ export async function POST(request: Request) {
       }
       const utmSource = str(data.utm?.source, 80);
 
-      // Two more ways a visit is ours, neither of which needs a cookie:
-      //   known   — this browser's id is already on record as ours;
-      //   network — it comes from the same internet connection an admin was signed in from in the last
-      //             7 days. This is what catches our own link opened inside Instagram, TikTok, WhatsApp
-      //             or LinkedIn, whose built-in browsers share no cookies with the one we sign in from.
-      // The visitor's IP is only compared here, never stored. "Not me" in the dashboard exempts a browser
-      // from the network rule, for a customer who happens to share our Wi-Fi or mobile carrier address.
+      // One more way a visit is mine, without needing a cookie: this browser's id is
+      // already on record as mine, from a visit when the marker or an admin session was
+      // there. The visitor's IP is never compared and never stored.
+      //
+      // Sharing an address with an admin login is deliberately NOT one of the tests. A
+      // phone on the same Wi-Fi, and in practice a whole carrier behind one NAT address,
+      // would be silently dropped from the numbers — which is exactly what happened to
+      // the first real visitor this site had.
       const [seen] = (await sql`
-        select exists (select 1 from analytics_sessions where visitor_id = ${vid} and is_own) as known,
-               (${meta.ip}::text is not null
-                and exists (select 1 from admin_sessions a where a.ip = ${meta.ip} and a.last_seen > now() - interval '7 days')
-                and not exists (select 1 from analytics_not_own n where n.visitor_id = ${vid})) as network`) as { known: boolean; network: boolean }[];
-      const own = isOwn || seen.known || seen.network;
-      const ownReason = signedIn ? 'signed_in' : isOwn || seen.known ? 'device' : seen.network ? 'network' : null;
+        select exists (select 1 from analytics_sessions where visitor_id = ${vid} and is_own) as known`) as { known: boolean }[];
+      const own = isOwn || seen.known;
+      const ownReason = signedIn ? 'signed_in' : own ? 'device' : null;
       const ua = parseUserAgent(meta.userAgent);
       await sql`
         insert into analytics_sessions (id, visitor_id, entry_path, exit_path, referrer, referrer_host, source, utm_source, utm_medium, utm_campaign,

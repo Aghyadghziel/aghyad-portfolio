@@ -54,8 +54,11 @@ Every successful login emails all admins an alert with time, place and device.
 - Signing in to `/admin` marks that browser as yours for a year.
 - On a phone or laptop you never sign in from, open `/api/own` once. `/api/own?off=1`
   clears it.
-- Visits from the same IP an admin signed in from in the last 7 days are flagged too
-  (this catches links opened inside Instagram, TikTok and WhatsApp browsers).
+- A browser once known to be yours stays yours on later visits, even if the cookie is
+  gone by then.
+- Sharing a network with you does **not** count. Your phone on the same Wi-Fi, or any
+  visitor behind the same mobile carrier address, is a normal visitor — mark your own
+  devices with `/api/own` instead.
 - In the dashboard, **This is me** / **Not me** on any visitor moves all of that
   browser's visits in or out of the numbers.
 

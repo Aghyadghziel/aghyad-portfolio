@@ -73,6 +73,20 @@ The code belongs to Bagel Labs, so what follows is the architecture and the deci
 
 **The admin console is the same application with a different role.** User management, monitoring and the operational controls are routes that require the admin role server-side — not a separate deployment, which for a small team would have meant two codebases drifting apart.
 
+### Inside the admin console
+
+No screenshots: the platform is Bagel Labs' product and the console shows real customer accounts. What it had to answer, and how each answer was built:
+
+*Who is this user, and what are they entitled to?* One page per account: profile, role, plan and subscription status read from the billing record that Stripe's webhooks maintain — so support is looking at the same source of truth the paywall uses, not a cached copy that can disagree with it.
+
+*Why did this job fail?* Fine-tunes and deployments are listed with their state, owner and timestamps, so a failure is a row to open rather than a log to search. The same states the user sees, without the marketing around them.
+
+*What is this account storing?* Datasets with their validation results, which is where a "my upload doesn't work" ticket is usually answered in one look.
+
+*Is the platform healthy right now?* Monitoring for the operational picture — what is running, what is queued, what is erroring.
+
+Two rules held the console together. **Every action is authorised on the server from the session role**, so an admin route is not reachable by guessing a URL. And **admin actions are not silent** — anything that changes another account leaves a record, because "who changed this plan" is a question that always gets asked eventually.
+
 ## What it taught me
 
 The hard part was not any single feature — it was keeping fast iteration and long-term scalability in the same codebase. Fine-tuning workflows, subscription gating, cloud infrastructure and authentication all touch each other, and a shortcut in one shows up as a bug in another. Getting that right end to end, in a fully remote team, is the part I carried into every project since.

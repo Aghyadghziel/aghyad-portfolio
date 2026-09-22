@@ -74,6 +74,20 @@ The code belongs to Alpha Factory. This is the design underneath it.
 
 **Payments are recorded as transactions, not as a flag on the project.** PayPal and crypto settle differently and at different speeds, so each payment is its own row with its own status and provider reference. The project asks the transaction whether it is paid; it never stores the answer itself.
 
+### Inside the admin panel
+
+No screenshots: the platform is Alpha Factory's, and every view is full of real users, briefs and payments. What the panel existed to do:
+
+*Keep the marketplace moving.* Every project in every state on one screen, filtered by what is stuck — a brief nobody accepted, a draft waiting on a review, a delivery that was never approved. In a two-sided market the stalled rows are the ones that cost money on both sides.
+
+*Settle disputes.* A dispute opens with the project attached: its history, its files and both sides' messages, so a decision is made on the record rather than on whoever emailed first. The outcome writes back to the project state and, where money is involved, to the transaction.
+
+*Reconcile payments.* Transactions listed with their provider and reference, because PayPal and crypto settle at different speeds and "he says he paid" has to be answerable from the platform, not from a screenshot a user sends.
+
+*Manage people.* Accounts by role, with suspension for the cases that need it.
+
+The constraint I kept: **an admin can unblock the workflow, but cannot stand inside it.** Moderation resolves disputes, refunds and suspends — it never approves a delivery or submits work on a user's behalf. The moment support can act as a party to a transaction, the audit trail stops meaning anything.
+
 **Large video never passes through the application server.** Uploads go to object storage directly, and the platform stores the reference, the validation result and who may read it. Prisma models the rest — users, roles, projects, revisions, deliveries, transactions and disputes — so the relationships that decide access are declared in one schema rather than implied across queries.
 
 ## What it taught me

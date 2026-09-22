@@ -15,6 +15,7 @@ export {
   linkedInUrl,
   githubUrl,
   cvPath,
+  siteUrl,
 } from "./content";
 
 // Site configuration — theme, routes, fonts and SEO.

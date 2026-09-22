@@ -29,6 +29,14 @@ const whatsappDisplay = "+966 59 265 5067";
 const calendarLink = "https://calendly.com/aghyadghziel/meeting";
 const linkedInUrl = "https://www.linkedin.com/in/aghyadghziel/";
 const githubUrl = "https://github.com/Aghyadghziel";
+/**
+ * The public site, stated outright. `baseURL` falls back to the Vercel or the
+ * localhost origin, and the CV is printed to a PDF from a local server — which
+ * baked `http://localhost` into the links inside the file. Anything that leaves
+ * the site in a downloadable form uses this instead.
+ */
+const siteUrl = "https://www.aghyad.site";
+
 /** The CV. The page at /cv is the source; the PDF is printed from it. */
 const cvPath = "/Aghyad-Ghziel-CV.pdf";
 
@@ -446,4 +454,5 @@ export {
   linkedInUrl,
   githubUrl,
   cvPath,
+  siteUrl,
 };

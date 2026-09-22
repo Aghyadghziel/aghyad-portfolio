@@ -6,6 +6,7 @@ import {
   home,
   linkedInUrl,
   person,
+  siteUrl,
   specialty,
   whatsappDisplay,
 } from "@/resources";
@@ -38,7 +39,7 @@ export default function CV() {
   const contactItems = [
     { label: "Email", value: person.email, href: `mailto:${person.email}` },
     { label: "Phone", value: whatsappDisplay, href: `tel:${whatsappDisplay.replace(/\s/g, "")}` },
-    { label: "Site", value: "aghyad.site", href: baseURL },
+    { label: "Site", value: "aghyad.site", href: siteUrl },
     { label: "LinkedIn", value: "in/aghyadghziel", href: linkedInUrl },
     { label: "GitHub", value: "Aghyadghziel", href: githubUrl },
     { label: "Location", value: "Riyadh, Saudi Arabia" },

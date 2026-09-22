@@ -6,79 +6,27 @@
   position: relative;
   display: inline-flex;
   align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  overflow: hidden;
-  border-radius: var(--radius-pill);
+  gap: 0.6rem;
   text-decoration: none;
   font-family: var(--font-text);
   font-weight: 500;
-  letter-spacing: 0;
   white-space: nowrap;
   transition:
-    background-color 0.5s var(--ease-out),
-    color 0.5s var(--ease-out),
-    border-color 0.5s var(--ease-out),
-    transform 0.5s var(--ease-out);
-}
-
-.cta:active {
-  transform: scale(0.97);
+    background-color 0.4s var(--ease-out),
+    color 0.4s var(--ease-out),
+    border-color 0.4s var(--ease-out);
 }
 
 .s {
-  height: 2.75rem;
-  padding-inline: 1.25rem;
   font-size: 0.875rem;
 }
 
 .m {
-  height: 3rem;
-  padding-inline: 1.5rem;
   font-size: 0.95rem;
 }
 
 .l {
-  height: 3.5rem;
-  padding-inline: 2rem;
   font-size: 1.05rem;
-}
-
-@media (min-width: 640px) {
-  .m {
-    height: 3.25rem;
-    padding-inline: 1.75rem;
-  }
-}
-
-/* Rolling label: the text slides up and its twin slides in from below. */
-.label {
-  position: relative;
-  display: block;
-  overflow: hidden;
-}
-
-.text {
-  display: block;
-  transition: transform 0.5s var(--ease-out);
-}
-
-.textGhost {
-  position: absolute;
-  inset: 0;
-  display: block;
-  transform: translateY(100%);
-  transition: transform 0.5s var(--ease-out);
-}
-
-.cta:hover .text,
-.cta:focus-visible .text {
-  transform: translateY(-100%);
-}
-
-.cta:hover .textGhost,
-.cta:focus-visible .textGhost {
-  transform: translateY(0);
 }
 
 .icon {
@@ -92,56 +40,75 @@
 
 .cta:hover .arrow,
 .cta:focus-visible .arrow {
-  transform: translate(0.125rem, -0.125rem);
+  transform: translateX(0.25rem);
 }
 
-/* ---------- variants ---------- */
+/* ---------- primary: solid ink block ---------- */
 
 .cta.primary {
-  background: var(--accent);
-  color: var(--ink);
-  border: 1px solid transparent;
+  justify-content: center;
+  height: 3rem;
+  padding-inline: 1.25rem;
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--paper);
+  border: 1px solid var(--ink);
+}
+
+.cta.primary.s {
+  height: 2.5rem;
+  padding-inline: 1rem;
+}
+
+.cta.primary.l {
+  height: 3.5rem;
+  padding-inline: 1.75rem;
 }
 
 .cta.primary:hover,
 .cta.primary:focus-visible {
-  background: var(--paper);
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--paper);
+}
+
+/* ---------- secondary / ghost: text link with a drawn underline ---------- */
+
+.cta.secondary,
+.cta.ghost {
+  padding-block: 0.25rem;
   color: var(--ink);
 }
 
-.cta.secondary {
-  background: transparent;
-  color: var(--paper);
-  border: 1px solid var(--line);
-}
-
-.cta.secondary:hover,
-.cta.secondary:focus-visible {
-  border-color: rgb(244 244 241 / 0.4);
-  background: rgb(244 244 241 / 0.05);
-  color: var(--paper);
-}
-
 .cta.ghost {
-  background: transparent;
-  color: var(--paper);
-  border: 1px solid transparent;
-  padding-inline: 0;
+  color: var(--mute);
+}
+
+.cta.secondary .label,
+.cta.ghost .label {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 100% 1px;
+  transition: background-size 0.5s var(--ease-out);
+}
+
+.cta.secondary:hover .label,
+.cta.secondary:focus-visible .label,
+.cta.ghost:hover .label,
+.cta.ghost:focus-visible .label {
+  background-size: 0% 1px;
+  background-position: 100% 100%;
 }
 
 .cta.ghost:hover,
 .cta.ghost:focus-visible {
-  color: var(--accent);
+  color: var(--ink);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .text,
-  .textGhost,
-  .arrow {
+  .arrow,
+  .label {
     transition: none;
-  }
-
-  .cta:active {
-    transform: none;
   }
 }

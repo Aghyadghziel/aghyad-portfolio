@@ -54,33 +54,27 @@ const home: Home = {
   description:
     "Full-stack developer with a frontend focus, building production web applications with React, Next.js, TypeScript and Node.js.",
   hero: {
-    eyebrow: "Available for roles and freelance",
-    lines: ["Full-stack developer", "with a frontend focus."],
+    eyebrow: "Full-stack developer · Riyadh",
+    lines: ["Web products that", "feel *considered*."],
     subline: (
       <>
         I build production web applications end to end — interface, API and database. Two years
-        shipping SaaS platforms with real users, payments and deadlines.
+        shipping SaaS platforms with real users and payments, and now my own studio building
+        Arabic-first sites with real-time 3D.
       </>
     ),
-    primary: { label: "View projects", href: "#projects" },
-    secondary: { label: "Get in touch", href: "#contact" },
-    stack: ["React", "Next.js", "TypeScript", "Node.js", "SQL"],
-    proof: {
-      label: "Latest client project",
-      name: "NASAQ Uniforms",
-      domain: "nasaqksa.com",
-      href: "/work/nasaq",
-      poster: "/images/projects/nasaq/loop-poster.jpg",
-      video: "/images/projects/nasaq/loop.mp4",
-    },
+    primary: { label: "See the work", href: "#projects" },
+    secondary: { label: "Say hi", href: "#contact" },
+    stack: ["React", "Next.js", "TypeScript", "Node.js", "Three.js"],
+    now: "Founder & developer at SIMA Studio. Open to full-stack and frontend roles, and to freelance work.",
   },
 };
 
 const capabilities: Capabilities = {
   display: true,
   id: "stack",
-  eyebrow: "Stack",
-  title: "Technologies I work with",
+  eyebrow: "04 — Stack",
+  title: "What I *build* with.",
   description: (
     <>
       Day to day I work across the whole stack, with most of my depth on the front end — and, on
@@ -133,8 +127,8 @@ const capabilities: Capabilities = {
 const contact: Contact = {
   display: true,
   id: "contact",
-  eyebrow: "Contact",
-  title: "Get in touch",
+  eyebrow: "05 — Contact",
+  title: "Let’s *talk*.",
   description: (
     <>
       Open to full-stack and frontend roles, and to freelance work. The quickest way to reach me is

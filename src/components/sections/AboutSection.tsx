@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { about, person } from "@/resources";
 import { Reveal } from "@/components/motion/Reveal";
 import { Section } from "./Section";
@@ -7,24 +6,21 @@ import styles from "./AboutSection.module.scss";
 /**
  * A short introduction, built to be read in about ten seconds.
  *
- * One paragraph of substance plus scannable facts — not a biography, and
- * not a CV dump. The full history lives one click away on the about page.
+ * One paragraph of substance in the serif, plus scannable facts — not a
+ * biography. The portrait lives in the hero; the full history is on /about.
  */
 export function AboutSection() {
   return (
-    <Section id="about" eyebrow="About" title="Who I am" divider>
+    <Section id="about" eyebrow="01 — About" title="Who I *am*." divider>
       <div className={styles.layout}>
-        <Reveal variant="mask" className={styles.portraitWrap}>
-          <div className={styles.portrait}>
-            <Image
-              src={person.avatar}
-              alt={`Portrait of ${person.name}`}
-              fill
-              className={styles.portraitImage}
-              sizes="(max-width: 900px) 40vw, 22vw"
-              loading="lazy"
-            />
-          </div>
+        <Reveal variant="fade" className={styles.aside}>
+          <p className={styles.asideLine}>
+            Two years on SaaS products, then a studio of my own. The full history is on the{" "}
+            <a href="/about" className={styles.asideLink}>
+              about page
+            </a>
+            .
+          </p>
         </Reveal>
 
         <div className={styles.body}>

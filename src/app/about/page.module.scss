@@ -48,11 +48,10 @@
   margin: 0 0 0.75rem;
   font-family: var(--font-display);
   font-size: var(--step-display);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 0.96;
-  letter-spacing: -0.005em;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .role {
@@ -120,7 +119,7 @@
   overflow: hidden;
   border-radius: var(--radius-card);
   box-shadow: inset 0 0 0 1px var(--line);
-  background: var(--ink-2);
+  background: var(--paper-3);
 }
 
 .portraitImage {
@@ -155,10 +154,10 @@
   margin: 0 0 clamp(2rem, 4vw, 3.5rem);
   font-family: var(--font-display);
   font-size: var(--step-title);
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--paper);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
 /* ---------- experience ---------- */
@@ -198,10 +197,10 @@
   margin: 0 0 0.5rem;
   font-family: var(--font-display);
   font-size: clamp(1.6rem, 2.4vw, 2.5rem);
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--paper);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
 .experienceRole {
@@ -252,7 +251,7 @@
   overflow: hidden;
   border-radius: var(--radius-card);
   border: 1px solid var(--line);
-  background: var(--ink-2);
+  background: var(--paper-3);
 }
 
 .experienceImageMedia {
@@ -278,10 +277,10 @@
   margin: 0 0 0.5rem;
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--paper);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
 .skillDescription {
@@ -306,9 +305,9 @@
   gap: 0.45rem;
   padding: 0.3rem 0.75rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius);
   font-size: 0.8rem;
-  color: #b8b8ba;
+  color: var(--ink-2);
 }
 
 .tagIcon {
@@ -334,10 +333,10 @@
   margin: 0 0 0.4rem;
   font-family: var(--font-display);
   font-size: 1.4rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  line-height: 1;
-  color: var(--paper);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  color: var(--ink);
 }
 
 .studyDescription {

@@ -25,9 +25,9 @@ interface CTAProps {
 }
 
 /**
- * The site's call-to-action link: a pill whose label rolls up on hover,
- * with an optional arrow that nudges up and right. Only `transform` and
- * colour change, so the interaction stays on the compositor.
+ * The site's call-to-action link. `primary` is a solid ink block that turns
+ * to the accent on hover; `secondary` and `ghost` are text links whose
+ * underline unwinds to the right. An optional arrow slides along.
  */
 export function CTA({
   href,
@@ -51,15 +51,10 @@ export function CTA({
   const content = (
     <>
       {icon && <Icon name={icon} size="s" className={styles.icon} />}
-      <span className={styles.label}>
-        <span className={styles.text}>{children}</span>
-        <span className={styles.textGhost} aria-hidden="true">
-          {children}
-        </span>
-      </span>
+      <span className={styles.label}>{children}</span>
       {arrow && (
         <span className={styles.arrow} aria-hidden="true">
-          <Icon name="arrowUpRight" size="s" />
+          <Icon name="arrowLongRight" size="s" />
         </span>
       )}
     </>

@@ -65,10 +65,10 @@ export default async function RootLayout({
                   });
 
                   // Resolve theme
-                                    // The site is dark only: the palette is built for an ink
-                  // ground, so a stored light preference is never honoured.
-                  localStorage.setItem('data-theme', 'dark');
-                  root.setAttribute('data-theme', 'dark');
+                                    // The site is light only: the palette is built for a paper
+                  // ground, so a stored dark preference is never honoured.
+                  localStorage.setItem('data-theme', 'light');
+                  root.setAttribute('data-theme', 'light');
 
                   // Apply any saved style overrides
                   const styleKeys = Object.keys(config);
@@ -80,7 +80,7 @@ export default async function RootLayout({
                   });
                 } catch (e) {
                   console.error('Failed to initialize theme:', e);
-                  document.documentElement.setAttribute('data-theme', 'dark');
+                  document.documentElement.setAttribute('data-theme', 'light');
                 }
               })();
             `,

@@ -30,13 +30,13 @@ export default function Work() {
         }}
       />
       <Section
-        eyebrow="Projects"
-        title="Projects"
+        eyebrow="Index"
+        title="All the *work*."
         description={
           <>
-            SaaS platforms with real users, payments and deadlines, and studio work for brands
-            where the interface itself is a real-time 3D scene. Each entry covers the problem,
-            what I built and the stack it runs on.
+            SaaS platforms with real users and payments, and studio work for brands where the
+            interface is a real-time 3D scene. Each entry covers the problem, what I built and
+            the stack it runs on.
           </>
         }
         top

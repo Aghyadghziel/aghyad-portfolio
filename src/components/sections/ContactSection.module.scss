@@ -38,11 +38,10 @@
   margin: 0 0 1.5rem;
   font-family: var(--font-display);
   font-size: var(--step-hero);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 0.92;
-  letter-spacing: -0.005em;
-  color: var(--paper);
+  color: var(--ink);
   max-width: 12ch;
 }
 
@@ -100,7 +99,7 @@
 }
 
 .channel:hover .channelIcon {
-  border-color: rgb(244 244 241 / 0.4);
+  border-color: rgb(23 22 19 / 0.4);
 }
 
 .channelBody {
@@ -123,7 +122,7 @@
 
 .channelValue {
   font-size: clamp(1.05rem, 1.5vw, 1.35rem);
-  color: var(--paper);
+  color: var(--ink);
   overflow-wrap: anywhere;
   transition: color 0.3s ease;
 }

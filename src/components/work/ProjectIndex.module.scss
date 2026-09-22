@@ -1,0 +1,190 @@
+/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
+   class. Anchor colour rules below are doubled (.x.x) so this component
+   keeps control of its own colour regardless of stylesheet order. */
+
+.index {
+  position: relative;
+}
+
+.list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+}
+
+.item {
+  border-bottom: var(--studio-rule);
+  transition: opacity 0.5s var(--ease-out);
+}
+
+/* Other rows step back while one is hovered. */
+.hasActive .item:not(.active) {
+  opacity: 0.35;
+}
+
+.row.row {
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) auto;
+  grid-template-areas:
+    "number name arrow"
+    "number meta year";
+  align-items: baseline;
+  column-gap: 1rem;
+  row-gap: 0.35rem;
+  padding: 1.25rem 0;
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.number {
+  grid-area: number;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  color: var(--faint);
+  padding-top: 0.6em;
+}
+
+.name {
+  grid-area: name;
+  font-family: var(--font-display);
+  font-size: var(--step-title);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.item.active .name {
+  transform: translateX(0.5rem);
+}
+
+.meta {
+  grid-area: meta;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  font-size: 0.9rem;
+  color: var(--mute);
+}
+
+.label {
+  color: var(--faint);
+}
+
+.year {
+  grid-area: year;
+  justify-self: end;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  color: var(--faint);
+}
+
+.arrow {
+  grid-area: arrow;
+  justify-self: end;
+  display: inline-flex;
+  color: var(--ink);
+  transition: transform 0.6s var(--ease-out);
+}
+
+.item.active .arrow {
+  transform: translateX(0.4rem);
+}
+
+.summary {
+  display: none;
+}
+
+/* ---------- inline media (touch) ---------- */
+
+.inlineMedia.inlineMedia {
+  position: relative;
+  display: block;
+  aspect-ratio: 16 / 10;
+  margin-top: 1.25rem;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--paper-3);
+}
+
+.inlineImage {
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ---------- floating preview (mouse) ---------- */
+
+.preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: clamp(16rem, 28vw, 26rem);
+  aspect-ratio: 16 / 10;
+  margin: -1.5rem 0 0 2rem;
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.92;
+  transition:
+    opacity 0.35s var(--ease-out),
+    scale 0.6s var(--ease-out);
+  will-change: transform;
+}
+
+.previewOn {
+  opacity: 1;
+  scale: 1;
+}
+
+.previewImage {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  box-shadow:
+    0 30px 60px -20px rgb(23 22 19 / 0.35),
+    0 0 0 1px rgb(23 22 19 / 0.08);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.previewImageOn {
+  opacity: 1;
+}
+
+.previewMedia {
+  object-fit: cover;
+  object-position: top;
+}
+
+/* ---------- wide ---------- */
+
+@media (min-width: 900px) {
+  .row.row {
+    grid-template-columns: 4rem minmax(0, 1.4fr) minmax(0, 1fr) 6rem 2rem;
+    grid-template-areas: "number name meta year arrow";
+    align-items: baseline;
+    padding: clamp(1.5rem, 2.5vw, 2.25rem) 0;
+  }
+
+  .meta {
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .year {
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .item,
+  .name,
+  .arrow,
+  .preview,
+  .previewImage {
+    transition: none;
+  }
+}

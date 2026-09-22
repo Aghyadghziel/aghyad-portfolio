@@ -1,6 +1,5 @@
 import { getPosts } from "@/utils/utils";
-import { WorkCard } from "./WorkCard";
-import styles from "./Projects.module.scss";
+import { ProjectIndex } from "./ProjectIndex";
 
 interface ProjectsProps {
   /** 1-based inclusive slice of the sorted list, e.g. [1, 2]. */
@@ -14,8 +13,8 @@ interface ProjectsProps {
  *
  * Projects with an explicit `order` lead the list, then featured work, then
  * the most recent — a portfolio should open with the strongest work, not the
- * oldest. Cards alternate sides. Reading the MDX happens on the server, so no
- * project content ships to the browser as JavaScript.
+ * oldest. Reading the MDX happens on the server; only the row data reaches
+ * the client index.
  */
 export function Projects({ range, exclude }: ProjectsProps) {
   let allProjects = getPosts(["src", "app", "work", "projects"]);
@@ -44,29 +43,17 @@ export function Projects({ range, exclude }: ProjectsProps) {
     ? sortedProjects.slice(range[0] - 1, range[1] ?? sortedProjects.length)
     : sortedProjects;
 
-  return (
-    <div className={styles.list}>
-      {displayedProjects.map((post, index) => (
-        <WorkCard
-          key={post.slug}
-          index={index}
-          flip={index % 2 === 1}
-          href={`/work/${post.slug}`}
-          title={post.metadata.title}
-          summary={post.metadata.summary}
-          brand={post.metadata.brand}
-          kind={post.metadata.kind}
-          label={post.metadata.label}
-          role={post.metadata.role}
-          year={post.metadata.year}
-          services={post.metadata.services}
-          stack={post.metadata.stack}
-          image={post.metadata.images?.[0]}
-          mobile={post.metadata.mobile}
-          link={post.metadata.link}
-          priority={index === 0}
-        />
-      ))}
-    </div>
-  );
+  const rows = displayedProjects.map((post) => ({
+    slug: post.slug,
+    href: `/work/${post.slug}`,
+    name: post.metadata.brand || post.metadata.title,
+    kind: post.metadata.kind,
+    label: post.metadata.label,
+    year: post.metadata.year,
+    summary: post.metadata.summary,
+    image: post.metadata.images?.find((src) => !/\.(mp4|webm)$/i.test(src)),
+    link: post.metadata.link,
+  }));
+
+  return <ProjectIndex rows={rows} startAt={range ? range[0] : 1} />;
 }

@@ -1,6 +1,7 @@
 export { Cursor } from "@/components/Cursor";
 export { Footer } from "@/components/Footer";
 export { HeadingLink } from "@/components/HeadingLink";
+export { LocalTime } from "@/components/LocalTime";
 export { RouteGuard } from "@/components/RouteGuard";
 export { Providers } from "@/components/Providers";
 export { ScrollToHash } from "@/components/ScrollToHash";

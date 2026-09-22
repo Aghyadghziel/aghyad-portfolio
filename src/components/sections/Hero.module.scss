@@ -1,253 +1,177 @@
-/* Once UI ships `a:not(.button){color:...}`, which out-specifies a single
-   class. Anchor colour rules below are doubled (.x.x) so this component
-   keeps control of its own colour regardless of stylesheet order. */
-
 .hero {
   position: relative;
   isolation: isolate;
-  display: flex;
-  flex-direction: column;
   width: 100%;
-  min-height: 100svh;
-  overflow: hidden;
-  background: var(--ink);
+  padding-top: calc(var(--nav) + clamp(2.5rem, 7vh, 5rem));
 }
 
-/* ---------- backdrop ---------- */
-
-.backdrop {
+/* A soft warm wash in the top corner — the only atmosphere on the page. */
+.wash {
   position: absolute;
   inset: 0;
   z-index: -1;
   pointer-events: none;
+  background:
+    radial-gradient(55% 60% at 88% 8%, rgb(214 150 120 / 0.28), transparent 70%),
+    radial-gradient(40% 40% at 60% 30%, rgb(181 52 28 / 0.06), transparent 70%);
 }
-
-/* Soft dark pool behind the centred copy so the light never fights the text. */
-.pool {
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    42% 40% at 50% 42%,
-    rgb(14 14 15 / 0.8),
-    rgb(14 14 15 / 0.45) 55%,
-    transparent 82%
-  );
-}
-
-.fade {
-  position: absolute;
-  inset: auto 0 0;
-  height: 8%;
-  background: linear-gradient(to top, var(--ink), transparent);
-}
-
-.grain {
-  position: absolute;
-  inset: -20%;
-}
-
-/* ---------- content ---------- */
 
 .container {
   width: min(100% - 2 * var(--studio-gutter), var(--studio-max));
   margin-inline: auto;
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  padding-top: calc(var(--nav) + clamp(2rem, 8vh, 6rem));
 }
 
-.kicker {
-  display: inline-flex;
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 3rem;
+  align-items: end;
+}
+
+/* ---------- copy ---------- */
+
+.copy {
+  min-width: 0;
+  padding-bottom: 0.5rem;
+}
+
+.eyebrow {
+  display: flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.4rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
-  background: rgb(14 14 15 / 0.5);
-  backdrop-filter: blur(4px);
+  gap: 0.6rem;
   font-family: var(--font-mono);
   font-size: var(--step-label);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: #c4c4c0;
+  color: var(--mute);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
 }
 
-.kickerDot {
-  width: 0.375rem;
-  height: 0.375rem;
+.dot {
+  width: 0.4rem;
+  height: 0.4rem;
   border-radius: 50%;
+  background: var(--accent);
   flex: none;
 }
 
-.headline {
-  margin-top: 1.75rem;
-  max-width: 36ch;
-  /* Slightly under the display-xl ceiling so two lines stay on screen. */
-  font-size: clamp(2.5rem, 0.9rem + 4.6vw, 6.25rem) !important;
+.headline.headline {
+  font-size: var(--step-hero);
+  max-width: 12ch;
 }
 
 .subline {
-  margin: 1.25rem 0 0;
-  max-width: 52ch;
-  font-size: 1rem;
-  line-height: 1.6;
-  color: #b2b1ac;
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  max-width: 42ch;
+  font-size: var(--step-lead);
+  line-height: 1.55;
+  color: var(--ink-2);
   text-wrap: pretty;
 }
 
 .actions {
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 1.75rem;
+  gap: 1rem 2rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
 }
 
-.secondary {
-  background: rgb(14 14 15 / 0.4) !important;
-  backdrop-filter: blur(4px);
+.now {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: 1.25rem;
+  border-top: var(--studio-rule);
+  font-size: 0.9rem;
+  color: var(--ink-2);
+  max-width: 32rem;
 }
 
-.stack {
-  margin-top: 1.5rem;
+.nowLabel {
+  flex: none;
   font-family: var(--font-mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.1em;
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--faint);
-  white-space: pre;
 }
 
-/* ---------- proof card ---------- */
+/* ---------- portrait ---------- */
 
-.proofWrap {
-  width: 100%;
-  max-width: 46rem;
-  margin-top: auto;
-  padding-top: 2.5rem;
-}
-
-.proof.proof {
-  position: relative;
-  display: block;
-  max-height: 40svh;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-bottom: 0;
-  border-radius: 1.1rem 1.1rem 0 0;
-  background: var(--ink-2);
-  color: inherit;
-  text-align: left;
-  text-decoration: none;
-  box-shadow: 0 -30px 80px -30px rgb(0 0 0 / 0.9);
-  transition: border-color 0.3s ease;
-}
-
-.proof.proof:hover {
-  border-color: rgb(244 244 241 / 0.3);
-}
-
-.proofBar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.625rem 1rem;
-  border-bottom: 1px solid var(--line);
-  background: rgb(14 14 15 / 0.7);
-  backdrop-filter: blur(12px);
-}
-
-.proofTitle {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.portraitWrap {
   min-width: 0;
-  font-size: 0.8rem;
 }
 
-.proofLabel {
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.proofName {
-  color: var(--paper);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.proofDomain {
-  display: flex;
-  align-items: center;
-  gap: 0.375rem;
-  flex: none;
-  font-size: 0.75rem;
-  color: var(--mute);
-  transition: color 0.3s ease;
-}
-
-.proof:hover .proofDomain {
-  color: var(--paper);
-}
-
-.proofArrow {
-  transition: transform 0.5s var(--ease-out);
-}
-
-.proof:hover .proofArrow {
-  transform: translate(0.125rem, -0.125rem);
-}
-
-.proofMedia {
+.portrait {
   position: relative;
-  display: block;
-  aspect-ratio: 16 / 10;
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background: var(--paper-3);
 }
 
-.proofPoster {
+.portraitImage {
   object-fit: cover;
-  object-position: top;
+  object-position: center top;
+}
+
+.caption {
+  position: absolute;
+  inset: auto 0 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--paper);
+  background: linear-gradient(to top, rgb(23 22 19 / 0.55), transparent);
+}
+
+/* ---------- strip ---------- */
+
+.strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-block: 1rem;
+  border-top: 1px solid var(--ink);
+  border-bottom: var(--studio-rule);
+  font-family: var(--font-mono);
+  font-size: var(--step-label);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mute);
 }
 
 /* ---------- responsive ---------- */
 
 @media (min-width: 640px) {
-  .subline {
-    margin-top: 1.5rem;
-    font-size: 1.25rem;
-  }
-
-  .actions {
-    margin-top: 2.25rem;
-  }
-
-  .proofWrap {
-    padding-top: 3rem;
-  }
-
-  .proofTitle {
-    font-size: 0.875rem;
+  .portraitWrap {
+    max-width: 24rem;
   }
 }
 
-@media (max-width: 767px) {
-  .pool {
-    background: radial-gradient(
-      85% 42% at 50% 40%,
-      rgb(14 14 15 / 0.78),
-      rgb(14 14 15 / 0.4) 60%,
-      transparent 85%
-    );
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+    gap: clamp(2rem, 5vw, 6rem);
   }
 
-  .proofDomainText {
-    display: none;
+  .portraitWrap {
+    max-width: none;
+    justify-self: end;
+    width: 100%;
+    max-width: 30rem;
   }
 }
 
@@ -255,15 +179,16 @@
   .actions {
     flex-direction: column;
     align-items: stretch;
-    width: 100%;
   }
 
   .actions > *,
   .actions a {
     width: 100%;
+    justify-content: center;
   }
 
-  .stack {
-    white-space: normal;
+  .now {
+    flex-direction: column;
+    gap: 0.4rem;
   }
 }

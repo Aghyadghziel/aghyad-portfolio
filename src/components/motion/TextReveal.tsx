@@ -17,8 +17,23 @@ interface TextRevealProps {
   id?: string;
 }
 
+/** Renders `*word*` spans in a line as the italic accent. */
+function renderLine(line: string) {
+  return line.split(/(\*[^*]+\*)/).map((part, index) =>
+    part.startsWith("*") && part.endsWith("*") ? (
+      // biome-ignore lint/suspicious/noArrayIndexKey: fragments never reorder.
+      <em key={index} className={styles.accent}>
+        {part.slice(1, -1)}
+      </em>
+    ) : (
+      part
+    ),
+  );
+}
+
 /**
  * Reveals a headline one line at a time, each sliding up from behind a mask.
+ * A word wrapped in asterisks is set in the italic accent.
  *
  * The full text stays in the accessibility tree as a single string via
  * `aria-label`, while the animated lines are hidden from screen readers — so
@@ -64,16 +79,13 @@ export function TextReveal({
     <Tag
       id={id}
       ref={ref}
-      aria-label={lines.join(" ")}
+      aria-label={lines.join(" ").replace(/\*/g, "")}
       className={classNames(styles.heading, visible && styles.visible, className)}
     >
       {lines.map((line, index) => (
         <span aria-hidden="true" className={styles.line} key={line}>
-          <span
-            className={styles.inner}
-            style={{ transitionDelay: `${delay + index * stagger}s` }}
-          >
-            {line}
+          <span className={styles.inner} style={{ transitionDelay: `${delay + index * stagger}s` }}>
+            {renderLine(line)}
           </span>
         </span>
       ))}

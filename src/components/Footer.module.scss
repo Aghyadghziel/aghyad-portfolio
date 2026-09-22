@@ -26,11 +26,10 @@
   display: inline-block;
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 4.5rem);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 0.95;
-  letter-spacing: -0.005em;
-  color: var(--paper);
+  color: var(--ink);
   text-decoration: none;
   max-width: 10ch;
 }
@@ -69,14 +68,14 @@
   align-items: center;
   min-height: 2.5rem;
   font-size: 0.95rem;
-  color: #c4c4c0;
+  color: var(--ink-2);
   text-decoration: none;
   transition: color 0.3s ease;
   overflow-wrap: anywhere;
 }
 
 .link.link:hover {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .socials {
@@ -93,7 +92,7 @@
   height: 2.75rem;
   border: 1px solid var(--line);
   border-radius: 50%;
-  color: #adaca8;
+  color: var(--ink-2);
   text-decoration: none;
   transition:
     color 0.3s ease,
@@ -101,8 +100,8 @@
 }
 
 .socialLink.socialLink:hover {
-  color: var(--paper);
-  border-color: rgb(244 244 241 / 0.4);
+  color: var(--ink);
+  border-color: rgb(23 22 19 / 0.4);
 }
 
 /* ---------- bottom bar ---------- */
@@ -143,7 +142,7 @@
 }
 
 .attributionLink.attributionLink:hover {
-  color: var(--paper);
+  color: var(--ink);
 }
 
 @media (max-width: 800px) {

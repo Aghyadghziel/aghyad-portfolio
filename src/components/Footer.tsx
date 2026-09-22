@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Icon } from "@once-ui-system/core";
 import { person, social } from "@/resources";
+import { LocalTime } from "./LocalTime";
 import styles from "./Footer.module.scss";
 
 const FOOTER_LINKS = [
@@ -94,7 +95,9 @@ export const Footer = () => {
               </a>
             </span>
           </p>
-          <p className={styles.legal}>Riyadh · Remote</p>
+          <p className={styles.legal}>
+            <LocalTime />
+          </p>
         </div>
       </div>
     </footer>

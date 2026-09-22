@@ -36,7 +36,7 @@
   font-family: var(--font-mono);
   font-size: var(--step-label);
   font-weight: 500;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--mute);
   margin-bottom: 1.5rem;
@@ -53,7 +53,7 @@
 /* Doubled: TextReveal's own `.heading` resets margin at the same specificity. */
 .title.title {
   font-size: var(--step-display);
-  max-width: 16ch;
+  max-width: 14ch;
 }
 
 .headerSide {
@@ -66,8 +66,8 @@
   margin: 0;
   font-size: 1.125rem;
   line-height: 1.55;
-  color: var(--mute);
-  max-width: 42ch;
+  color: var(--ink-2);
+  max-width: 40ch;
   text-wrap: pretty;
 }
 
@@ -86,7 +86,7 @@
   }
 
   .headerSide {
-    align-items: flex-end;
-    text-align: left;
+    align-items: flex-start;
+    max-width: 26rem;
   }
 }

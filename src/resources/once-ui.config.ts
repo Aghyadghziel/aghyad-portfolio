@@ -39,28 +39,27 @@ const display: DisplayConfig = {
 /** Password-protected routes. Set the password in .env — see .env.example. */
 const protectedRoutes: ProtectedRoutesConfig = {};
 
-import { Barlow, Barlow_Condensed, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 
-/** Display — condensed and heavy, set uppercase by the display utilities. */
-const heading = Barlow_Condensed({
+/** Display — a serif with a true italic for the accent words. */
+const heading = Instrument_Serif({
   variable: "--font-heading",
   subsets: ["latin"],
-  weight: ["600", "700", "800"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
-/** Body and UI labels. */
-const body = Barlow({
+/** Body and UI. */
+const body = Geist({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
   display: "swap",
 });
 
-const label = Barlow({
+const label = Geist({
   variable: "--font-label",
   subsets: ["latin"],
-  weight: ["500"],
   display: "swap",
 });
 
@@ -68,7 +67,7 @@ const label = Barlow({
 const code = Geist_Mono({
   variable: "--font-code",
   subsets: ["latin"],
-  weight: ["500"],
+  weight: ["400", "500"],
   display: "swap",
   preload: false,
 });
@@ -82,10 +81,10 @@ const fonts: FontsConfig = {
 
 // default customization applied to the HTML in the main layout.tsx
 const style: StyleConfig = {
-  theme: "dark", // dark only — the palette in custom.css is built for ink
-  neutral: "gray", // remapped in custom.css; kept so the template tokens resolve
-  brand: "blue", // remapped in custom.css to the cool accent
-  accent: "blue",
+  theme: "light", // light only — the palette in custom.css is built for paper
+  neutral: "sand", // remapped in custom.css; kept so the template tokens resolve
+  brand: "red", // remapped in custom.css to the brick accent
+  accent: "red",
   solid: "contrast", // color | contrast
   solidStyle: "flat", // flat | plastic
   border: "conservative", // tighter radii read as more editorial than "playful"

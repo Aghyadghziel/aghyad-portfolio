@@ -24,10 +24,10 @@
   margin: 0;
   font-family: var(--font-display);
   font-size: var(--step-title);
-  font-weight: 700;
-  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   line-height: 1;
-  color: var(--paper);
+  color: var(--ink);
 }
 
 .timeframe {
@@ -89,11 +89,11 @@
 }
 
 .techItem {
-  padding: 0.25rem 0.75rem;
+  padding: 0.25rem 0.6rem;
   border: 1px solid var(--line);
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius);
   font-size: 0.75rem;
-  color: #b8b8ba;
+  color: var(--ink-2);
 }
 
 @media (max-width: 800px) {

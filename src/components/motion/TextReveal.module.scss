@@ -2,20 +2,24 @@
   margin: 0;
   display: block;
   font-family: var(--font-display);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: -0.005em;
-  line-height: 0.96;
-  color: var(--paper);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--ink);
   text-wrap: balance;
 }
 
 .line {
   display: block;
   overflow: hidden;
-  /* Padding stops descenders (g, y, p) being clipped by the mask. */
-  padding-bottom: 0.08em;
-  margin-bottom: -0.08em;
+  /* Padding stops descenders and italic overhangs being clipped by the mask. */
+  padding: 0 0.06em 0.1em 0;
+  margin: 0 -0.06em -0.1em 0;
+}
+
+.accent {
+  font-style: italic;
+  color: var(--accent);
 }
 
 .inner {

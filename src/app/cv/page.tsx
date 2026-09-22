@@ -84,7 +84,9 @@ export default function CV() {
               </div>
               <p className={styles.roleTitle}>{role.role}</p>
               <ul className={styles.bullets}>
-                {role.achievements.map((achievement, index) => (
+                {/* Four lines per role keeps the CV to two pages and reads better
+                    than a wall of bullets; the site shows every one. */}
+                {role.achievements.slice(0, 4).map((achievement, index) => (
                   // biome-ignore lint/suspicious/noArrayIndexKey: achievements are static JSX.
                   <li key={index}>{achievement}</li>
                 ))}

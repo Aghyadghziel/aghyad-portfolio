@@ -280,29 +280,115 @@
     width: 100%;
   }
 
-  .sheet {
-    color: #111;
+  /* Chrome prints with `print-color-adjust: economy`, which washes the ink out
+     to a grey — the PDF came back looking faded. `exact` keeps the colours the
+     page actually specifies, and the values below are then stated outright so
+     nothing inherits a weaker one. */
+  .sheet,
+  .sheet * {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 
   .sheet {
-    font-size: 9.5pt;
-    line-height: 1.4;
+    color: #000 !important;
+  }
+
+  .name,
+  .lead,
+  .company,
+  .bullets li,
+  .projectName,
+  .projectSummary,
+  .skillTitle,
+  .contactValue.contactValue {
+    color: #000 !important;
+  }
+
+  .blockTitle,
+  .contactLabel,
+  .timeframe,
+  .tech,
+  .projectKind,
+  .skillTags {
+    color: #3a3733 !important;
+  }
+
+  .role,
+  .roleTitle,
+  .projectLink.projectLink {
+    color: #8f2814 !important;
+  }
+
+  /* Print type is set a little larger and a little heavier than the screen
+     text: 9.5pt Geist at weight 400 renders thin enough that the PDF reads as
+     grey and out of focus on a laptop screen. */
+  .sheet {
+    font-size: 10.4pt;
+    line-height: 1.5;
+    font-weight: 450;
+    -webkit-font-smoothing: auto;
   }
 
   .name {
-    font-size: 24pt;
+    font-size: 27pt;
   }
 
   .company {
-    font-size: 12pt;
+    font-size: 13pt;
+  }
+
+  .blockTitle,
+  .contactLabel,
+  .timeframe,
+  .tech,
+  .projectKind {
+    font-size: 8.2pt;
+    font-weight: 500;
+  }
+
+  .role,
+  .roleTitle,
+  .skillTitle,
+  .projectName {
+    font-weight: 500;
+  }
+
+  .bullets {
+    gap: 0.28rem;
   }
 
   .block {
-    margin-top: 14pt;
+    margin-top: 13pt;
   }
 
-  .blockTitle {
+  /* Let a long role run over the page break instead of jumping whole, which
+     left half of page one empty. Only the heading is kept with its bullets. */
+  .role_ {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    margin-bottom: 12pt;
+  }
+
+  .blockTitle,
+  .roleHead,
+  .roleTitle {
     break-after: avoid;
+  }
+
+  .bullets li,
+  .projects li,
+  .tech {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  /* Chrome will still slice a single-line block across the break unless it is
+     told to keep it with what comes before it. */
+  .tech {
+    break-before: avoid;
+    page-break-before: avoid;
+    padding-bottom: 1pt;
   }
 
   .download {
